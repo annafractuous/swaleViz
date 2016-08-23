@@ -21,12 +21,10 @@
   function setup() {
     // noLoop();
 
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth, windowHeight * 0.75);
     background(232);
     var url = 'http://54.235.200.47/tower';
     loadJSON(url, loadTemp);
-
-
 
     dropdown = createElement('select');
     dropdown.id('yAxis');
@@ -37,7 +35,7 @@
       option.parent(dropdown);
     }
     dropdown.position(width * 0.04, height * 0.85)
-    var droptest = createDiv('Y Variable');
+    var droptest = createDiv(dropdown.elt.value);
     dropdown.elt.onchange = function() {
       droptest.html(this.value);
     }
@@ -56,7 +54,6 @@
         drawTemp();
       } else {}
     }
-
 
   }
 
@@ -91,8 +88,6 @@
     title.id('title');
     title.position(width * .5 - (textWidth("Tower Data Over The Last 30 Minutes")),  height * 0.08);
 
-
-
   }
 
 
@@ -112,10 +107,10 @@
       line(xTemp[r - 1], yVariable[r - 1], xTemp[r], yVariable[r]);
 
     }
-    noFill();
-    stroke(86);
-    strokeWeight(9);
-    rect(30, 30, width - 60, height - 60);
+    // noFill();
+    // stroke(86);
+    // strokeWeight(9);
+    // rect(30, 30, width - 60, height - 60);
   }
 
   function majorLines() {
@@ -129,7 +124,6 @@
     strokeWeight(1);
     line(xMin, yMin, xMax, yMin);
     // line(xMin, yMax, xMin, yMin);
-
 
   }
 
@@ -200,9 +194,7 @@
         line(xMin - 3, y, xMax, y);
         text(z, xMin - 30, y + 5);
       }
-    }
-
-    else if (yVariable == possible.wind_direction_deg) {
+    } else if (yVariable == possible.wind_direction_deg) {
       for (z = 0; z < 370; z= z + 20) {
         y = map(z, 0, 360, yMin, windowHeight / 4);
         stroke(86, 86, 86, 100);
