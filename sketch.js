@@ -59,7 +59,7 @@
 
   function loadTemp(weather) {
     var xMin = width * 0.15;
-    var xMax = width * 0.85;
+    var xMax = width * 0.75;
     var yMin = height * 0.8;
     var yMax = height * 0.2;
     // get the humidity value out of the loaded JSON
@@ -115,7 +115,7 @@
 
   function majorLines() {
     var xMin = width * 0.15;
-    var xMax = width * 0.85;
+    var xMax = width * 0.75;
     var yMin = height * 0.8;
     var yMax = height * 0.2;
 
@@ -129,7 +129,7 @@
 
   function strokeLinesX(Xvalue) {
     var xMin = width * 0.15;
-    var xMax = width * 0.85;
+    var xMax = width * 0.75;
     var yMin = height * 0.8;
     var yMax = height * 0.2;
     //stroke lines
@@ -151,7 +151,7 @@
   function strokeLinesY() {
     var xMin = width * 0.15
     var yMin = height * 0.8;
-    var xMax = width * 0.85;
+    var xMax = width * 0.75;
     textFont("Source Code Pro");
     if (yVariable == possible.temperature_f || yVariable == possible.humidity_per) {
       for (var z = 0; z < 110; z = z + 10) {

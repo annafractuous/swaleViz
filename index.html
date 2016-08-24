@@ -28,13 +28,61 @@
   <!--  <option value="pressure_pa">Pressure</option>-->
   <!--</select>-->
 
-  <div id="data-bar">
-    <div id="header">
-      <h3>Live Data Feed From @SwaleNY</h3>
-    </div>
-    <div id="data">
-      
-    </div>
+  <div class="data-snapshot">
+      <h4>Current</h4>
+      <div class="current-container">
+          <h1 id="current-value">2.4</h1>
+          <h4 id="value-unit">MPH</h4>
+      </div>
+      <div class="low-high-container">
+          <div class="high">
+              <h4>High</h4>
+              <h2 id="high-value">4.7</h2>
+          </div>
+          <div class="low">
+              <h4>Low</h4>
+              <h2 id="low-value">0.8</h2>
+          </div>
+      </div>
+  </div>
+
+  <div class="data-bar">
+      <div class="header">
+          <h5>Live Data Feed From @SwaleNY</h5>
+      </div>
+      <div class="data">
+          <div class="data-section temperature">
+              <div class="temp-container">
+                  <div class="fahrenheit">
+                      <h3><span class="value">92</span>°F</h3>
+                  </div>
+                  <div class="celsius">
+                      <h3><span class="value">33<span class="decimal">.3</span></span>°C</h3>
+                  </div>
+              </div>
+              <h4 class="label">Temperature</h4>
+          </div>
+          <div class="data-section windspeed">
+              <h3><span class="value">2.4</span>MPH</h3>
+              <h4 class="label">Windspeed</h4>
+          </div>
+          <div class="data-section pressure">
+              <h3><span class="value">101.2</span>kPa</h3>
+              <h4 class="label">Pressure</h4>
+          </div>
+          <div class="data-section rainfall">
+              <h3><span class="value">0.08"</span></h3>
+              <h4 class="label">Rainfall</h4>
+          </div>
+          <div class="data-section location">
+              <h4 class="label">
+                  <span class="area">Hudson River</span>
+                  <span class="borough">// Manhattan</span>
+                  <span class="city">New York City</span>
+                  <span class="time">7:13pm</span>
+              </h4>
+          </div>
+      </div>
   </div>
 </body>
 

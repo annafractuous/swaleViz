@@ -5,28 +5,91 @@ body
 canvas
   vertical-align: top
 
-#data-bar
+h1, h2, h3, h4, h5, h6
+  font-family: 'Source Code Pro'
+  text-transform: uppercase
+  margin: 0
+
+h1
+  font-size: 60px
+h2
+  font-size: 32px
+h3
+  font-size: 24px
+h4
+  font-size: 16px
+h5
+  font-size: 12px
+
+.data-snapshot
+  background-color: #E8E8E8
+  position: absolute
+  top: 25%
+  left: 80%
+
+  .current-container
+    display: block
+    line-height: 68px
+
+    h1, h4
+      display: inline-block
+      vertical-align: middle
+
+  .low-high-container
+    display: flex
+    justify-content: space-between
+
+    h2
+      display: inline-block
+      line-height: 40px
+
+.data-bar
   position: absolute
   left: 0
   top: 75%
   height: 25%
   width: 100%
 
-  #header
+  .header
     background-color: #80A596
     height: 20px
-    padding: 5px 0 0 50px
+    padding: 0 50px
 
-    h3
-      margin: 0
-      font-family: 'Cousine'
-      font-size: 12px
-      text-transform: uppercase
+    h5
       color: #FDFDFD
+      line-height: 20px
+      vertical-align: middle
 
-  #data
+  .data
     background-color: #B4D2CA
     height: 100%
+    display: flex
+    color: #FFF
+    text-align: center
+
+    .data-section
+      border-right: 1px solid #9CB8B5
+      width: 20%
+      padding: 20px
+      &.temperature
+        width: 35%
+        .temp-container
+          display: flex
+      &.location
+        width: 15%
+        span
+          display: block
+          text-align: right
+      &:last-child
+        border-right: 0
+      h3
+        line-height: 70px
+        vertical-align: bottom
+        .value
+          font-size: 70px
+          .decimal
+            font-size: 36px
+            vertical-align: top
 
 .axisLabels
   font-family: 'Source Code Pro'
