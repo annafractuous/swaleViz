@@ -1,0 +1,57 @@
+// BOTTOM DATA BAR
+.data-bar
+  position: absolute
+  height: 25%
+  width: 100%
+  left: 0
+  top: 75%
+
+  .header
+    background-color: #80A596
+    height: 20px
+    padding-left: 50px
+
+    h5
+      font-family: 'DINPro Medium'
+      color: #FDFDFD
+      line-height: 20px
+      vertical-align: middle
+
+  .data
+    background-image: url('../assets/images/data-bar-bg.jpg')
+    background-size: cover
+    height: 100%
+    display: flex
+    color: #FFF
+    text-align: center
+
+    .data-section
+      border-right: 1px solid #9CB8B5
+      width: 20%
+      padding: 20px 0 0 40px
+      &.temperature
+        width: 35%
+        .temp-container
+          display: flex
+      &.location
+        width: 15%
+        span
+          display: block
+          text-align: right
+      &:last-child
+        border-right: 0
+      h3
+        line-height: 70px
+        vertical-align: bottom
+        font-family: 'Input Sans Regular'
+        font-weight: normal
+        text-transform: none
+        .value
+          font-family: 'Blanch Condensed'
+          font-weight: normal
+          font-size: 90px
+          .decimal
+            font-size: 36px
+            vertical-align: top
+      .label
+        font-family: 'DINPro Regular'

@@ -1,0 +1,138 @@
+body {
+  padding: 0;
+  margin: 0; }
+
+canvas {
+  vertical-align: top; }
+
+/* TYPOGRAPHY */
+@font-face {
+  font-family: "DINPro Regular";
+  src: url("/Library/Fonts/DINPro-Regular.otf") format("opentype"); }
+@font-face {
+  font-family: "DINPro Medium";
+  src: url("/Library/Fonts/DINPro-Medium.otf") format("opentype"); }
+@font-face {
+  font-family: "Blanch Condensed";
+  src: url("/Library/Fonts/BLANCH_CONDENSED.otf") format("opentype"); }
+@font-face {
+  font-family: "Input Sans Regular";
+  src: url("/Library/Fonts/InputSans-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: "Input Mono Compressed Light";
+  src: url("/Library/Fonts/InputMonoCompressed-Light.ttf") format("truetype"); }
+@font-face {
+  font-family: "Input Mono Compressed Regular";
+  src: url("/Library/Fonts/InputMonoCompressed-Regular.ttf") format("truetype"); }
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+  margin: 0; }
+
+h1 {
+  font-size: 60px; }
+
+h2 {
+  font-size: 32px; }
+
+h3 {
+  font-size: 24px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 12px; }
+
+/* MAIN STYLES */
+.axisLabels {
+  font-family: "Source Code Pro";
+  font-size: 16px; }
+
+#title {
+  font-family: "Cousine";
+  font-size: 26px; }
+
+.data-bar {
+  position: absolute;
+  height: 25%;
+  width: 100%;
+  left: 0;
+  top: 75%; }
+  .data-bar .header {
+    background-color: #80A596;
+    height: 20px;
+    padding-left: 50px; }
+    .data-bar .header h5 {
+      font-family: "DINPro Medium";
+      color: #FDFDFD;
+      line-height: 20px;
+      vertical-align: middle; }
+  .data-bar .data {
+    background-image: url("../assets/images/data-bar-bg.jpg");
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    color: #FFF;
+    text-align: center; }
+    .data-bar .data .data-section {
+      border-right: 1px solid #9CB8B5;
+      width: 20%;
+      padding: 20px 0 0 40px; }
+      .data-bar .data .data-section.temperature {
+        width: 35%; }
+        .data-bar .data .data-section.temperature .temp-container {
+          display: flex; }
+      .data-bar .data .data-section.location {
+        width: 15%; }
+        .data-bar .data .data-section.location span {
+          display: block;
+          text-align: right; }
+      .data-bar .data .data-section:last-child {
+        border-right: 0; }
+      .data-bar .data .data-section h3 {
+        line-height: 70px;
+        vertical-align: bottom;
+        font-family: "Input Sans Regular";
+        font-weight: normal;
+        text-transform: none; }
+        .data-bar .data .data-section h3 .value {
+          font-family: "Blanch Condensed";
+          font-weight: normal;
+          font-size: 90px; }
+          .data-bar .data .data-section h3 .value .decimal {
+            font-size: 36px;
+            vertical-align: top; }
+      .data-bar .data .data-section .label {
+        font-family: "DINPro Regular"; }
+
+.data-snapshot {
+  color: #373737;
+  background-color: #E8E8E8;
+  position: absolute;
+  top: 25%;
+  left: 80%; }
+  .data-snapshot .label {
+    font-family: "Input Mono Compressed Light"; }
+  .data-snapshot .value {
+    font-family: "Blanch Condensed";
+    font-weight: normal; }
+  .data-snapshot #value-unit {
+    font-family: "Input Sans";
+    font-weight: normal; }
+  .data-snapshot .current-container {
+    display: block;
+    line-height: 68px; }
+    .data-snapshot .current-container h1, .data-snapshot .current-container h4 {
+      display: inline-block;
+      vertical-align: middle; }
+    .data-snapshot .current-container .value {
+      font-size: 80px; }
+  .data-snapshot .low-high-container {
+    display: flex;
+    justify-content: space-between; }
+    .data-snapshot .low-high-container .value {
+      display: inline-block;
+      font-size: 45px;
+      line-height: 50px; }
+
+/*# sourceMappingURL=style.css.map */

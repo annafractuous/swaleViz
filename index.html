@@ -13,7 +13,7 @@
   <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="sketch.js" type="text/javascript"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 
 <body>
@@ -28,24 +28,32 @@
   <!--  <option value="pressure_pa">Pressure</option>-->
   <!--</select>-->
 
+<!-- DATA SNAPSHOT -->
   <div class="data-snapshot">
-      <h4>Current</h4>
+
+      <h4 class="label">Current</h4>
       <div class="current-container">
-          <h1 id="current-value">2.4</h1>
+          <h1 id="current-value" class="value">2.4</h1>
           <h4 id="value-unit">MPH</h4>
       </div>
+
       <div class="low-high-container">
+
           <div class="high">
-              <h4>High</h4>
-              <h2 id="high-value">4.7</h2>
+              <h4 class="label">High</h4>
+              <h2 id="high-value" class="value">4.7</h2>
           </div>
+
           <div class="low">
-              <h4>Low</h4>
-              <h2 id="low-value">0.8</h2>
+              <h4 class="label">Low</h4>
+              <h2 id="low-value" class="value">0.8</h2>
           </div>
+
       </div>
+
   </div>
 
+<!-- BOTTOM DATA BAR -->
   <div class="data-bar">
       <div class="header">
           <h5>Live Data Feed From @SwaleNY</h5>
