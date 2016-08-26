@@ -7,6 +7,9 @@ canvas {
 
 /* TYPOGRAPHY */
 @font-face {
+  font-family: "DINPro Light";
+  src: url("/Library/Fonts/DINPro-Light.otf") format("opentype"); }
+@font-face {
   font-family: "DINPro Regular";
   src: url("/Library/Fonts/DINPro-Regular.otf") format("opentype"); }
 @font-face {
@@ -15,6 +18,12 @@ canvas {
 @font-face {
   font-family: "Blanch Condensed";
   src: url("/Library/Fonts/BLANCH_CONDENSED.otf") format("opentype"); }
+@font-face {
+  font-family: "Blanch Condensed Light";
+  src: url("/Library/Fonts/BLANCH_CONDENSED_LIGHT.otf") format("opentype"); }
+@font-face {
+  font-family: "Input Sans Light";
+  src: url("/Library/Fonts/InputSans-Light.ttf") format("truetype"); }
 @font-face {
   font-family: "Input Sans Regular";
   src: url("/Library/Fonts/InputSans-Regular.ttf") format("truetype"); }
@@ -73,17 +82,24 @@ h5 {
     height: 100%;
     display: flex;
     color: #FFF;
-    text-align: center; }
+    text-align: left; }
     .data-bar .data .data-section {
       border-right: 1px solid #9CB8B5;
       width: 20%;
       padding: 20px 0 0 40px; }
       .data-bar .data .data-section.temperature {
-        width: 35%; }
+        width: 29%; }
         .data-bar .data .data-section.temperature .temp-container {
-          display: flex; }
+          display: flex;
+          justify-content: flex-start; }
+      .data-bar .data .data-section.windspeed {
+        width: 18%; }
+      .data-bar .data .data-section.pressure {
+        width: 19%; }
+      .data-bar .data .data-section.rainfall {
+        width: 20%; }
       .data-bar .data .data-section.location {
-        width: 15%; }
+        width: 14%; }
         .data-bar .data .data-section.location span {
           display: block;
           text-align: right; }
@@ -92,7 +108,7 @@ h5 {
       .data-bar .data .data-section h3 {
         line-height: 70px;
         vertical-align: bottom;
-        font-family: "Input Sans Regular";
+        font-family: "Input Sans Light";
         font-weight: normal;
         text-transform: none; }
         .data-bar .data .data-section h3 .value {
@@ -103,7 +119,12 @@ h5 {
             font-size: 36px;
             vertical-align: top; }
       .data-bar .data .data-section .label {
-        font-family: "DINPro Regular"; }
+        font-family: "DINPro Light";
+        font-size: 14px;
+        text-align: left; }
+      .data-bar .data .data-section.location h4 {
+        padding: 20% 40px 0 0;
+        font-size: 12px; }
 
 .data-snapshot {
   color: #373737;
