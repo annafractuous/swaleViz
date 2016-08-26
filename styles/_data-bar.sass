@@ -29,27 +29,52 @@
       border-right: 1px solid #9CB8B5
       width: 20%
       padding: 20px 0 0 40px
+      h3, h4
+        position: relative
+      .icon
+        position: absolute
+        top: 20px
+        color: #FFF
+        opacity: .25
+        font-size: 130px
       &.temperature
         width: 29%
+        .icon
+          right: 75%
+          font-size: 167px
         .temp-container
           display: flex
           justify-content: flex-start
+          .fahrenheit
+            margin-right: 20px
       &.windspeed
         width: 18%
+        .icon
+          right: 55%
+          bottom: -20px
+          top: auto
+          font-size: 147px
       &.pressure
         width: 19%
+        .icon
+          right: 35%
       &.rainfall
         width: 20%
+        .icon
+          right: 15%
       &.location
         width: 14%
+        .icon
+          right: 0
+          bottom: -20px
+          top: auto
+          font-size: 160px
         span
           display: block
           text-align: right
       &:last-child
         border-right: 0
       h3
-        line-height: 70px
-        vertical-align: bottom
         font-family: 'Input Sans Light'
         font-weight: normal
         text-transform: none
@@ -58,12 +83,15 @@
           font-weight: normal
           font-size: 90px
           .decimal
-            font-size: 36px
-            vertical-align: top
+            font-size: 45px
+            line-height: 62px
+            position: absolute
       .label
         font-family: 'DINPro Light'
         font-size: 14px
+        line-height: 14px
         text-align: left
       &.location h4
-        padding: 20% 40px 0 0
+        padding: 20% 30% 0 0
         font-size: 12px
+        line-height: 18px
