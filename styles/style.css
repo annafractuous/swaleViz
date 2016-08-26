@@ -128,7 +128,7 @@ h5 {
         top: 20px;
         color: #FFF;
         opacity: 0.25;
-        font-size: 130px; }
+        font-size: 133px; }
       .data-bar .data .data-section.temperature {
         width: 29%; }
         .data-bar .data .data-section.temperature .icon {
@@ -154,6 +154,9 @@ h5 {
         width: 20%; }
         .data-bar .data .data-section.rainfall .icon {
           right: 15%; }
+        .data-bar .data .data-section.rainfall h3 {
+          display: inline-block;
+          margin-top: -5px; }
       .data-bar .data .data-section.location {
         width: 14%; }
         .data-bar .data .data-section.location .icon {
@@ -175,8 +178,8 @@ h5 {
           font-weight: normal;
           font-size: 90px; }
           .data-bar .data .data-section h3 .value .decimal {
-            font-size: 45px;
-            line-height: 62px;
+            font-size: 50px;
+            line-height: 65px;
             position: absolute; }
       .data-bar .data .data-section .label {
         font-family: "DINPro Light";
