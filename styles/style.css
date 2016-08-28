@@ -73,22 +73,22 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0; }
 
 h1 {
-  font-size: 60px; }
+  font-size: 4.6875rem; }
 
 h2 {
-  font-size: 32px; }
+  font-size: 3.125rem; }
 
 h3 {
-  font-size: 24px; }
+  font-size: 2.5rem; }
 
 h4 {
-  font-size: 16px; }
+  font-size: 2rem; }
 
 h5 {
-  font-size: 12px; }
+  font-size: 1.5rem; }
 
 h6 {
-  font-size: 10px; }
+  font-size: 0.75rem; }
 
 /* MAIN STYLES */
 .axisLabels {
@@ -114,6 +114,7 @@ h6 {
     .data-bar .header h6 {
       font-family: "DINPro Regular";
       color: #FDFDFD;
+      font-size: 0.625rem;
       line-height: 20px;
       vertical-align: middle; }
   .data-bar .data {
@@ -127,7 +128,7 @@ h6 {
       border-right: 1px solid #9CB8B5;
       width: 20%;
       padding: 20px 0 0 40px; }
-      .data-bar .data .data-section h3, .data-bar .data .data-section h4 {
+      .data-bar .data .data-section h5, .data-bar .data .data-section h6 {
         position: relative; }
       .data-bar .data .data-section .icon {
         position: absolute;
@@ -160,7 +161,7 @@ h6 {
         width: 20%; }
         .data-bar .data .data-section.rainfall .icon {
           right: 15%; }
-        .data-bar .data .data-section.rainfall h3 {
+        .data-bar .data .data-section.rainfall h5 {
           display: inline-block;
           margin-top: -5px; }
       .data-bar .data .data-section.location {
@@ -175,24 +176,23 @@ h6 {
           text-align: right; }
       .data-bar .data .data-section:last-child {
         border-right: 0; }
-      .data-bar .data .data-section h3 {
+      .data-bar .data .data-section h5 {
         font-family: "Input Sans Light";
         font-weight: normal;
         text-transform: none; }
-        .data-bar .data .data-section h3 .value {
+        .data-bar .data .data-section h5 .value {
           font-family: "Blanch Condensed";
           font-weight: normal;
           font-size: 5.625rem; }
-          .data-bar .data .data-section h3 .value .decimal {
+          .data-bar .data .data-section h5 .value .decimal {
             font-size: 3.125rem;
             line-height: 65px;
             position: absolute; }
       .data-bar .data .data-section .label {
         font-family: "DINPro Light";
-        font-size: 0.75rem;
         line-height: 14px;
         text-align: left; }
-      .data-bar .data .data-section.location h4 {
+      .data-bar .data .data-section.location h6 {
         padding: 20% 30% 0 0;
         line-height: 18px; }
 
@@ -201,6 +201,8 @@ h6 {
   position: absolute;
   top: 25%;
   left: 80%; }
+  .data-snapshot h5 {
+    font-size: 1rem; }
   .data-snapshot .label {
     font-family: "Input Mono Compressed Light"; }
   .data-snapshot .value {
@@ -211,7 +213,7 @@ h6 {
     font-weight: normal; }
   .data-snapshot .current-container {
     display: block; }
-    .data-snapshot .current-container h1, .data-snapshot .current-container h4 {
+    .data-snapshot .current-container h1, .data-snapshot .current-container h5 {
       display: inline-block;
       vertical-align: middle; }
     .data-snapshot .current-container .label {
