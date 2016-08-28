@@ -6,6 +6,7 @@ body {
 canvas {
   vertical-align: top; }
 
+/* FUNCTIONS & MIXINS */
 /* TYPOGRAPHY */
 @font-face {
   font-family: "icomoon";
@@ -92,11 +93,11 @@ h6 {
 /* MAIN STYLES */
 .axisLabels {
   font-family: "Source Code Pro";
-  font-size: 16px; }
+  font-size: 1rem; }
 
 #title {
   font-family: "Cousine";
-  font-size: 26px; }
+  font-size: 1.625rem; }
 
 .data-bar {
   position: absolute;
@@ -133,12 +134,12 @@ h6 {
         top: 20px;
         color: #FFF;
         opacity: 0.25;
-        font-size: 133px; }
+        font-size: 8.3125rem; }
       .data-bar .data .data-section.temperature {
         width: 29%; }
         .data-bar .data .data-section.temperature .icon {
           right: 75%;
-          font-size: 167px; }
+          font-size: 10.4375rem; }
         .data-bar .data .data-section.temperature .temp-container {
           display: flex;
           justify-content: flex-start; }
@@ -150,7 +151,7 @@ h6 {
           right: 55%;
           bottom: -20px;
           top: auto;
-          font-size: 147px; }
+          font-size: 9.1875rem; }
       .data-bar .data .data-section.pressure {
         width: 19%; }
         .data-bar .data .data-section.pressure .icon {
@@ -168,7 +169,7 @@ h6 {
           right: 0;
           bottom: -20px;
           top: auto;
-          font-size: 160px; }
+          font-size: 10rem; }
         .data-bar .data .data-section.location span {
           display: block;
           text-align: right; }
@@ -181,24 +182,22 @@ h6 {
         .data-bar .data .data-section h3 .value {
           font-family: "Blanch Condensed";
           font-weight: normal;
-          font-size: 90px; }
+          font-size: 5.625rem; }
           .data-bar .data .data-section h3 .value .decimal {
-            font-size: 50px;
+            font-size: 3.125rem;
             line-height: 65px;
             position: absolute; }
       .data-bar .data .data-section .label {
         font-family: "DINPro Light";
-        font-size: 14px;
+        font-size: 0.75rem;
         line-height: 14px;
         text-align: left; }
       .data-bar .data .data-section.location h4 {
         padding: 20% 30% 0 0;
-        font-size: 12px;
         line-height: 18px; }
 
 .data-snapshot {
   color: #373737;
-  background-color: #E8E8E8;
   position: absolute;
   top: 25%;
   left: 80%; }
@@ -211,19 +210,21 @@ h6 {
     font-family: "Input Sans";
     font-weight: normal; }
   .data-snapshot .current-container {
-    display: block;
-    line-height: 68px; }
+    display: block; }
     .data-snapshot .current-container h1, .data-snapshot .current-container h4 {
       display: inline-block;
       vertical-align: middle; }
+    .data-snapshot .current-container .label {
+      display: block; }
     .data-snapshot .current-container .value {
-      font-size: 80px; }
+      font-size: 5rem;
+      margin-bottom: 14px; }
   .data-snapshot .low-high-container {
     display: flex;
     justify-content: space-between; }
     .data-snapshot .low-high-container .value {
       display: inline-block;
-      font-size: 45px;
+      font-size: 2.8125rem;
       line-height: 50px; }
 
 /*# sourceMappingURL=style.css.map */
