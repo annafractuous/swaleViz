@@ -6,6 +6,21 @@ body {
 canvas {
   vertical-align: top; }
 
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
 /* FUNCTIONS & MIXINS */
 /* TYPOGRAPHY */
 @font-face {
@@ -68,6 +83,9 @@ canvas {
 @font-face {
   font-family: "Input Mono Compressed Regular";
   src: url("/Library/Fonts/InputMonoCompressed-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: "Input Mono Compressed Bold";
+  src: url("/Library/Fonts/InputMonoCompressed-Bold.ttf") format("truetype"); }
 h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   margin: 0; }
@@ -228,5 +246,19 @@ h6 {
       display: inline-block;
       font-size: 2.8125rem;
       line-height: 50px; }
+
+.data-info {
+  position: absolute;
+  color: #373737;
+  top: 21%;
+  left: 51%;
+  width: 25%; }
+  .data-info #data-category {
+    font-family: "Input Mono Compressed Bold";
+    margin-bottom: 0.625rem; }
+  .data-info #data-description {
+    font-family: "Input Sans Regular";
+    font-size: 0.625rem;
+    line-height: 1.25rem; }
 
 /*# sourceMappingURL=style.css.map */
