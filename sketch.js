@@ -1,5 +1,5 @@
-  var options = ["temperature_f", "rain_in", "humidity_per", "wind_direction_deg", "wind_speed_mph", "pressure_pa", "light_v"];
-  var optionNames = ["Temperature", "Rain", "Humidity", "Wind Direction", "Wind Speed", "Pressure", "Light"];
+  var options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wind_direction_deg", "pressure_pa", "light_v"];
+  var optionNames = ["Wind Speed", "Temperature", "Rain", "Humidity", "Wind Direction", "Pressure", "Light"];
   var tempMapped = [];
   var xTemp = [];
   var xVariable = "time";
@@ -24,9 +24,10 @@
     createCanvas(windowWidth, windowHeight * 0.75);
     background(232);
     var url = 'http://54.235.200.47/tower';
-    loadJSON(url, loadTemp);
+    loadJSON(url, loadData);
 
     dropdown = createElement('select');
+
     dropdown.id('yAxis');
     for (var i = 0; i < options.length; i++) {
       var option = createElement('option');
@@ -35,29 +36,27 @@
       option.parent(dropdown);
     }
     dropdown.position(width * 0.04, height * 0.85)
-    var droptest = createDiv(dropdown.elt.value);
     dropdown.elt.onchange = function() {
       droptest.html(this.value);
     }
 
-    droptest.position(width * 0.04, height / 2);
-    droptest.style('transform', 'translate(' + 0 + 'px) rotate(' + 270 + 'deg)');
+    var droptest = createDiv(dropdown.elt.value);
+    droptest.position(width * .15 - 130, height / 2);
+    droptest.style('transform', 'rotate(270deg)');
     droptest.class("axisLabels");
   }
 
 
   function mouseMoved() {
-
     for (var key in possible) {
       if (dropdown.elt.value === key) {
         yVariable = possible[key];
         drawTemp();
       } else {}
     }
-
   }
 
-  function loadTemp(weather) {
+  function loadData(weather) {
     var xMin = width * 0.15;
     var xMax = width * 0.75;
     var yMin = height * 0.8;
@@ -82,7 +81,7 @@
     //   var label = ($(this).find("option:selected").text());
     // });
 
-    yVariable = possible.temperature_f;
+    yVariable = possible.wind_speed_mph;
     drawTemp();
     title = createDiv("Tower Data Over The Last " + weather.results.length + " Minutes");
     title.id('title');
