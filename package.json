@@ -1,0 +1,39 @@
+{
+  "name": "swale-sensor-data",
+  "version": "1.0.0",
+  "description": "Displaying the sensor data from Swale (www.swaleny.org), a food forest barge and social-political art installation in NYC",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annafractuous/swaleViz.git"
+  },
+  "keywords": [
+    "data-visualization",
+    "swale",
+    "data"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annafractuous/swaleViz/issues"
+  },
+  "homepage": "https://github.com/annafractuous/swaleViz#readme",
+  "dependencies": {
+    "handlebars": "^4.0.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.3"
+  }
+}
