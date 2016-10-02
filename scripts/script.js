@@ -1,37 +1,43 @@
-function getCurrentValues(weather) {
-  updateDataBar(weather);
-  updateSnapshot(weather);
-}
+// TO DO:
+// update data every minute
+// - clear present sensor values
+// - clear canvas
 
-function updateDataBar(weather) {
+
+
+var dataBarTemplate = $('#handlebars-data-bar').html(),
+    dataBarTemplateScript = Handlebars.compile(dataBarTemplate),
+    snapshotTemplate = $('#handlebars-snapshot').html(),
+    snapshotTemplateScript = Handlebars.compile(snapshotTemplate);
+
+
+function updateDataBar() {
   var dataBarData = {},
-      lastIdx = weather.length - 1;
+      lastIdx = sensorValues["temperature_f"].length - 1;
 
-  dataBarData.temperature_f = Math.round(weather[lastIdx].temperature_f);
-  var tempCels = (weather[lastIdx].temperature_f - 32) / 1.8;
+  dataBarData.temperature_f = Math.round(sensorValues["temperature_f"][lastIdx]);
+  var tempCels = (sensorValues["temperature_f"][lastIdx] - 32) / 1.8;
   dataBarData.temperature_c = formatCelsiusTemp(Number(Math.round(tempCels + 'e1') + 'e-1'));
-  dataBarData.windspeed = weather[lastIdx].wind_speed_mph.toFixed(1);
-  dataBarData.pressure = (weather[lastIdx].pressure_pa / 1000).toFixed(1);
-  dataBarData.rainfall = weather[lastIdx].rain_in.toFixed(2);
+  dataBarData.windspeed = sensorValues["wind_speed_mph"][lastIdx];
+  dataBarData.pressure = sensorValues["pressure_pa"][lastIdx];
+  dataBarData.rainfall = sensorValues["rain_in"][lastIdx];
 
-  var template = $('#handlebars-data-bar').html(),
-      templateScript = Handlebars.compile(template),
-      compiledHTML = templateScript(dataBarData);
-  $('.data-bar').append(compiledHTML);
+  var compiledHTML = dataBarTemplateScript(dataBarData);
+  $('.data-bar .data').empty();
+  $('.data-bar .data').append(compiledHTML);
 }
 
-function updateSnapshot(weather) {
+function updateSnapshot() {
   var snapshotData = {},
-      currentCat = $('.axisLabels').text(),
-      lastIdx = weather.length - 1;
+      currentCat = $('#yAxisLabel').text(),
+      lastIdx = sensorValues[currentCat].length - 1;
 
   snapshotData.current = sensorValues[currentCat][lastIdx];
   snapshotData.high = Math.max(...sensorValues[currentCat]);
   snapshotData.low = Math.min(...sensorValues[currentCat]);
 
-  var template = $('#handlebars-snapshot').html(),
-      templateScript = Handlebars.compile(template),
-      compiledHTML = templateScript(snapshotData);
+  var compiledHTML = snapshotTemplateScript(snapshotData);
+  $('.data-snapshot').empty();
   $('.data-snapshot').append(compiledHTML);
 }
 
