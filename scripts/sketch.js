@@ -1,5 +1,4 @@
 var options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wind_direction_deg", "pressure_pa", "light_v"],
-    optionNames = ["Wind Speed", "Temperature", "Rain", "Humidity", "Wind Direction", "Pressure", "Light"],
     towerUrl = 'http://54.235.200.47/tower',
     yVariable = "wind_speed_mph",
     xCoordinates = [],
@@ -12,11 +11,56 @@ for (i = 0; i < options.length; i++) {
   mappedValues[options[i]] = [];
 }
 
+var optionsInfo = {
+  wind_speed_mph: {
+    text: "wind speed",
+    unit: "MPH",
+    description: "There are dozens of us! DOZENS! Dad would stage elaborate situations using a one-armed man to teach us lessons. Could it be love?"
+  },
+  temperature_f: {
+    text: "temperature (°f)",
+    unit: "°F",
+    description: "Walter, you can't do that. These guys're like me, they're pacifists. No, Donny, these men are nihilists, there's nothing to be afraid of."
+  },
+  rain_in: {
+    text: "rain",
+    unit: "in",
+    description: "A very small stage in a vast cosmic arena the sky calls to us galaxies bits of moving fluff ship of the imagination, kindling the energy hidden in matter."
+  },
+  humidity_per: {
+    text: "humidity",
+    unit: "%",
+    description: "A surprise party? Mr. Worf, I hate surprise parties. Some days you get the bear, and some days the bear gets you. Yesterday I did not know how to eat gagh."
+  },
+  wind_direction_deg: {
+    text: "wind direction",
+    unit: "°",
+    description: "Fore heave to boatswain parley nipper capstan bilged on her anchor strike colors ahoy grog. Carouser hearties aft cable splice the main brace Sea Legs warp tack sloop."
+  },
+  pressure_pa: {
+    text: "pressure",
+    unit: "kPa",
+    description: "If you spell Chuck Norris in Scrabble, you win. Chuck Norris' hand is the only hand that can beat a Royal Flush. Chuck Norris is the reason why Waldo is hiding."
+  },
+  light_v: {
+    text: "light",
+    unit: "Volts",
+    description: "Alright, alright, okay McFly, get a grip on yourself. It's all a dream. Just a very intense dream. He's an absolute dream. You know Marty, you look so familiar, do I know your mother?"
+  }
+}
+
 var dropdown,
     title;
 
 
 function setup() {
+  drawCanvas();
+  loadData();
+  setEventListeners();
+}
+
+
+function drawCanvas() {
   // create graph canvas
   createCanvas(windowWidth, windowHeight * 0.75);
   background(232);
@@ -27,13 +71,13 @@ function setup() {
   for (var i = 0; i < options.length; i++) {
     var option = createElement('option');
     option.attribute('value', options[i]);
-    option.html(optionNames[i]);
+    option.html(optionsInfo[options[i]].text);
     option.parent(dropdown);
   }
   dropdown.position(width * 0.04, height * 0.85);
 
   // create y-axis label
-  var yAxisLabel = createDiv(dropdown.elt.value);
+  var yAxisLabel = createDiv(optionsInfo[dropdown.elt.value].text);
   yAxisLabel.position(width * .15 - 130, height / 2);
   yAxisLabel.style('transform', 'rotate(270deg)');
   yAxisLabel.id("yAxisLabel");
@@ -42,9 +86,6 @@ function setup() {
   var xAxisLabel = createDiv("minutes passed");
   xAxisLabel.position(width * .41, height * 0.87);
   xAxisLabel.id("xAxisLabel");
-
-  loadData();
-  setEventListeners();
 }
 
 
@@ -55,7 +96,7 @@ function loadData() {
 
 function setEventListeners() {
   $('#yAxis').change(function() {
-    $('#yAxisLabel').html(this.value);
+    $('#yAxisLabel').html(optionsInfo[this.value].text);
     drawGraph();
     updateSnapshot();
   });
@@ -64,6 +105,7 @@ function setEventListeners() {
   //
   // }, 60000);
 }
+
 
 function drawGraph() {
   for (var key in mappedValues) {

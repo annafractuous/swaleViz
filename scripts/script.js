@@ -1,7 +1,8 @@
 // TO DO:
 // update data every minute
 // - clear present sensor values
-// - clear canvas
+// - clear graph
+// updata data snapshot units
 
 
 
@@ -29,16 +30,20 @@ function updateDataBar() {
 
 function updateSnapshot() {
   var snapshotData = {},
-      currentCat = $('#yAxisLabel').text(),
+      currentCat = dropdown.elt.value,
       lastIdx = sensorValues[currentCat].length - 1;
 
   snapshotData.current = sensorValues[currentCat][lastIdx];
   snapshotData.high = Math.max(...sensorValues[currentCat]);
   snapshotData.low = Math.min(...sensorValues[currentCat]);
+  snapshotData.unit = optionsInfo[currentCat].unit;
 
   var compiledHTML = snapshotTemplateScript(snapshotData);
   $('.data-snapshot').empty();
   $('.data-snapshot').append(compiledHTML);
+
+  $('#data-category').html(optionsInfo[currentCat].text);
+  $('#data-description').html(optionsInfo[currentCat].description);
 }
 
 function formatCelsiusTemp(temp) {
