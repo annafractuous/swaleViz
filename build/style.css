@@ -52,43 +52,43 @@ body {
 
 @font-face {
   font-family: 'DINPro Light';
-  src: url("/Library/Fonts/DINPro-Light.otf") format("opentype"); }
+  src: url("../assets/fonts/DINPro-Light.otf") format("opentype"); }
 
 @font-face {
   font-family: 'DINPro Regular';
-  src: url("/Library/Fonts/DINPro-Regular.otf") format("opentype"); }
+  src: url("../assets/fonts/DINPro-Regular.otf") format("opentype"); }
 
 @font-face {
   font-family: 'DINPro Medium';
-  src: url("/Library/Fonts/DINPro-Medium.otf") format("opentype"); }
+  src: url("../assets/fonts/DINPro-Medium.otf") format("opentype"); }
 
 @font-face {
   font-family: 'Blanch Condensed';
-  src: url("/Library/Fonts/BLANCH_CONDENSED.otf") format("opentype"); }
+  src: url("../assets/fonts/BLANCH_CONDENSED.otf") format("opentype"); }
 
 @font-face {
   font-family: 'Blanch Condensed Light';
-  src: url("/Library/Fonts/BLANCH_CONDENSED_LIGHT.otf") format("opentype"); }
+  src: url("../assets/fonts/BLANCH_CONDENSED_LIGHT.otf") format("opentype"); }
 
 @font-face {
   font-family: 'Input Sans Light';
-  src: url("/Library/Fonts/InputSans-Light.ttf") format("truetype"); }
+  src: url("../assets/fonts/InputSans-Light.ttf") format("truetype"); }
 
 @font-face {
   font-family: 'Input Sans Regular';
-  src: url("/Library/Fonts/InputSans-Regular.ttf") format("truetype"); }
+  src: url("../assets/fonts/InputSans-Regular.ttf") format("truetype"); }
 
 @font-face {
   font-family: 'Input Mono Compressed Light';
-  src: url("/Library/Fonts/InputMonoCompressed-Light.ttf") format("truetype"); }
+  src: url("../assets/fonts/InputMonoCompressed-Light.ttf") format("truetype"); }
 
 @font-face {
   font-family: 'Input Mono Compressed Regular';
-  src: url("/Library/Fonts/InputMonoCompressed-Regular.ttf") format("truetype"); }
+  src: url("../assets/fonts/InputMonoCompressed-Regular.ttf") format("truetype"); }
 
 @font-face {
   font-family: 'Input Mono Compressed Bold';
-  src: url("/Library/Fonts/InputMonoCompressed-Bold.ttf") format("truetype"); }
+  src: url("../assets/fonts/InputMonoCompressed-Bold.ttf") format("truetype"); }
 
 h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
