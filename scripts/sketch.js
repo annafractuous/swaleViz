@@ -1,15 +1,15 @@
 var options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wind_direction_deg", "pressure_pa", "light_v"],
     towerUrl = 'http://54.235.200.47/tower',
     yVariable = "wind_speed_mph",
-    xCoordinates = [],
-    yCoordinates = {},
-    mappedValues = {},
-    sensorValues = {};
+    xCoordinates,
+    yCoordinates,
+    mappedValues,
+    sensorValues,
+    dropdown,
+    title;
 
-for (i = 0; i < options.length; i++) {
-  sensorValues[options[i]] = [];
-  mappedValues[options[i]] = [];
-}
+// testing data re-fetch
+// var updateCounter = 0;
 
 var optionsInfo = {
   wind_speed_mph: {
@@ -49,14 +49,34 @@ var optionsInfo = {
   }
 }
 
-var dropdown,
-    title;
-
 
 function setup() {
   drawCanvas();
-  loadData();
+  displayData();
   setEventListeners();
+}
+
+
+function displayData() {
+  loadJSON(towerUrl, loadDataFunction);
+}
+
+
+function loadDataFunction(weather) {
+  clearPresentData();
+  saveData(weather);
+  // testing data re-fetch
+  // console.log("updating data, #" + updateCounter);
+  // console.log("latest time: " + sensorValues.time[sensorValues.time.length - 1]);
+  // updateCounter++;
+  update();
+}
+
+
+function update() {
+  drawGraph();
+  updateDataBar();
+  updateSnapshot();
 }
 
 
@@ -86,47 +106,38 @@ function drawCanvas() {
   var xAxisLabel = createDiv("minutes passed");
   xAxisLabel.position(width * .41, height * 0.87);
   xAxisLabel.id("xAxisLabel");
+
+  // create title
+  title = createDiv("Tower Data Over The Last <span id='num-minutes'></span> Minutes");
+  title.id('title');
+  title.position(width * .5 - (textWidth("Tower Data Over The Last 30 Minutes")),  height * 0.08);
 }
 
 
-function loadData() {
-  loadJSON(towerUrl, loadDataFunction);
+function clearPresentData() {
+  xCoordinates = [];
+  yCoordinates = {};
+  mappedValues = {};
+  sensorValues = {};
+
+  sensorValues["time"] = []; // include timestamps in sensorValues
+
+  for (i = 0; i < options.length; i++) {  // sensorValues = {
+    sensorValues[options[i]] = [];        //  temperature_f: [],
+    mappedValues[options[i]] = [];        //  wind_speed_mph: [], ...
+  }                                       // }
 }
 
 
-function setEventListeners() {
-  $('#yAxis').change(function() {
-    $('#yAxisLabel').html(optionsInfo[this.value].text);
-    drawGraph();
-    updateSnapshot();
-  });
-
-  // window.setInterval(function(){
-  //
-  // }, 60000);
-}
-
-
-function drawGraph() {
-  for (var key in mappedValues) {
-    if (dropdown.elt.value === key) {
-      yCoordinates = mappedValues[key];
-      drawValues();
-    }
-  }
-}
-
-
-function loadDataFunction(weather) {
+function saveData(weather) {
   var xMin = width * 0.15,
       xMax = width * 0.75,
       yMin = height * 0.8,
       yMax = height * 0.2;
 
+  // weather.results returns an array of objects, with each index in the array
+  // representing 1 minute and holding all sensor values (rain, temp, etc.) for that minute
   for (var i = 0; i < weather.results.length; i++) {
-    // weather.results returns an array of objects, with each index in the array
-    // representing 1 minute and holding all sensor values (rain, temp, etc.) for that minute
-
     // sensorValues restructures the same data into an object where the keys are the data type (rain, temp, etc.),
     // pointing to an array that holds all sensor values in that category from the past however many minutes
     sensorValues.temperature_f.push(Math.round(weather.results[i].temperature_f));
@@ -136,8 +147,9 @@ function loadDataFunction(weather) {
     sensorValues.wind_speed_mph.push(weather.results[i].wind_speed_mph.toFixed(1));
     sensorValues.pressure_pa.push((weather.results[i].pressure_pa / 1000).toFixed(1));
     sensorValues.light_v.push(weather.results[i].light_v);
+    sensorValues.time.push(weather.results[i].date.split("T")[1].split("-")[0]); // 20:53:01
 
-    // mappedValues contains ensor values mapped to the size of the canvas
+    // mappedValues contains sensor values mapped to the size of the canvas
     mappedValues.temperature_f.push(map(weather.results[i].temperature_f, 0, 100, yMin, yMax));
     mappedValues.rain_in.push(map(weather.results[i].rain_in, 0, 5, yMin, yMax));
     mappedValues.humidity_per.push(map(weather.results[i].humidity_per, 0, 100, yMin, yMax));
@@ -149,26 +161,23 @@ function loadDataFunction(weather) {
     xCoordinates.push(map(i, 0, weather.results.length, xMin, xMax));
   }
 
-  // create title
-  title = createDiv("Tower Data Over The Last " + weather.results.length + " Minutes");
-  title.id('title');
-  title.position(width * .5 - (textWidth("Tower Data Over The Last 30 Minutes")),  height * 0.08);
-
   yCoordinates = mappedValues[yVariable];
-  drawValues();
-  updateDataBar();
-  updateSnapshot();
 }
 
 
-function drawValues() {
+function drawGraph() {
   fill(232);
   stroke(232);
   rect(0, 0, width, height);
-  majorLines();
-  strokeLinesX();
-  strokeLinesY();
 
+  drawMajorLines();
+  drawXStrokes();
+  drawYStrokes();
+  drawLine();
+}
+
+
+function drawLine() {
   for (var r = sensorValues.temperature_f.length; r >= 0; r--) {
     stroke(14, 164, 252);
     strokeWeight(4);
@@ -177,7 +186,7 @@ function drawValues() {
 }
 
 
-function majorLines() {
+function drawMajorLines() {
   var xMin = width * 0.15
       xMax = width * 0.75
       yMin = height * 0.8
@@ -189,7 +198,7 @@ function majorLines() {
 }
 
 
-function strokeLinesX(Xvalue) {
+function drawXStrokes(Xvalue) {
   var xMin = width * 0.15,
       xMax = width * 0.75,
       yMin = height * 0.8,
@@ -207,19 +216,21 @@ function strokeLinesX(Xvalue) {
     if (i % 2 == 1) {
       textFont("Source Code Pro");
       text(i, x, yMin + 20);
+      // testing data re-fetch
+      // text(sensorValues.time[i], x, yMin + 20);
     }
   }
 }
 
 
-function strokeLinesY() {
+function drawYStrokes() {
   var xMin = width * 0.15,
       yMin = height * 0.8,
       xMax = width * 0.75;
 
   textFont("Source Code Pro");
 
-  function drawYStrokes(y, z) {
+  function draw(y, z) {
     stroke(86, 86, 86, 100);
     strokeWeight(0.25);
     line(xMin - 3, y, xMax, y);
@@ -231,38 +242,53 @@ function strokeLinesY() {
     case mappedValues.humidity_per:
       for (var z = 0; z < 110; z = z + 10) {
         var y = map(z, 0, 100, yMin, windowHeight / 4);
-        drawYStrokes(y, z);
+        draw(y, z);
       }
       break;
     case mappedValues.rain_in:
       for (z = 0; z < 6; z++) {
         y = map(z, 0, 5, yMin, windowHeight / 4);
-        drawYStrokes(y, z);
+        draw(y, z);
       }
       break;
     case mappedValues.wind_speed_mph:
       for (z = 0; z < 21; z++) {
         y = map(z, 0, 20, yMin, windowHeight / 4);
-        drawYStrokes(y, z);
+        draw(y, z);
       }
       break;
     case mappedValues.pressure_pa:
       for (z = 0; z < 150000; z = z + 5000) {
         y = map(z, 0, 150000, yMin, windowHeight / 4);
-        drawYStrokes(y, z);
+        draw(y, z);
       }
       break;
     case mappedValues.light_v:
       for (z = 0; z < 11; z++) {
         y = map(z, 0, 10, yMin, windowHeight / 4);
-        drawYStrokes(y, z);
+        draw(y, z);
       }
       break;
     case mappedValues.wind_direction_deg:
       for (z = 0; z < 370; z= z + 20) {
         y = map(z, 0, 360, yMin, windowHeight / 4);
-        drawYStrokes(y, z);
+        draw(y, z);
       }
       break;
-    }
   }
+}
+
+
+function setEventListeners() {
+  $('#yAxis').change(function() {
+    yVariable = this.value;
+    yCoordinates = mappedValues[this.value];
+    $('#yAxisLabel').html(optionsInfo[this.value].text);
+    drawGraph();
+    updateSnapshot();
+  });
+
+  // window.setInterval(function(){
+  //   displayData();
+  // }, 60000);
+}

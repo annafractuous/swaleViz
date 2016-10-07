@@ -1,8 +1,11 @@
 // TO DO:
-// update data every minute
-// - clear present sensor values
-// - clear graph
-// updata data snapshot units
+// improve data snapshot for wind direction (high/low aren't very descriptive/applicable)
+// frequent 504 error on retrieving tower data?
+// temperature mapping is off (graphing degrees about 20° than they should be)
+// is the time axis labeled correctly? according to the numbering along the bottom, it seems most recent values
+//   should be to the right. but according to the timestamps, the most recent values are on the left.
+// we should reconsider labeling the x-axis with minutes passed——sometimes the tower goes down, and data shown
+//   is actually several hours old
 
 
 
@@ -26,6 +29,8 @@ function updateDataBar() {
   var compiledHTML = dataBarTemplateScript(dataBarData);
   $('.data-bar .data').empty();
   $('.data-bar .data').append(compiledHTML);
+
+  $('#num-minutes').html(sensorValues[yVariable].length);
 }
 
 function updateSnapshot() {
@@ -49,5 +54,5 @@ function updateSnapshot() {
 function formatCelsiusTemp(temp) {
   temp = temp.toString();
   var decimalIndex = temp.indexOf('.');
-  return temp.slice(0, decimalIndex) + "<span class='decimal'>" + temp.slice(decimalIndex) + "</span>"
+  return temp.slice(0, decimalIndex) + "<span class='decimal'>" + temp.slice(decimalIndex) + "</span>";
 }
