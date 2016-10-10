@@ -9,41 +9,41 @@
 
 
 
-var dataBarTemplate = $('#handlebars-data-bar').html(),
-    dataBarTemplateScript = Handlebars.compile(dataBarTemplate),
-    snapshotTemplate = $('#handlebars-snapshot').html(),
-    snapshotTemplateScript = Handlebars.compile(snapshotTemplate);
+var bottomBarTemplate = $('#handlebars-data-bar').html(),
+    bottomBarTemplateScript = Handlebars.compile(bottomBarTemplate),
+    sidebarTemplate = $('#handlebars-snapshot').html(),
+    sidebarTemplateScript = Handlebars.compile(sidebarTemplate);
 
 
-function updateDataBar() {
-  var dataBarData = {},
+function updateBottomBar() {
+  var bottomBarData = {},
       lastIdx = sensorValues["temperature_f"].length - 1;
 
-  dataBarData.temperature_f = Math.round(sensorValues["temperature_f"][lastIdx]);
+  bottomBarData.temperature_f = Math.round(sensorValues["temperature_f"][lastIdx]);
   var tempCels = (sensorValues["temperature_f"][lastIdx] - 32) / 1.8;
-  dataBarData.temperature_c = formatCelsiusTemp(Number(Math.round(tempCels + 'e1') + 'e-1'));
-  dataBarData.windspeed = sensorValues["wind_speed_mph"][lastIdx];
-  dataBarData.pressure = sensorValues["pressure_pa"][lastIdx];
-  dataBarData.rainfall = sensorValues["rain_in"][lastIdx];
+  bottomBarData.temperature_c = formatCelsiusTemp(Number(Math.round(tempCels + 'e1') + 'e-1'));
+  bottomBarData.windspeed = sensorValues["wind_speed_mph"][lastIdx];
+  bottomBarData.pressure = sensorValues["pressure_pa"][lastIdx];
+  bottomBarData.rainfall = sensorValues["rain_in"][lastIdx];
 
-  var compiledHTML = dataBarTemplateScript(dataBarData);
+  var compiledHTML = bottomBarTemplateScript(bottomBarData);
   $('.data-bar .data').empty();
   $('.data-bar .data').append(compiledHTML);
 
-  $('#num-minutes').html(sensorValues[yVariable].length);
+  // $('#num-minutes').html(sensorValues[yVariable].length);
 }
 
-function updateSnapshot() {
-  var snapshotData = {},
+function updateSidebar() {
+  var sidebarData = {},
       currentCat = dropdown.elt.value,
       lastIdx = sensorValues[currentCat].length - 1;
 
-  snapshotData.current = sensorValues[currentCat][lastIdx];
-  snapshotData.high = Math.max(...sensorValues[currentCat]);
-  snapshotData.low = Math.min(...sensorValues[currentCat]);
-  snapshotData.unit = optionsInfo[currentCat].unit;
+  sidebarData.current = sensorValues[currentCat][lastIdx];
+  sidebarData.high = Math.max(...sensorValues[currentCat]);
+  sidebarData.low = Math.min(...sensorValues[currentCat]);
+  sidebarData.unit = optionsInfo[currentCat].unit;
 
-  var compiledHTML = snapshotTemplateScript(snapshotData);
+  var compiledHTML = sidebarTemplateScript(sidebarData);
   $('.data-snapshot').empty();
   $('.data-snapshot').append(compiledHTML);
 
@@ -62,13 +62,11 @@ var options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wi
     yVariable = "wind_speed_mph",
     xCoordinates,
     yCoordinates,
+    towerData,
     mappedValues,
     sensorValues,
     dropdown,
     title;
-
-// testing data re-fetch
-// var updateCounter = 0;
 
 var optionsInfo = {
   wind_speed_mph: {
@@ -109,33 +107,28 @@ var optionsInfo = {
 }
 
 
+function preload() {
+  towerData = loadJSON(towerUrl);
+}
+
+
 function setup() {
   drawCanvas();
-  displayData();
+  update(towerData);
   setEventListeners();
 }
 
 
-function displayData() {
-  loadJSON(towerUrl, loadDataFunction);
-}
-
-
-function loadDataFunction(weather) {
+function update(weather) {
   clearPresentData();
   saveData(weather);
-  // testing data re-fetch
-  // console.log("updating data, #" + updateCounter);
-  // console.log("latest time: " + sensorValues.time[sensorValues.time.length - 1]);
-  // updateCounter++;
-  update();
+  updateDataSnapshots();
 }
 
 
-function update() {
-  drawGraph();
-  updateDataBar();
-  updateSnapshot();
+function updateDataSnapshots() {
+  updateBottomBar();
+  updateSidebar();
 }
 
 
@@ -167,7 +160,7 @@ function drawCanvas() {
   xAxisLabel.id("xAxisLabel");
 
   // create title
-  title = createDiv("Tower Data Over The Last <span id='num-minutes'></span> Minutes");
+  title = createDiv("Most Recent Tower Data");
   title.id('title');
   title.position(width * .5 - (textWidth("Tower Data Over The Last 30 Minutes")),  height * 0.08);
 }
@@ -224,7 +217,7 @@ function saveData(weather) {
 }
 
 
-function drawGraph() {
+function draw() {
   fill(232);
   stroke(232);
   rect(0, 0, width, height);
@@ -275,8 +268,6 @@ function drawXStrokes(Xvalue) {
     if (i % 2 == 1) {
       textFont("Source Code Pro");
       text(i, x, yMin + 20);
-      // testing data re-fetch
-      // text(sensorValues.time[i], x, yMin + 20);
     }
   }
 }
@@ -343,11 +334,12 @@ function setEventListeners() {
     yVariable = this.value;
     yCoordinates = mappedValues[this.value];
     $('#yAxisLabel').html(optionsInfo[this.value].text);
-    drawGraph();
-    updateSnapshot();
+    redraw();
+    updateSidebar();
   });
 
-  // window.setInterval(function(){
-  //   displayData();
-  // }, 60000);
+  window.setInterval(function(){
+    loadJSON(towerUrl, update);
+    redraw();
+  }, 60000);
 }

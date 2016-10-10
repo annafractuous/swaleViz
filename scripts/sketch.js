@@ -3,13 +3,11 @@ var options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wi
     yVariable = "wind_speed_mph",
     xCoordinates,
     yCoordinates,
+    towerData,
     mappedValues,
     sensorValues,
     dropdown,
     title;
-
-// testing data re-fetch
-// var updateCounter = 0;
 
 var optionsInfo = {
   wind_speed_mph: {
@@ -50,33 +48,28 @@ var optionsInfo = {
 }
 
 
+function preload() {
+  towerData = loadJSON(towerUrl);
+}
+
+
 function setup() {
   drawCanvas();
-  displayData();
+  update(towerData);
   setEventListeners();
 }
 
 
-function displayData() {
-  loadJSON(towerUrl, loadDataFunction);
-}
-
-
-function loadDataFunction(weather) {
+function update(weather) {
   clearPresentData();
   saveData(weather);
-  // testing data re-fetch
-  // console.log("updating data, #" + updateCounter);
-  // console.log("latest time: " + sensorValues.time[sensorValues.time.length - 1]);
-  // updateCounter++;
-  update();
+  updateDataSnapshots();
 }
 
 
-function update() {
-  drawGraph();
-  updateDataBar();
-  updateSnapshot();
+function updateDataSnapshots() {
+  updateBottomBar();
+  updateSidebar();
 }
 
 
@@ -108,7 +101,7 @@ function drawCanvas() {
   xAxisLabel.id("xAxisLabel");
 
   // create title
-  title = createDiv("Tower Data Over The Last <span id='num-minutes'></span> Minutes");
+  title = createDiv("Most Recent Tower Data");
   title.id('title');
   title.position(width * .5 - (textWidth("Tower Data Over The Last 30 Minutes")),  height * 0.08);
 }
@@ -165,7 +158,7 @@ function saveData(weather) {
 }
 
 
-function drawGraph() {
+function draw() {
   fill(232);
   stroke(232);
   rect(0, 0, width, height);
@@ -216,8 +209,6 @@ function drawXStrokes(Xvalue) {
     if (i % 2 == 1) {
       textFont("Source Code Pro");
       text(i, x, yMin + 20);
-      // testing data re-fetch
-      // text(sensorValues.time[i], x, yMin + 20);
     }
   }
 }
@@ -284,11 +275,12 @@ function setEventListeners() {
     yVariable = this.value;
     yCoordinates = mappedValues[this.value];
     $('#yAxisLabel').html(optionsInfo[this.value].text);
-    drawGraph();
-    updateSnapshot();
+    redraw();
+    updateSidebar();
   });
 
-  // window.setInterval(function(){
-  //   displayData();
-  // }, 60000);
+  window.setInterval(function(){
+    loadJSON(towerUrl, update);
+    redraw();
+  }, 60000);
 }
