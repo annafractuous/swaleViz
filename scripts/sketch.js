@@ -76,7 +76,7 @@ function updateDataSnapshots() {
 function drawCanvas() {
   // create graph canvas
   createCanvas(windowWidth, windowHeight * 0.75);
-  background(232);
+  background(248,252,252);
 
   // create dropdown menu for data types
   dropdown = createElement('select');
@@ -90,20 +90,20 @@ function drawCanvas() {
   dropdown.position(width * 0.04, height * 0.85);
 
   // create y-axis label
-  var yAxisLabel = createDiv(optionsInfo[dropdown.elt.value].text);
+  var yAxisLabel = createDiv(optionsInfo[dropdown.elt.value].text + " (" + optionsInfo[dropdown.elt.value].unit + ")");
   yAxisLabel.position(width * .15 - 130, height / 2);
   yAxisLabel.style('transform', 'rotate(270deg)');
   yAxisLabel.id("yAxisLabel");
 
   // create x-axis label
-  var xAxisLabel = createDiv("minutes passed");
+  var xAxisLabel = createDiv("minutes");
   xAxisLabel.position(width * .41, height * 0.87);
   xAxisLabel.id("xAxisLabel");
 
   // create title
   title = createDiv("Most Recent Tower Data");
+  title.position(width * .5 - (textWidth("Most Recent Tower Data")*1.3),  height * 0.08);
   title.id('title');
-  title.position(width * .5 - (textWidth("Tower Data Over The Last 30 Minutes")),  height * 0.08);
 }
 
 
@@ -144,12 +144,12 @@ function saveData(weather) {
 
     // mappedValues contains sensor values mapped to the size of the canvas
     mappedValues.temperature_f.push(map(weather.results[i].temperature_f, 0, 100, yMin, yMax));
-    mappedValues.rain_in.push(map(weather.results[i].rain_in, 0, 5, yMin, yMax));
+    mappedValues.rain_in.push(map(weather.results[i].rain_in, 0, 3, yMin, yMax));
     mappedValues.humidity_per.push(map(weather.results[i].humidity_per, 0, 100, yMin, yMax));
     mappedValues.wind_direction_deg.push(map(weather.results[i].wind_direction_deg, 0, 360, yMin, yMax));
     mappedValues.wind_speed_mph.push(map(weather.results[i].wind_speed_mph, 0, 20, yMin, yMax));
     mappedValues.pressure_pa.push(map(weather.results[i].pressure_pa, 0, 150000, yMin, yMax));
-    mappedValues.light_v.push(map(weather.results[i].light_v, 0, 10, yMin, yMax));
+    mappedValues.light_v.push(map(weather.results[i].light_v, 0, 5, yMin, yMax));
 
     xCoordinates.push(map(i, 0, weather.results.length, xMin, xMax));
   }
@@ -217,7 +217,8 @@ function drawXStrokes(Xvalue) {
 function drawYStrokes() {
   var xMin = width * 0.15,
       yMin = height * 0.8,
-      xMax = width * 0.75;
+      xMax = width * 0.75,
+      yMax = height * 0.2;
 
   textFont("Source Code Pro");
 
@@ -232,37 +233,37 @@ function drawYStrokes() {
     case mappedValues.temperature_f:
     case mappedValues.humidity_per:
       for (var z = 0; z < 110; z = z + 10) {
-        var y = map(z, 0, 100, yMin, windowHeight / 4);
+        var y = map(z, 0, 100, yMin, yMax);
         draw(y, z);
       }
       break;
     case mappedValues.rain_in:
-      for (z = 0; z < 6; z++) {
-        y = map(z, 0, 5, yMin, windowHeight / 4);
+      for (z = 0; z < 4; z++) {
+        y = map(z, 0, 3, yMin, yMax);
         draw(y, z);
       }
       break;
     case mappedValues.wind_speed_mph:
       for (z = 0; z < 21; z++) {
-        y = map(z, 0, 20, yMin, windowHeight / 4);
+        y = map(z, 0, 20, yMin, yMax);
         draw(y, z);
       }
       break;
     case mappedValues.pressure_pa:
-      for (z = 0; z < 150000; z = z + 5000) {
-        y = map(z, 0, 150000, yMin, windowHeight / 4);
+      for (z = 0; z < 150; z = z + 5) {
+        y = map(z, 0, 150, yMin, yMax);
         draw(y, z);
       }
       break;
     case mappedValues.light_v:
-      for (z = 0; z < 11; z++) {
-        y = map(z, 0, 10, yMin, windowHeight / 4);
+      for (z = 0; z < 6; z++) {
+        y = map(z, 0, 5, yMin, yMax);
         draw(y, z);
       }
       break;
     case mappedValues.wind_direction_deg:
       for (z = 0; z < 370; z= z + 20) {
-        y = map(z, 0, 360, yMin, windowHeight / 4);
+        y = map(z, 0, 360, yMin, yMax);
         draw(y, z);
       }
       break;

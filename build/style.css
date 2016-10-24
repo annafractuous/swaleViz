@@ -35,6 +35,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.icon-pulldown:before {
+  content: "\e900"; }
+
 .icon-windspeed:before {
   content: "\e901"; }
 
@@ -120,10 +123,12 @@ h6 {
 #title {
   font-family: 'Cousine';
   font-size: 1.625rem; }
+  #title h3 {
+    text-transform: capitalize; }
 
 @media screen and (min-width: 768px) {
   .data-bar .data .data-section.location .label {
-    padding-right: 20%; } }
+    padding-right: 18%; } }
 
 .data-bar {
   position: absolute;
@@ -278,3 +283,22 @@ h6 {
     font-family: 'Input Sans Regular';
     font-size: 0.625rem;
     line-height: 1.25rem; }
+
+.plant-archive {
+  background-color: black;
+  height: 90vh;
+  position: absolute;
+  top: -89vh;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  -webkit-transition: top 300ms ease-out;
+  transition: top 300ms ease-out; }
+  .plant-archive.open {
+    top: -1vh; }
+  .plant-archive .icon-pulldown {
+    font-size: 215px;
+    position: absolute;
+    bottom: -214px;
+    left: 50vw;
+    margin-left: -107px; }
