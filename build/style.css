@@ -35,14 +35,71 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.icon-about:before {
+  content: "\e917"; }
+
+.icon-sunflower:before {
+  content: "\e918"; }
+
+.icon-ginger:before {
+  content: "\e906"; }
+
+.icon-marigold:before {
+  content: "\e907"; }
+
+.icon-oregano:before {
+  content: "\e908"; }
+
+.icon-fennel:before {
+  content: "\e909"; }
+
+.icon-lemon:before {
+  content: "\e90a"; }
+
+.icon-pear:before {
+  content: "\e90b"; }
+
+.icon-apple:before {
+  content: "\e90c"; }
+
+.icon-ant:before {
+  content: "\e90d"; }
+
+.icon-elderflower:before {
+  content: "\e90e"; }
+
+.icon-bee:before {
+  content: "\e90f"; }
+
+.icon-rose:before {
+  content: "\e910"; }
+
+.icon-violet:before {
+  content: "\e911"; }
+
+.icon-dandelion:before {
+  content: "\e912"; }
+
+.icon-chamomile:before {
+  content: "\e913"; }
+
+.icon-raspberry:before {
+  content: "\e914"; }
+
+.icon-lavender:before {
+  content: "\e915"; }
+
+.icon-mint:before {
+  content: "\e916"; }
+
 .icon-pulldown:before {
   content: "\e900"; }
 
 .icon-windspeed:before {
-  content: "\e901"; }
+  content: "\e905"; }
 
 .icon-rain:before {
-  content: "\e900"; }
+  content: "\e901"; }
 
 .icon-thermometer:before {
   content: "\e902"; }
@@ -80,6 +137,10 @@ body {
 @font-face {
   font-family: 'Input Sans Regular';
   src: url("../assets/fonts/InputSans-Regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Input Mono Regular';
+  src: url("../assets/fonts/InputMono-Regular.ttf") format("truetype"); }
 
 @font-face {
   font-family: 'Input Mono Compressed Light';
@@ -125,10 +186,6 @@ h6 {
   font-size: 1.625rem; }
   #title h3 {
     text-transform: capitalize; }
-
-@media screen and (min-width: 768px) {
-  .data-bar .data .data-section.location .label {
-    padding-right: 18%; } }
 
 .data-bar {
   position: absolute;
@@ -218,21 +275,25 @@ h6 {
         font-family: 'Input Sans Light';
         font-weight: normal;
         text-transform: none; }
-        .data-bar .data .data-section h5 .value {
+        .data-bar .data .data-section h5 .data-bar-value {
           font-family: 'Blanch Condensed';
           font-weight: normal;
           font-size: 5.625rem; }
-          .data-bar .data .data-section h5 .value .decimal {
+          .data-bar .data .data-section h5 .data-bar-value .decimal {
             font-size: 3.125rem;
             line-height: 65px;
             position: absolute; }
-      .data-bar .data .data-section .label {
+      .data-bar .data .data-section .data-bar-label {
         font-family: 'DINPro Light';
         line-height: 14px;
         text-align: left; }
       .data-bar .data .data-section.location h6 {
         padding: 20% 30% 0 0;
         line-height: 18px; }
+
+@media screen and (min-width: 768px) {
+  .data-bar .data .data-section.location .label {
+    padding-right: 18%; } }
 
 .data-snapshot {
   color: #373737;
@@ -241,31 +302,31 @@ h6 {
   left: 80%; }
   .data-snapshot h5 {
     font-size: 1rem; }
-  .data-snapshot .label {
+  .data-snapshot .snapshot-label {
     font-family: 'Input Mono Compressed Light'; }
-  .data-snapshot .value {
+  .data-snapshot .snapshot-value {
     font-family: 'Blanch Condensed';
-    font-weight: normal; }
-  .data-snapshot #value-unit {
-    font-family: 'Input Sans';
     font-weight: normal; }
   .data-snapshot .current-container {
     display: block; }
     .data-snapshot .current-container h1, .data-snapshot .current-container h5 {
       display: inline-block;
       vertical-align: middle; }
-    .data-snapshot .current-container .label {
+    .data-snapshot .current-container .snapshot-label {
       display: block; }
-    .data-snapshot .current-container .value {
+    .data-snapshot .current-container .snapshot-value {
       font-size: 5rem;
       margin-bottom: 14px; }
+    .data-snapshot .current-container #value-unit {
+      font-family: 'Input Sans';
+      font-weight: normal; }
   .data-snapshot .low-high-container {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex; }
     .data-snapshot .low-high-container .low, .data-snapshot .low-high-container .high {
       width: 66px; }
-    .data-snapshot .low-high-container .value {
+    .data-snapshot .low-high-container .snapshot-value {
       display: inline-block;
       font-size: 2.8125rem;
       line-height: 50px; }
@@ -291,14 +352,43 @@ h6 {
   top: -89vh;
   left: 0;
   right: 0;
+  padding: 50px 100px;
   z-index: 200;
   -webkit-transition: top 300ms ease-out;
   transition: top 300ms ease-out; }
   .plant-archive.open {
     top: -1vh; }
-  .plant-archive .icon-pulldown {
+  .plant-archive__pulldown {
+    color: black;
     font-size: 215px;
     position: absolute;
     bottom: -214px;
     left: 50vw;
     margin-left: -107px; }
+    .plant-archive__pulldown .icon-sunflower {
+      font-size: 65px;
+      color: white;
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      margin-left: -26px; }
+  .plant-archive__header {
+    text-transform: capitalize;
+    font-family: 'Input Mono Regular';
+    font-size: 55px;
+    color: white;
+    text-align: center;
+    margin-bottom: 50px; }
+  .plant-archive__icons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    .plant-archive__icons div[class^=icon-] {
+      color: white;
+      font-size: 100px;
+      text-align: center;
+      padding: 30px 20px; }
+    .plant-archive__icons div.icon-about {
+      font-size: 80px; }

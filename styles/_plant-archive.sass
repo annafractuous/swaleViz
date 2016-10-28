@@ -5,6 +5,7 @@
   top: -89vh
   left: 0
   right: 0
+  padding: 50px 100px
   z-index: 200
   -webkit-transition: top 300ms ease-out
   -moz-transition: top 300ms ease-out
@@ -14,9 +15,39 @@
   &.open
     top: -1vh
 
-  .icon-pulldown
+  &__pulldown
+    color: black
     font-size: 215px
     position: absolute
     bottom: -214px
     left: 50vw
     margin-left: -107px
+
+    .icon-sunflower
+      font-size: 65px
+      color: white
+      position: absolute
+      top: 2px
+      left: 50%
+      margin-left: -26px
+
+  &__header
+    text-transform: capitalize
+    font-family: 'Input Mono Regular'
+    font-size: 55px
+    color: white
+    text-align: center
+    margin-bottom: 50px
+
+  &__icons
+    display: flex
+    flex-wrap: wrap
+
+    div[class^=icon-]
+      color: white
+      font-size: 100px
+      text-align: center
+      padding: 30px 20px
+
+    div.icon-about
+      font-size: 80px

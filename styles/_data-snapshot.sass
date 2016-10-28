@@ -8,15 +8,11 @@
   h5
     font-size: rem(16)
 
-  .label
+  .snapshot-label
     font-family: 'Input Mono Compressed Light'
 
-  .value
+  .snapshot-value
     font-family: 'Blanch Condensed'
-    font-weight: normal
-
-  #value-unit
-    font-family: 'Input Sans'
     font-weight: normal
 
   .current-container
@@ -26,12 +22,16 @@
       display: inline-block
       vertical-align: middle
 
-    .label
+    .snapshot-label
       display: block
 
-    .value
+    .snapshot-value
       font-size: rem(80)
       margin-bottom: 14px
+
+    #value-unit
+      font-family: 'Input Sans'
+      font-weight: normal
 
   .low-high-container
     display: flex
@@ -39,7 +39,7 @@
     .low, .high
       width: 66px
 
-    .value
+    .snapshot-value
       display: inline-block
       font-size: rem(45)
       line-height: 50px

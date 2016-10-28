@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <title>towerOverTime</title>
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="libraries/p5.js" type="text/javascript"></script>
-  <script src="libraries/p5.dom.js" type="text/javascript"></script>
-  <script src="libraries/p5.sound.js" type="text/javascript"></script>
-  <script src="libraries/handlebars.min-latest.js" type="text/javascript"></script>
   <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="build/style.css">
 </head>
-
 <body>
   <!-- PLANT ARCHIVE DROPDOWN -->
     <div class="plant-archive">
-      <span class="icon-pulldown"></span>
+      <h2 class="plant-archive__header">Archive of the Ecological Future</h2>
+      <div class="plant-archive__icons row">
+        <div class="icon-oregano col-md-2 col-sm-3"></div>
+        <div class="icon-lavender col-md-2 col-sm-3"></div>
+        <div class="icon-raspberry col-md-2 col-sm-3"></div>
+        <div class="icon-chamomile col-md-2 col-sm-3"></div>
+        <div class="icon-dandelion col-md-2 col-sm-3"></div>
+        <div class="icon-ginger col-md-2 col-sm-3"></div>
+        <div class="icon-violet col-md-2 col-sm-3"></div>
+        <div class="icon-marigold col-md-2 col-sm-3"></div>
+        <div class="icon-rose col-md-2 col-sm-3"></div>
+        <div class="icon-bee col-md-2 col-sm-3"></div>
+        <div class="icon-pear col-md-2 col-sm-3"></div>
+        <div class="icon-elderflower col-md-2 col-sm-3"></div>
+        <div class="icon-apple col-md-2 col-sm-3"></div>
+        <div class="icon-ant col-md-2 col-sm-3"></div>
+        <div class="icon-lemon col-md-2 col-sm-3"></div>
+        <div class="icon-fennel col-md-2 col-sm-3"></div>
+        <div class="icon-mint col-md-2 col-sm-3"></div>
+        <div class="icon-about col-md-2 col-sm-3"></div>
+      </div>
+      <span class="plant-archive__pulldown icon-pulldown">
+        <span class="icon-sunflower">
+      </span>
     </div>
 
   <!-- DATA INFO -->
@@ -33,21 +50,21 @@
 
       <script id="handlebars-snapshot" type="text/x-handlebars-template">
         <div class="current-container">
-            <h5 class="label">Current</h5>
-            <h1 id="current-value" class="value">{{current}}</h1>
+            <h5 class="snapshot-label">Current</h5>
+            <h1 id="current-value" class="snapshot-value">{{current}}</h1>
             <h5 id="value-unit">{{unit}}</h5>
         </div>
 
         <div class="low-high-container">
 
             <div class="high">
-                <h5 class="label">High</h5>
-                <h2 id="high-value" class="value">{{high}}</h2>
+                <h5 class="snapshot-label">High</h5>
+                <h2 id="high-value" class="snapshot-value">{{high}}</h2>
             </div>
 
             <div class="low">
-                <h5 class="label">Low</h5>
-                <h2 id="low-value" class="value">{{low}}</h2>
+                <h5 class="snapshot-label">Low</h5>
+                <h2 id="low-value" class="snapshot-value">{{low}}</h2>
             </div>
 
         </div>
@@ -69,36 +86,36 @@
               <span class="icon icon-thermometer"></span>
               <div class="temp-container">
                   <div class="fahrenheit">
-                      <h5><span class="value">{{temperature_f}}</span>°F</h5>
+                      <h5><span class="data-bar-value">{{temperature_f}}</span>°F</h5>
                   </div>
                   <div class="celsius">
-                      <h5><span class="value">{{{temperature_c}}}</span>°C</h5>
+                      <h5><span class="data-bar-value">{{{temperature_c}}}</span>°C</h5>
                   </div>
               </div>
-              <h6 class="label">Temperature</h6>
+              <h6 class="data-bar-label">Temperature</h6>
           </div>
 
           <div class="data-section windspeed">
               <span class="icon icon-windspeed"></span>
-              <h5><span class="value">{{windspeed}}</span>MPH</h5>
-              <h6 class="label">Windspeed</h6>
+              <h5><span class="data-bar-value">{{windspeed}}</span>MPH</h5>
+              <h6 class="data-bar-label">Windspeed</h6>
           </div>
 
           <div class="data-section pressure">
               <span class="icon icon-pressure"></span>
-              <h5><span class="value">{{pressure}}</span>kPa</h5>
-              <h6 class="label">Pressure</h6>
+              <h5><span class="data-bar-value">{{pressure}}</span>kPa</h5>
+              <h6 class="data-bar-label">Pressure</h6>
           </div>
 
           <div class="data-section rainfall">
               <span class="icon icon-rain"></span>
-              <h5><span class="value">{{rainfall}}"</span></h5>
-              <h6 class="label">Rainfall</h6>
+              <h5><span class="data-bar-value">{{rainfall}}"</span></h5>
+              <h6 class="data-bar-label">Rainfall</h6>
           </div>
 
           <div class="data-section location">
               <span class="icon icon-location"></span>
-              <h6 class="label">
+              <h6 class="data-bar-label">
                   <span class="area">Brooklyn Bridge Park</span>
                   <span class="borough">// Brooklyn</span>
                   <span class="city">New York City</span>
@@ -108,11 +125,15 @@
 
         </script>
       </div>
-
   </div>
 
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="libraries/p5.js" type="text/javascript"></script>
+  <script src="libraries/p5.dom.js" type="text/javascript"></script>
+  <script src="libraries/p5.sound.js" type="text/javascript"></script>
+  <script src="libraries/handlebars.min-latest.js" type="text/javascript"></script>
   <script src="build/script.js" type="text/javascript"></script>
 
 </body>
-
 </html>

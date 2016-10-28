@@ -1,12 +1,4 @@
 // BOTTOM DATA BAR
-
-// media queries
-
-@media screen and (min-width: $tablet)
-  .data-bar .data .data-section.location .label
-    padding-right: 18%
-
-
 .data-bar
   position: absolute
   height: 23%
@@ -93,7 +85,7 @@
         font-family: 'Input Sans Light'
         font-weight: normal
         text-transform: none
-        .value
+        .data-bar-value
           font-family: 'Blanch Condensed'
           font-weight: normal
           font-size: rem(90)
@@ -101,10 +93,15 @@
             font-size: rem(50)
             line-height: 65px
             position: absolute
-      .label
+      .data-bar-label
         font-family: 'DINPro Light'
         line-height: 14px
         text-align: left
       &.location h6
         padding: 20% 30% 0 0
         line-height: 18px
+
+// media queries
+@media screen and (min-width: $tablet)
+  .data-bar .data .data-section.location .label
+    padding-right: 18%
