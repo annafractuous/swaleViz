@@ -384,29 +384,28 @@ h6 {
       top: 2px;
       left: 50%;
       margin-left: -26px; }
-  .plant-archive__menu {
-    display: none; }
-    .plant-archive__menu-header {
-      text-transform: capitalize;
-      font-family: 'Input Mono Regular';
-      font-size: 55px;
-      color: white;
-      text-align: center;
-      margin-bottom: 50px; }
-    .plant-archive__menu-icon-list {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
-    .plant-archive__menu-icon {
-      color: white;
-      font-size: 100px;
-      text-align: center;
-      padding: 30px 20px; }
-      .plant-archive__menu-icon.icon-about {
-        font-size: 80px; }
+  .plant-archive__menu-header {
+    text-transform: capitalize;
+    font-family: 'Input Mono Regular';
+    font-size: 55px;
+    color: white;
+    text-align: center;
+    margin-bottom: 50px; }
+  .plant-archive__menu-icon-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+  .plant-archive__menu-icon {
+    color: white;
+    font-size: 100px;
+    text-align: center;
+    padding: 30px 20px; }
+    .plant-archive__menu-icon.icon-about {
+      font-size: 80px; }
   .plant-archive__entry {
+    display: none;
     color: white; }
     .plant-archive__entry-heading {
       font-family: "Input Mono Medium"; }
