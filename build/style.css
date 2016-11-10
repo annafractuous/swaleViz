@@ -139,8 +139,20 @@ body {
   src: url("../assets/fonts/InputSans-Regular.ttf") format("truetype"); }
 
 @font-face {
+  font-family: 'Input Mono Extra Light';
+  src: url("../assets/fonts/InputMono-ExtraLight.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Input Mono Extra Light Italic';
+  src: url("../assets/fonts/InputMono-ExtraLightItalic.ttf") format("truetype"); }
+
+@font-face {
   font-family: 'Input Mono Regular';
   src: url("../assets/fonts/InputMono-Regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Input Mono Medium';
+  src: url("../assets/fonts/InputMono-Medium.ttf") format("truetype"); }
 
 @font-face {
   font-family: 'Input Mono Compressed Light';
@@ -372,23 +384,37 @@ h6 {
       top: 2px;
       left: 50%;
       margin-left: -26px; }
-  .plant-archive__header {
-    text-transform: capitalize;
-    font-family: 'Input Mono Regular';
-    font-size: 55px;
-    color: white;
-    text-align: center;
-    margin-bottom: 50px; }
-  .plant-archive__icons {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap; }
-    .plant-archive__icons div[class^=icon-] {
+  .plant-archive__menu {
+    display: none; }
+    .plant-archive__menu-header {
+      text-transform: capitalize;
+      font-family: 'Input Mono Regular';
+      font-size: 55px;
+      color: white;
+      text-align: center;
+      margin-bottom: 50px; }
+    .plant-archive__menu-icon-list {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+    .plant-archive__menu-icon {
       color: white;
       font-size: 100px;
       text-align: center;
       padding: 30px 20px; }
-    .plant-archive__icons div.icon-about {
-      font-size: 80px; }
+      .plant-archive__menu-icon.icon-about {
+        font-size: 80px; }
+  .plant-archive__entry {
+    color: white; }
+    .plant-archive__entry-heading {
+      font-family: "Input Mono Medium"; }
+    .plant-archive__entry-title, .plant-archive__entry-text, .plant-archive__entry-quote-marks {
+      font-family: "Input Mono Extra Light"; }
+    .plant-archive__entry-quote {
+      font-family: "Input Mono Extra Light Italic"; }
+    .plant-archive__entry-quote-marks {
+      font-size: 150px; }
+    .plant-archive__entry-symbol {
+      height: 100%; }

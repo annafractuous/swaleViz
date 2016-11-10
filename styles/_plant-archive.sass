@@ -31,23 +31,47 @@
       left: 50%
       margin-left: -26px
 
-  &__header
-    text-transform: capitalize
-    font-family: 'Input Mono Regular'
-    font-size: 55px
-    color: white
-    text-align: center
-    margin-bottom: 50px
+  &__menu
+    display: none
 
-  &__icons
-    display: flex
-    flex-wrap: wrap
+    &-header
+      text-transform: capitalize
+      font-family: 'Input Mono Regular'
+      font-size: 55px
+      color: white
+      text-align: center
+      margin-bottom: 50px
 
-    div[class^=icon-]
+    &-icon-list
+      display: flex
+      flex-wrap: wrap
+
+    &-icon
       color: white
       font-size: 100px
       text-align: center
       padding: 30px 20px
 
-    div.icon-about
-      font-size: 80px
+      &.icon-about
+        font-size: 80px
+
+  &__entry
+    // display: none
+    color: white
+
+    &-heading
+      font-family: "Input Mono Medium"
+
+    &-title,
+    &-text,
+    &-quote-marks
+      font-family: "Input Mono Extra Light"
+
+    &-quote
+      font-family: "Input Mono Extra Light Italic"
+
+    &-quote-marks
+      font-size: 150px
+
+    &-symbol
+      height: 100%
