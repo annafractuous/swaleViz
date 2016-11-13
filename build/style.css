@@ -38,6 +38,9 @@ body {
 .icon-about:before {
   content: "\e917"; }
 
+.icon-grid:before {
+  content: "\e919"; }
+
 .icon-sunflower:before {
   content: "\e918"; }
 
@@ -364,7 +367,7 @@ h6 {
   top: -89vh;
   left: 0;
   right: 0;
-  padding: 50px 100px;
+  padding: 20px 40px;
   z-index: 200;
   -webkit-transition: top 300ms ease-out;
   transition: top 300ms ease-out; }
@@ -384,36 +387,71 @@ h6 {
       top: 2px;
       left: 50%;
       margin-left: -26px; }
-  .plant-archive__menu-header {
-    text-transform: capitalize;
-    font-family: 'Input Mono Regular';
-    font-size: 55px;
-    color: white;
-    text-align: center;
-    margin-bottom: 50px; }
-  .plant-archive__menu-icon-list {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap; }
-  .plant-archive__menu-icon {
-    color: white;
-    font-size: 100px;
-    text-align: center;
-    padding: 30px 20px; }
-    .plant-archive__menu-icon.icon-about {
-      font-size: 80px; }
+  .plant-archive__menu {
+    padding: 30px 70px; }
+    .plant-archive__menu-header {
+      text-transform: capitalize;
+      font-family: 'Input Mono Regular';
+      font-size: 55px;
+      color: white;
+      text-align: center;
+      margin-bottom: 50px; }
+    .plant-archive__menu-icon-list {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      .plant-archive__menu-icon-list .row {
+        width: 100%;
+        height: 30%; }
+    .plant-archive__menu-icon {
+      color: white;
+      font-size: 100px;
+      text-align: center;
+      padding: 30px 20px; }
+      .plant-archive__menu-icon.icon-about {
+        font-size: 80px; }
   .plant-archive__entry {
     display: none;
-    color: white; }
+    max-height: 100%; }
+    .plant-archive__entry-content {
+      color: white; }
+    .plant-archive__entry-menu-btn {
+      height: 10%;
+      color: white; }
+      .plant-archive__entry-menu-btn .icon-grid {
+        font-size: 40px;
+        margin-bottom: 20px; }
     .plant-archive__entry-heading {
-      font-family: "Input Mono Medium"; }
-    .plant-archive__entry-title, .plant-archive__entry-text, .plant-archive__entry-quote-marks {
+      font-family: "Input Mono Medium";
+      font-size: 16px;
+      margin: 20px 0; }
+    .plant-archive__entry-title, .plant-archive__entry-text,
+    .plant-archive__entry-text p, .plant-archive__entry-link {
       font-family: "Input Mono Extra Light"; }
-    .plant-archive__entry-quote {
-      font-family: "Input Mono Extra Light Italic"; }
-    .plant-archive__entry-quote-marks {
-      font-size: 150px; }
+    .plant-archive__entry-title {
+      text-transform: capitalize; }
+    .plant-archive__entry-text {
+      padding-bottom: 30px; }
+      .plant-archive__entry-text p {
+        line-height: 1.2; }
+    .plant-archive__entry-link a {
+      color: inherit;
+      text-decoration: underline; }
+      .plant-archive__entry-link a:hover {
+        color: inherit; }
     .plant-archive__entry-symbol {
-      height: 100%; }
+      font-size: 375px; }
+    .plant-archive__entry-quote {
+      font-family: "Input Mono Extra Light Italic";
+      text-align: center; }
+    .plant-archive__entry-quote-marks {
+      font-family: "Input Mono Extra Light Italic";
+      font-size: 100px;
+      text-align: left; }
+      .plant-archive__entry-quote-marks:first-of-type {
+        -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+        position: relative;
+        top: -.5em; }
