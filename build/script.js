@@ -1,13 +1,3 @@
-// TO DO:
-// improve data snapshot for wind direction (high/low aren't very descriptive/applicable)
-// frequent 504 error on retrieving tower data?
-// temperature mapping is off (graphing degrees about 20° higher than they should be)
-// display somewhere the actual time range of the data, since tower data isn't always recent?
-// is the time axis labeled correctly? according to the numbering along the bottom, it seems most recent values
-//   should be to the right. but according to the  timestamps, the most recent values are on the left.
-
-
-
 var bottomBarTemplate = $('#handlebars-data-bar').html(),
     bottomBarTemplateScript = Handlebars.compile(bottomBarTemplate),
     sidebarTemplate = $('#handlebars-snapshot').html(),
