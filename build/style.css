@@ -418,20 +418,19 @@ h6 {
     .plant-archive__entry-content {
       color: white; }
     .plant-archive__entry-menu-btn {
-      height: 10%;
       color: white; }
       .plant-archive__entry-menu-btn .icon-grid {
-        font-size: 40px;
-        margin-bottom: 20px; }
+        font-size: 40px; }
     .plant-archive__entry-heading {
       font-family: "Input Mono Medium";
-      font-size: 16px;
+      font-size: 14px;
       margin: 20px 0; }
     .plant-archive__entry-title, .plant-archive__entry-text,
     .plant-archive__entry-text p, .plant-archive__entry-link {
       font-family: "Input Mono Extra Light"; }
     .plant-archive__entry-title {
-      text-transform: capitalize; }
+      text-transform: capitalize;
+      font-size: 55px; }
     .plant-archive__entry-text {
       padding-bottom: 30px; }
       .plant-archive__entry-text p {
@@ -442,13 +441,14 @@ h6 {
       .plant-archive__entry-link a:hover {
         color: inherit; }
     .plant-archive__entry-symbol {
-      font-size: 375px; }
+      font-size: 350px;
+      max-height: 350px; }
     .plant-archive__entry-quote {
       font-family: "Input Mono Extra Light Italic";
       text-align: center; }
     .plant-archive__entry-quote-marks {
       font-family: "Input Mono Extra Light Italic";
-      font-size: 100px;
+      font-size: 90px;
       text-align: left; }
       .plant-archive__entry-quote-marks:first-of-type {
         -webkit-transform: rotate(180deg);
