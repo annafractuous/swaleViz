@@ -15,7 +15,7 @@ function updateBottomBar() {
   bottomBarData.windspeed = sensorValues["wind_speed_mph"][lastIdx];
   bottomBarData.pressure = sensorValues["pressure_pa"][lastIdx];
   bottomBarData.rainfall = sensorValues["rain_in"][lastIdx];
-  bottomBarData.time = time.replace(time.substring(5, 8), "");
+  bottomBarData.time = time.replace(time.substring(4, 8), " ");
 
   var compiledHTML = bottomBarTemplateScript(bottomBarData);
   $('.data-bar .data').empty();
@@ -64,5 +64,5 @@ function formatDateTime(timeStr) {
     ampm = "pm";
   }
 
-  return 1(month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm);
+  return (month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm);
 }
