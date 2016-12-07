@@ -119,6 +119,10 @@ var options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wi
     yVariable = "wind_speed_mph",
     xCoordinates,
     yCoordinates,
+    xMin,
+    xMax,
+    yMin,
+    yMax,
     towerData,
     mappedValues,
     sensorValues,
@@ -176,6 +180,12 @@ function drawCanvas() {
   createCanvas(windowWidth, windowHeight * 0.75);
   background(248,252,252);
 
+  // set graph boundaries
+  xMin = width * 0.15;
+  xMax = width * 0.75;
+  yMin = height * 0.8;
+  yMax = height * 0.2;
+
   // create dropdown menu for data types
   dropdown = createElement('select');
   dropdown.id('yAxis');
@@ -221,11 +231,6 @@ function clearPresentData() {
 
 
 function saveData(weather) {
-  var xMin = width * 0.15,
-      xMax = width * 0.75,
-      yMin = height * 0.8,
-      yMax = height * 0.2;
-
   // weather.results returns an array of objects, with each index in the array
   // representing 1 minute and holding all sensor values (rain, temp, etc.) for that minute
   for (var i = 0; i < weather.results.length; i++) {
@@ -278,11 +283,6 @@ function drawLine() {
 
 
 function drawMajorLines() {
-  var xMin = width * 0.15
-      xMax = width * 0.75
-      yMin = height * 0.8
-      yMax = height * 0.2;
-
   stroke(86);
   strokeWeight(1);
   line(xMin, yMin, xMax, yMin);
@@ -290,11 +290,6 @@ function drawMajorLines() {
 
 
 function drawXStrokes(Xvalue) {
-  var xMin = width * 0.15,
-      xMax = width * 0.75,
-      yMin = height * 0.8,
-      yMax = height * 0.2;
-
   stroke(86, 86, 86, 100);
   strokeWeight(0.5);
 
@@ -313,11 +308,6 @@ function drawXStrokes(Xvalue) {
 
 
 function drawYStrokes() {
-  var xMin = width * 0.15,
-      yMin = height * 0.8,
-      xMax = width * 0.75,
-      yMax = height * 0.2;
-
   textFont("Source Code Pro");
 
   function draw(y, z) {
