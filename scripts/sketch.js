@@ -10,13 +10,13 @@ var options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wi
     towerData,
     mappedValues,
     sensorValues,
-    dropdown,
-    title,
-    optionsInfo;
+    optionsInfo,
+    lastTime,
+    dropdown;
 
 
 function setEventListeners() {
-  $('#yAxis').change(function() {
+  $('.sidebar__dropdown').change(function() {
     yVariable = this.value;
     yCoordinates = mappedValues[this.value];
     $('#yAxisLabel').html(optionsInfo[this.value].text);
@@ -61,41 +61,26 @@ function updateDataSnapshots() {
 
 function drawCanvas() {
   // create graph canvas
-  createCanvas(windowWidth, windowHeight * 0.75);
-  background(248,252,252);
+  var canvas = createCanvas(windowWidth * 0.6, windowHeight * 0.75);
+  canvas.parent("canvas");
 
   // set graph boundaries
-  xMin = width * 0.15;
-  xMax = width * 0.75;
-  yMin = height * 0.8;
-  yMax = height * 0.2;
+  xMin = width * 0.05;
+  xMax = width * 0.95;
+  yMin = height * 0.85;
+  yMax = height * 0.15;
 
-  // create dropdown menu for data types
-  dropdown = createElement('select');
-  dropdown.id('yAxis');
+  // populate dropdown menu for data types
+  dropdown = $('.sidebar__dropdown')[0];
   for (var i = 0; i < options.length; i++) {
     var option = createElement('option');
     option.attribute('value', options[i]);
     option.html(optionsInfo[options[i]].text);
     option.parent(dropdown);
   }
-  dropdown.position(width * 0.04, height * 0.85);
 
-  // create y-axis label
-  var yAxisLabel = createDiv(optionsInfo[dropdown.elt.value].text + " (" + optionsInfo[dropdown.elt.value].unit + ")");
-  yAxisLabel.position(width * .15 - 130, height / 2);
-  yAxisLabel.style('transform', 'rotate(270deg)');
-  yAxisLabel.id("yAxisLabel");
-
-  // create x-axis label
-  var xAxisLabel = createDiv("minutes");
-  xAxisLabel.position(width * .41, height * 0.87);
-  xAxisLabel.id("xAxisLabel");
-
-  // create title
-  title = createDiv("Most Recent Tower Data");
-  title.position(width * .5 - (textWidth("Most Recent Tower Data")*1.3),  height * 0.08);
-  title.id('title');
+  // y-axis label
+  $('#yAxisLabel').html(optionsInfo[dropdown.value].text + " (" + optionsInfo[dropdown.value].unit + ")");
 }
 
 
@@ -142,6 +127,7 @@ function saveData(weather) {
   }
 
   yCoordinates = mappedValues[yVariable];
+  lastTime = weather.results[weather.results.length - 1]['date'];
 }
 
 
@@ -192,12 +178,12 @@ function drawXStrokes(Xvalue) {
 
 
 function drawYStrokes() {
-  textFont("Source Code Pro");
 
   function draw(y, z) {
     stroke(86, 86, 86, 100);
     strokeWeight(0.25);
     line(xMin - 3, y, xMax, y);
+    textFont("Source Code Pro");
     text(z, xMin - 30, y + 5);
   }
 

@@ -7,7 +7,7 @@ var bottomBarTemplate = $('#handlebars-data-bar').html(),
 function updateBottomBar() {
   var bottomBarData = {},
       lastIdx = sensorValues["temperature_f"].length - 1,
-      time = new Date().toLocaleTimeString();
+      currentTime = new Date().toLocaleTimeString();
 
   bottomBarData.temperature_f = Math.round(sensorValues["temperature_f"][lastIdx]);
   var tempCels = (sensorValues["temperature_f"][lastIdx] - 32) / 1.8;
@@ -15,7 +15,7 @@ function updateBottomBar() {
   bottomBarData.windspeed = sensorValues["wind_speed_mph"][lastIdx];
   bottomBarData.pressure = sensorValues["pressure_pa"][lastIdx];
   bottomBarData.rainfall = sensorValues["rain_in"][lastIdx];
-  bottomBarData.time = time.replace(time.substring(4, 8), " ");
+  bottomBarData.time = currentTime.replace(currentTime.substring(4, 7), " ");
 
   var compiledHTML = bottomBarTemplateScript(bottomBarData);
   $('.data-bar .data').empty();
@@ -24,7 +24,7 @@ function updateBottomBar() {
 
 function updateSidebar() {
   var sidebarData = {},
-      currentCat = dropdown.elt.value,
+      currentCat = dropdown.value,
       lastIdx = sensorValues[currentCat].length - 1;
 
   sidebarData.current = sensorValues[currentCat][lastIdx];
@@ -38,6 +38,8 @@ function updateSidebar() {
 
   $('#data-category').html(optionsInfo[currentCat].text);
   $('#data-description').html(optionsInfo[currentCat].description);
+
+  $('.sidebar__time').html(formatDateTime(lastTime));
 }
 
 function formatCelsiusTemp(temp) {

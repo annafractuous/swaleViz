@@ -30,75 +30,90 @@
     text-align: left
 
     .data-section
+      position: relative
       border-right: 1px solid #9CB8B5
       width: 20%
       padding: 20px 0 0 40px
+
       h5, h6
         position: relative
+
       .icon
         position: absolute
-        top: 20px
+        top: 0
+        right: 0
         color: #FFF
         opacity: .25
         font-size: rem(133)
+
       &.temperature
         width: 29%
+
         .icon
-          right: 75%
-          font-size: rem(167)
+          font-size: rem(144)
+          right: 15%
+
         .temp-container
           display: flex
           justify-content: flex-start
+
           .fahrenheit
             margin-right: 20px
+
       &.windspeed
         width: 18%
+
         .icon
-          right: 55%
-          bottom: -20px
+          bottom: 0px
           top: auto
-          font-size: rem(147)
+          font-size: rem(125)
+
       &.pressure
         width: 19%
-        .icon
-          right: 35%
+
       &.rainfall
         width: 20%
-        .icon
-          right: 15%
+
         h5
           display: inline-block
           margin-top: -5px
+
       &.location
         width: 14%
+
         .icon
-          right: 0
-          bottom: -20px
+          bottom: 0px
           top: auto
-          font-size: rem(160)
+
         span
           display: block
           text-align: right
+
       &:last-child
         border-right: 0
+
       h5
         font-family: 'Input Sans Light'
         font-weight: normal
         text-transform: none
+
         .data-bar-value
           font-family: 'Blanch Condensed'
           font-weight: normal
           font-size: rem(90)
+
           .decimal
             font-size: rem(50)
             line-height: 65px
             position: absolute
+
       .data-bar-label
         font-family: 'DINPro Light'
         line-height: 14px
         text-align: left
+
       &.location h6
-        padding: 20% 30% 0 0
+        padding: 17% 17% 0 0
         line-height: 18px
 
 // media queries
