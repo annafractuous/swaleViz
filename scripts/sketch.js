@@ -20,42 +20,37 @@ function setEventListeners() {
     yVariable = this.value;
     yCoordinates = mappedValues[this.value];
     $('#yAxisLabel').html(optionsInfo[this.value].text);
-    redraw();
+    drawChart();
     updateSidebar();
   });
 
   window.setInterval(function(){
     loadJSON(towerUrl, update);
-    redraw();
+    drawChart();
   }, 60000);
 }
 
 
 function preload() {
-  towerData = loadJSON(towerUrl);
   require(['../data/data-options.js'], function(data) {
     optionsInfo = data;
+    drawCanvas();
   });
 }
 
 
 function setup() {
-  drawCanvas();
-  update(towerData);
-  setEventListeners();
+  loadJSON(towerUrl, function(towerData) {
+    update(towerData);
+    drawChart();
+    setEventListeners();
+  });
 }
 
 
-function update(weather) {
-  clearPresentData();
-  saveData(weather);
-  updateDataSnapshots();
-}
-
-
-function updateDataSnapshots() {
-  updateBottomBar();
-  updateSidebar();
+function draw() {
+  background('#f7f7f7');
+  noLoop();
 }
 
 
@@ -79,8 +74,21 @@ function drawCanvas() {
     option.parent(dropdown);
   }
 
-  // y-axis label
+  // fill in y-axis label
   $('#yAxisLabel').html(optionsInfo[dropdown.value].text + " (" + optionsInfo[dropdown.value].unit + ")");
+}
+
+
+function update(weather) {
+  clearPresentData();
+  saveData(weather);
+  updateDataSnapshots();
+}
+
+
+function updateDataSnapshots() {
+  updateBottomBar();
+  updateSidebar();
 }
 
 
@@ -131,7 +139,7 @@ function saveData(weather) {
 }
 
 
-function draw() {
+function drawChart() {
   fill(232);
   stroke(232);
   rect(0, 0, width, height);
@@ -143,15 +151,6 @@ function draw() {
 }
 
 
-function drawLine() {
-  for (var r = sensorValues.temperature_f.length; r >= 0; r--) {
-    stroke(14, 164, 252);
-    strokeWeight(4);
-    line(xCoordinates[r - 1], yCoordinates[r - 1], xCoordinates[r], yCoordinates[r]);
-  }
-}
-
-
 function drawMajorLines() {
   stroke(86);
   strokeWeight(1);
@@ -159,7 +158,7 @@ function drawMajorLines() {
 }
 
 
-function drawXStrokes(Xvalue) {
+function drawXStrokes() {
   stroke(86, 86, 86, 100);
   strokeWeight(0.5);
 
@@ -225,5 +224,14 @@ function drawYStrokes() {
         draw(y, z);
       }
       break;
+  }
+}
+
+
+function drawLine() {
+  for (var r = sensorValues.temperature_f.length; r >= 0; r--) {
+    stroke(14, 164, 252);
+    strokeWeight(4);
+    line(xCoordinates[r - 1], yCoordinates[r - 1], xCoordinates[r], yCoordinates[r]);
   }
 }

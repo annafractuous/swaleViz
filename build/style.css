@@ -223,10 +223,12 @@ h6 {
     text-transform: none;
     position: absolute; }
   .main-content #yAxisLabel {
-    top: 50%;
-    left: -25px;
+    top: 57%;
+    left: -5px;
     -webkit-transform: rotate(270deg);
-            transform: rotate(270deg); }
+            transform: rotate(270deg);
+    -webkit-transform-origin: top left;
+            transform-origin: top left; }
   .main-content #xAxisLabel {
     left: 50%;
     bottom: 25px;
@@ -508,8 +510,8 @@ h6 {
       .plant-archive__entry-link a:hover {
         color: inherit; }
     .plant-archive__entry-symbol {
-      font-size: 350px;
-      max-height: 350px; }
+      font-size: 325px;
+      max-height: 325px; }
     .plant-archive__entry-quote {
       font-family: "Input Mono Extra Light Italic";
       text-align: center; }
