@@ -1,28 +1,29 @@
 // Gulp – compile & minify files, run server, watch for changes
-var gulp = require('gulp');
-var concat = require('gulp-concat');                  // concatenate scripts
-var sass = require('gulp-sass');                      // compile SASS files to CSS
-var autoprefixer = require('gulp-autoprefixer');      // auto-prefix CSS
-var rename = require('gulp-rename');                  // rename files when saving to build
+var gulp         = require('gulp'),
+    concat       = require('gulp-concat'),            // concatenate scripts
+    sass         = require('gulp-sass'),              // compile SASS files to CSS
+    autoprefixer = require('gulp-autoprefixer'),      // auto-prefix CSS
+    rename       = require('gulp-rename'),            // rename files when saving to build
+    webserver    = require('gulp-webserver');
 
 
 /*
   Compile Styles
 */
 gulp.task('styles',function() {
-  gulp.src('styles/style.sass')
-    .pipe(sass())
-    .pipe(autoprefixer())
-    .pipe(gulp.dest('build'))
+    gulp.src('styles/style.sass')
+        .pipe(sass())
+        .pipe(autoprefixer())
+        .pipe(gulp.dest('build'))
 });
 
 /*
   Concatenate JS
 */
 gulp.task('scripts', function() {
-  gulp.src('scripts/*.js')
-    .pipe(concat('script.js'))
-    .pipe(gulp.dest('build'));
+    gulp.src('scripts/*.js')
+        .pipe(concat('script.js'))
+        .pipe(gulp.dest('build'));
 });
 
 /*
@@ -33,4 +34,16 @@ gulp.task('watch', function() {
     gulp.watch('styles/*.sass', ['styles']);
 });
 
-gulp.task('default', ['styles', 'scripts', 'watch']);
+/*
+  Webserver
+*/
+gulp.task('webserver', function() {
+    gulp.src('.')
+        .pipe(webserver({
+            livereload: true,
+            directoryListing: true,
+            open: true
+        }));
+});
+
+gulp.task('default', ['styles', 'scripts', 'watch', 'webserver']);

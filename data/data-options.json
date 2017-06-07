@@ -1,0 +1,30 @@
+{
+    "wind_speed_mph": {
+        "text": "wind speed",
+        "unit": "MPH"
+    },
+    "temperature_f": {
+        "text": "temperature (°f)",
+        "unit": "°F"
+    },
+    "rain_in": {
+        "text": "rain",
+        "unit": "in"
+    },
+    "humidity_per": {
+        "text": "humidity",
+        "unit": "%"
+    },
+    "wind_direction_deg": {
+        "text": "wind direction",
+        "unit": "°"
+    },
+    "pressure_pa": {
+        "text": "pressure",
+        "unit": "kPa"
+    },
+    "light_v": {
+        "text": "light",
+        "unit": "Volts"
+    }
+}

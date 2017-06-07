@@ -1,46 +1,78 @@
-var plants,
-    plantEntryTemplate = $('#plant-archive-entry').html(),
-    plantEntryTemplateScript = Handlebars.compile(plantEntryTemplate);
+var App = App || {};
 
-function pullDownMenu() {
-  $('.icon-pulldown').click(function() {
-    $('.plant-archive').toggleClass('open');
-  });
+App.PlantArchive = {
+    init: function() {
+        this.getPlantData();
+        this.assignVariables();
+        this.compileHandlebarsTemplate();
+        this.setEventListeners();
+    },
+
+    getPlantData: function() {
+        var _this = this;
+        $.ajax({
+              url: 'data/archive.json',
+              dataType: 'json',
+              success: function(data) {
+                  _this.plants = data;
+              },
+              error: function(errorMsg) {
+                  console.log(errorMsg);
+              }
+        });
+    },
+
+    assignVariables: function() {
+        this.plantArchive = $('.plant-archive');
+        this.archiveMenu = $('.plant-archive__menu');
+        this.archiveEntry = $('.plant-archive__entry');
+        this.entryContent = $('.plant-archive__entry-content');
+    },
+
+    compileHandlebarsTemplate: function() {
+        var plantEntryTemplate = $('#plant-archive-entry').html();
+        this.plantEntryTemplateScript = Handlebars.compile(plantEntryTemplate);
+    },
+
+    setEventListeners: function() {
+        this.pullDownMenu();
+        this.showPlantEntry();
+        this.showArchiveMenu();
+    },
+
+    pullDownMenu: function() {
+        $('.icon-pulldown').click(function() {
+            this.plantArchive.toggleClass('open');
+        }.bind(this));
+    },
+
+    showPlantEntry: function() {
+        $('.plant-archive__menu-icon').click(function(e) {
+            var plant = $(e.target).attr("data-plant");
+            this.updatePlantEntry(plant);
+            this.archiveMenu.hide();
+            this.archiveEntry.show();
+        }.bind(this));
+    },
+
+    showArchiveMenu: function() {
+        $('.plant-archive__entry-menu-btn .icon-grid').click(function() {
+            this.archiveEntry.hide();
+            this.archiveMenu.show();
+        }.bind(this));
+    },
+
+    updatePlantEntry: function(plant) {
+        var plantEntryData = Object.assign({},
+            this.plants[plant],
+            {
+                name: plant,
+                symbol: "<span class='icon-" + plant + "'></span>",
+                source: "<a href='" + this.plants[plant].source + "' target='_blank'>" + this.plants[plant].source + "</a>",
+                medicinal_use: this.plants[plant].medicinal_use.join(",</p><p>")}
+            );
+        var compiledHTML = this.plantEntryTemplateScript(plantEntryData);
+        this.entryContent.empty();
+        this.entryContent.append(compiledHTML);
+    }
 }
-
-function showPlantEntry() {
-  $('.plant-archive__menu-icon').click(function() {
-    var plant = $(this).attr("data-plant");
-    updatePlantEntry(plant);
-    $('.plant-archive__menu').hide();
-    $('.plant-archive__entry').show();
-  });
-}
-
-function showArchiveMenu() {
-  $('.plant-archive__entry-menu-btn .icon-grid').click(function() {
-    $('.plant-archive__entry').hide();
-    $('.plant-archive__menu').show();
-  });
-}
-
-function updatePlantEntry(plant) {
-  var plantEntryData = Object.assign({},
-    plants[plant],
-    {name: plant,
-    symbol: "<span class='icon-" + plant + "'></span>",
-    source: "<a href='" + plants[plant].source + "' target='_blank'>" + plants[plant].source + "</a>",
-    medicinal_use: plants[plant].medicinal_use.join(",</p><p>")}
-  );
-  var compiledHTML = plantEntryTemplateScript(plantEntryData);
-  $('.plant-archive__entry-content').empty();
-  $('.plant-archive__entry-content').append(compiledHTML);
-}
-
-require(['../data/archive.js'], function(data) {
-  plants = data;
-});
-
-pullDownMenu();
-showPlantEntry();
-showArchiveMenu();
