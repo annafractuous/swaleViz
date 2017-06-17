@@ -35,15 +35,8 @@ App.PlantArchive = {
     },
 
     setEventListeners: function() {
-        this.pullDownMenu();
         this.showPlantEntry();
         this.showArchiveMenu();
-    },
-
-    pullDownMenu: function() {
-        $('.icon-pulldown').click(function() {
-            this.plantArchive.toggleClass('open');
-        }.bind(this));
     },
 
     showPlantEntry: function() {

@@ -6,6 +6,16 @@ App = {
         App.Handlebars.init();
         App.DataSnapshots.init();
         App.PlantArchive.init();
+        this.addNavEventListeners();
+    },
+
+    addNavEventListeners: function() {
+        $('.nav__item').click(function(e) {
+            var currentPage = $('.in-view');
+            var nextPage = $(e.target).data('page');
+            $(currentPage).removeClass('in-view');
+            $(nextPage).addClass('in-view');
+        });
     }
 }
 
@@ -33,8 +43,6 @@ App.DataSnapshots = {
         this.dropdown = $('.sidebar__dropdown')[0];
         this.dataBar = $('.data-bar .data');
         this.dataSnapshot = $('.data-snapshot');
-        this.dataCategory = $('#data-category');
-        this.time = $('.sidebar__time');
     },
 
     updateBottomBar: function(sensorValues) {
@@ -70,11 +78,6 @@ App.DataSnapshots = {
 
         this.dataSnapshot.empty();
         this.dataSnapshot.append(compiledHTML);
-    },
-
-    updateTimeAndCategory: function(optionsInfo) {
-        this.dataCategory.html(optionsInfo[currentCat].text);
-        this.time.html(this.formatDateTime(lastTime));
     },
 
     formatCelsiusTemp: function(temp) {
@@ -181,15 +184,8 @@ App.PlantArchive = {
     },
 
     setEventListeners: function() {
-        this.pullDownMenu();
         this.showPlantEntry();
         this.showArchiveMenu();
-    },
-
-    pullDownMenu: function() {
-        $('.icon-pulldown').click(function() {
-            this.plantArchive.toggleClass('open');
-        }.bind(this));
     },
 
     showPlantEntry: function() {
@@ -227,7 +223,9 @@ var App = App || {};
 
 App.Graph = function( p5 ) {
 
-    var options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wind_direction_deg", "pressure_pa", "light_v"],
+    var yAxisLabel = $('#yAxisLabel'),
+        dataTime = $('.sidebar__time'),
+        options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wind_direction_deg", "pressure_pa", "light_v"],
         // towerUrl = 'http://54.235.200.47/tower',
         towerUrl = 'data/latest-weather-data.json',
         yVariable = "wind_speed_mph",
@@ -297,7 +295,7 @@ App.Graph = function( p5 ) {
         }
 
         // fill in y-axis label
-        $('#yAxisLabel').html(optionsInfo[dropdown.value].text + " (" + optionsInfo[dropdown.value].unit + ")");
+        yAxisLabel.html(optionsInfo[dropdown.value].text + " (" + optionsInfo[dropdown.value].unit + ")");
     }
 
 
@@ -454,16 +452,16 @@ App.Graph = function( p5 ) {
         $('.sidebar__dropdown').change(function() {
             yVariable = this.value;
             yCoordinates = mappedValues[this.value];
-            $('#yAxisLabel').html(optionsInfo[this.value].text);
+            yAxisLabel.html(optionsInfo[this.value].text);
             drawChart();
             App.DataSnapshots.updateSidebar(sensorValues, optionsInfo);
-            App.DataSnapshots.updateTimeAndCategory(optionsInfo);
         });
 
         // refresh every 60 sec
         window.setInterval(function(){
             p5.loadJSON(towerUrl, update);
             drawChart();
+            dataTime.html(App.DataSnapshots.formatDateTime(lastTime));
         }, 60000);
     }
 };

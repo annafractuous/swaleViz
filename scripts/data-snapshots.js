@@ -18,8 +18,6 @@ App.DataSnapshots = {
         this.dropdown = $('.sidebar__dropdown')[0];
         this.dataBar = $('.data-bar .data');
         this.dataSnapshot = $('.data-snapshot');
-        this.dataCategory = $('#data-category');
-        this.time = $('.sidebar__time');
     },
 
     updateBottomBar: function(sensorValues) {
@@ -55,11 +53,6 @@ App.DataSnapshots = {
 
         this.dataSnapshot.empty();
         this.dataSnapshot.append(compiledHTML);
-    },
-
-    updateTimeAndCategory: function(optionsInfo) {
-        this.dataCategory.html(optionsInfo[currentCat].text);
-        this.time.html(this.formatDateTime(lastTime));
     },
 
     formatCelsiusTemp: function(temp) {
