@@ -1,10 +1,10 @@
 var App = App || {};
 
 App.PlantArchive = {
-    init: function() {
+    init: function(getHandlebarsPartials) {
         this.getPlantData();
         this.assignVariables();
-        this.compileHandlebarsTemplate();
+        this.compileHandlebarsTemplates();
         this.setEventListeners();
     },
 
@@ -29,8 +29,8 @@ App.PlantArchive = {
         this.entryContent = $('.plant-archive__entry-content');
     },
 
-    compileHandlebarsTemplate: function() {
-        var plantEntryTemplate = $('#plant-archive-entry').html();
+    compileHandlebarsTemplates: function() {
+        var plantEntryTemplate = $('#handlebars-plant-entry').html();
         this.plantEntryTemplateScript = Handlebars.compile(plantEntryTemplate);
     },
 

@@ -47,45 +47,7 @@
           <div class="col-sm-1 icon-grid"></div>
         </div>
         <div class="plant-archive__entry-content">
-          <script id="plant-archive-entry" type="text/x-handlebars-template">
-              <div class="plant-archive__entry-info row">
-                <div class="col-sm-4">
-                  <h5 class="plant-archive__entry-heading">Plant</h5>
-                  <h1 class="plant-archive__entry-title">{{name}}</h1>
-                  <h5 class="plant-archive__entry-heading">Medicinal Use</h5>
-                  <div class="plant-archive__entry-text">
-                    <p>{{{medicinal_use}}}</p>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <h5 class="plant-archive__entry-heading">Symbol</h5>
-                  <div class="plant-archive__entry-symbol">
-                    {{{symbol}}}
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <h5 class="plant-archive__entry-heading">Political Pairing</h5>
-                  <p class="plant-archive__entry-text">{{political_pairing}}</p>
-                  <h5 class="plant-archive__entry-heading">Source</h5>
-                  <p class="plant-archive__entry-link">
-                    {{{source}}}
-                  </p>
-                </div>
-              </div>
-              <div class="plant-archive__entry-poem row">
-                <div class="col-sm-12">
-                  <h5 class="plant-archive__entry-heading">Poetic Text</h5>
-                </div>
-                <div class="col-sm-12">
-                  <span class="plant-archive__entry-quote-marks col-sm-3">″</span>
-                  <p class="plant-archive__entry-quote col-sm-6">
-                    {{poetic_text}}
-                  </p>
-                  <span class="plant-archive__entry-quote-marks col-sm-3">″</span>
-                </div>
-              </div>
-
-          </script>
+            <script id="handlebars-plant-entry" type="text/x-handlebars-template"></script>
         </div>
       </div>
 
@@ -143,30 +105,7 @@
 
   <!-- DATA SNAPSHOT -->
     <div class="data-snapshot">
-
-      <script id="handlebars-snapshot" type="text/x-handlebars-template">
-          <div class="current-container">
-              <h5 class="snapshot-label">Current</h5>
-              <h1 id="current-value" class="snapshot-value">{{current}}</h1>
-              <h5 id="value-unit">{{unit}}</h5>
-          </div>
-
-          <div class="low-high-container">
-
-              <div class="high">
-                  <h5 class="snapshot-label">High</h5>
-                  <h2 id="high-value" class="snapshot-value">{{high}}</h2>
-              </div>
-
-              <div class="low">
-                  <h5 class="snapshot-label">Low</h5>
-                  <h2 id="low-value" class="snapshot-value">{{low}}</h2>
-              </div>
-
-          </div>
-
-      </script>
-
+      <script id="handlebars-snapshot" type="text/x-handlebars-template"></script>
     </div>
 
 <!-- BOTTOM DATA BAR -->
@@ -177,49 +116,7 @@
       </div>
 
       <div class="data">
-        <script id="handlebars-data-bar" type="text/x-handlebars-template">
-            <div class="data-section temperature">
-                <span class="icon icon-thermometer"></span>
-                <div class="temp-container">
-                    <div class="fahrenheit">
-                        <h5><span class="data-bar-value">{{temperature_f}}</span>°F</h5>
-                    </div>
-                    <div class="celsius">
-                        <h5><span class="data-bar-value">{{{temperature_c}}}</span>°C</h5>
-                    </div>
-                </div>
-                <h6 class="data-bar-label">Temperature</h6>
-            </div>
-
-            <div class="data-section windspeed">
-                <span class="icon icon-windspeed"></span>
-                <h5><span class="data-bar-value">{{windspeed}}</span>MPH</h5>
-                <h6 class="data-bar-label">Windspeed</h6>
-            </div>
-
-            <div class="data-section pressure">
-                <span class="icon icon-pressure"></span>
-                <h5><span class="data-bar-value">{{pressure}}</span>kPa</h5>
-                <h6 class="data-bar-label">Pressure</h6>
-            </div>
-
-            <div class="data-section rainfall">
-                <span class="icon icon-rain"></span>
-                <h5><span class="data-bar-value">{{rainfall}}"</span></h5>
-                <h6 class="data-bar-label">Rainfall</h6>
-            </div>
-
-            <div class="data-section location">
-                <span class="icon icon-location"></span>
-                <h6 class="data-bar-label">
-                    <span class="area">Winter Hibernation</span>
-                    <span class="borough">// A Secret Place</span>
-                    <span class="city">New York City</span>
-                    <span class="time">{{time}}</span>
-                </h6>
-            </div>
-
-        </script>
+        <script id="handlebars-data-bar" type="text/x-handlebars-template"></script>
       </div>
   </div>
 
