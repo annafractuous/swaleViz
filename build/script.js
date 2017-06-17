@@ -3,6 +3,7 @@ var App = App || {};
 App = {
     init: function() {
         new p5(App.Graph);
+        App.Handlebars.init();
         App.DataSnapshots.init();
         App.PlantArchive.init();
     }
@@ -15,7 +16,7 @@ $(function() {
 var App = App || {};
 
 App.DataSnapshots = {
-    init: function() {
+    init: function(getHandlebarsPartials) {
         this.compileHandlebarsTemplates();
         this.cacheSelectors();
     },
@@ -107,11 +108,49 @@ App.DataSnapshots = {
 
 var App = App || {};
 
-App.PlantArchive = {
+App.Handlebars = {
     init: function() {
+        this.partials = [
+            {
+                fileName: 'plant-entry',
+                targetNode: '#handlebars-plant-entry'
+            },
+            {
+                fileName: 'data-bar',
+                targetNode: '#handlebars-data-bar'
+            },
+            {
+                fileName: 'snapshot',
+                targetNode: '#handlebars-snapshot'
+            }
+        ]
+        this.getAllPartials();
+    },
+
+    getAllPartials: function() {
+        for (var i = 0; i < this.partials.length; i++) {
+            this.getPartial(this.partials[i].fileName, this.partials[i].targetNode);
+        }
+    },
+
+    getPartial: function(fileName, targetNode) {
+        $.ajax({
+            url : '../templates/' + fileName + '.hbs',
+            success : function(data) {
+                $(targetNode).html(data);
+            },
+            async : false
+        });
+    }
+}
+
+var App = App || {};
+
+App.PlantArchive = {
+    init: function(getHandlebarsPartials) {
         this.getPlantData();
         this.assignVariables();
-        this.compileHandlebarsTemplate();
+        this.compileHandlebarsTemplates();
         this.setEventListeners();
     },
 
@@ -136,8 +175,8 @@ App.PlantArchive = {
         this.entryContent = $('.plant-archive__entry-content');
     },
 
-    compileHandlebarsTemplate: function() {
-        var plantEntryTemplate = $('#plant-archive-entry').html();
+    compileHandlebarsTemplates: function() {
+        var plantEntryTemplate = $('#handlebars-plant-entry').html();
         this.plantEntryTemplateScript = Handlebars.compile(plantEntryTemplate);
     },
 
