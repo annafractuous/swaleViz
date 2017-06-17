@@ -464,10 +464,9 @@ h6 {
 
 .plant-archive {
   background-color: black;
-  padding: 20px 40px; }
+  padding: 60px 40px 20px; }
   .plant-archive__menu {
-    padding: 20px;
-    padding-top: 60px; }
+    padding: 20px; }
     .plant-archive__menu-header {
       text-transform: capitalize;
       font-family: 'Input Mono Regular';
@@ -488,7 +487,8 @@ h6 {
       color: white;
       font-size: 100px;
       text-align: center;
-      padding: 30px 20px; }
+      padding: 30px 20px;
+      cursor: pointer; }
       .plant-archive__menu-icon.icon-about {
         font-size: 80px; }
   .plant-archive__entry {
@@ -499,7 +499,8 @@ h6 {
     .plant-archive__entry-menu-btn {
       color: white; }
       .plant-archive__entry-menu-btn .icon-grid {
-        font-size: 40px; }
+        font-size: 40px;
+        cursor: pointer; }
     .plant-archive__entry-heading {
       font-family: "Input Mono Medium";
       font-size: 14px;
