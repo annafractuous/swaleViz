@@ -447,6 +447,7 @@ App.Graph = function( p5 ) {
 
 
     function updateDataSnapshots() {
+        dataTime.html(App.DataSnapshots.formatDateTime(lastTime));
         App.DataSnapshots.updateBottomBar(sensorValues);
         App.DataSnapshots.updateSidebar(sensorValues, optionsInfo);
     }
@@ -465,7 +466,6 @@ App.Graph = function( p5 ) {
         window.setInterval(function(){
             p5.loadJSON(towerUrl, update);
             drawChart();
-            dataTime.html(App.DataSnapshots.formatDateTime(lastTime));
         }, 60000);
     }
 };
