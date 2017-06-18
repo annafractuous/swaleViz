@@ -1,29 +1,44 @@
 // Gulp – compile & minify files, run server, watch for changes
 var gulp         = require('gulp'),
     concat       = require('gulp-concat'),            // concatenate scripts
+    babel        = require('gulp-babel'),             // transpile scripts to ES5
+    uglify       = require('gulp-uglify'),            // minify scripts
     sass         = require('gulp-sass'),              // compile SASS files to CSS
     autoprefixer = require('gulp-autoprefixer'),      // auto-prefix CSS
+    cleanCSS     = require('gulp-clean-css'),         // minify styles
     rename       = require('gulp-rename'),            // rename files when saving to build
+    pump         = require('pump');                   // error handling
     webserver    = require('gulp-webserver');
 
 
 /*
   Compile Styles
 */
-gulp.task('styles',function() {
-    gulp.src('styles/style.sass')
-        .pipe(sass())
-        .pipe(autoprefixer())
-        .pipe(gulp.dest('build'))
+gulp.task('styles',function(cb) {
+    pump([
+        gulp.src('styles/style.sass'),
+        sass(),
+        autoprefixer(),
+        cleanCSS(),
+        rename({ suffix: '.min' }),
+        gulp.dest('build')
+    ],
+    cb);
 });
 
 /*
   Concatenate JS
 */
-gulp.task('scripts', function() {
-    gulp.src('scripts/*.js')
-        .pipe(concat('script.js'))
-        .pipe(gulp.dest('build'));
+gulp.task('scripts', function(cb) {
+    pump([
+        gulp.src('scripts/*.js'),
+        concat('script.js'),
+        babel({ presets: ['es2015'] }),
+        uglify(),
+        rename({ suffix: '.min' }),
+        gulp.dest('build')
+    ],
+    cb);
 });
 
 /*
