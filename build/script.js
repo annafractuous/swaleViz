@@ -1,5 +1,245 @@
 var App = App || {};
 
+App = {
+    init: function() {
+        new p5(App.Graph);
+        App.Handlebars.init();
+        App.DataSnapshots.init();
+        App.PlantArchive.init();
+
+        this.pages = $('article');
+        this.navItems = $('.nav__item');
+        this.addNavEventListeners();
+    },
+
+    addNavEventListeners: function() {
+        this.navItems.click(function(e) {
+            var nextPage = $(e.target).data('page');
+            this.navItems.filter('.selected').removeClass('selected');
+            $(e.target).addClass('selected');
+            this.pages.filter('.in-view').removeClass('in-view');
+            this.pages.filter(nextPage).addClass('in-view');
+        }.bind(this));
+    }
+}
+
+$(function() {
+    App.init();
+});
+
+var App = App || {};
+
+App.DataSnapshots = {
+    init: function() {
+        this.compileHandlebarsTemplates();
+        this.cacheSelectors();
+    },
+
+    compileHandlebarsTemplates: function() {
+        var bottomBarTemplate = $('#handlebars-data-bar').html();
+        var sidebarTemplate = $('#handlebars-snapshot').html();
+
+        this.bottomBarTemplateScript = Handlebars.compile(bottomBarTemplate);
+        this.sidebarTemplateScript = Handlebars.compile(sidebarTemplate);
+    },
+
+    cacheSelectors: function() {
+        this.dropdown = $('.sidebar__dropdown')[0];
+        this.dataBar = $('.data-bar .data');
+        this.dataSnapshot = $('.data-snapshot');
+    },
+
+    updateBottomBar: function(sensorValues) {
+        var bottomBarData = {},
+            currentTime = new Date().toLocaleTimeString(),
+            lastIdx = sensorValues["temperature_f"].length - 1;
+
+        var tempCels = (sensorValues["temperature_f"][lastIdx] - 32) / 1.8;
+        bottomBarData.temperature_c = this.formatCelsiusTemp(Number(Math.round(tempCels + 'e1') + 'e-1'));
+        bottomBarData.temperature_f = Math.round(sensorValues["temperature_f"][lastIdx]);
+        bottomBarData.windspeed     = sensorValues["wind_speed_mph"][lastIdx];
+        bottomBarData.pressure      = sensorValues["pressure_pa"][lastIdx];
+        bottomBarData.rainfall      = sensorValues["rain_in"][lastIdx];
+        bottomBarData.time          = currentTime.replace(currentTime.substring(4, 7), " ");
+
+        var compiledHTML = this.bottomBarTemplateScript(bottomBarData);
+
+        this.dataBar.empty();
+        this.dataBar.append(compiledHTML);
+    },
+
+    updateSidebar: function(sensorValues, optionsInfo) {
+        var sidebarData = {},
+            currentCat = this.dropdown.value,
+            lastIdx = sensorValues[currentCat].length - 1;
+
+        sidebarData.current = sensorValues[currentCat][lastIdx];
+        sidebarData.high    = Math.max(...sensorValues[currentCat]);
+        sidebarData.low     = Math.min(...sensorValues[currentCat]);
+        sidebarData.unit    = optionsInfo[currentCat].unit;
+
+        var compiledHTML = this.sidebarTemplateScript(sidebarData);
+
+        this.dataSnapshot.empty();
+        this.dataSnapshot.append(compiledHTML);
+    },
+
+    formatCelsiusTemp: function(temp) {
+        var temp = temp.toString();
+        var idx = temp.indexOf('.');
+
+        return temp.slice(0, idx) + "<span class='decimal'>" + temp.slice(idx) + "</span>";
+    },
+
+    formatDateTime: function(timeStr) {
+        var regex   = /([0-9]*)-([0-9]*)-([0-9]*)T([0-9]{2}):([0-9]{2})/,
+            groups  = regex.exec(timeStr),    // ["2016-10-17T07:20", "2016", "10", "17", "07", "20"]
+            month   = groups[2],
+            day     = groups[3],
+            year    = groups[1],
+            hour    = groups[4],
+            minute  = groups[5],
+            ampm;
+
+        if (parseInt(hour) < 12) {
+            ampm = "am";
+        }
+        else {
+            hour = (parseInt(hour) - 12).toString();
+            ampm = "pm";
+        }
+
+        return (month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm);
+    }
+}
+
+var App = App || {};
+
+App.Handlebars = {
+    init: function() {
+        this.partials = [
+            {
+                fileName: 'plant-menu',
+                targetNode: '#handlebars-plant-menu'
+            },
+            {
+                fileName: 'plant-entry',
+                targetNode: '#handlebars-plant-entry'
+            },
+            {
+                fileName: 'data-bar',
+                targetNode: '#handlebars-data-bar'
+            },
+            {
+                fileName: 'snapshot',
+                targetNode: '#handlebars-snapshot'
+            }
+        ]
+        this.getAllPartials();
+    },
+
+    getAllPartials: function() {
+        for (var i = 0; i < this.partials.length; i++) {
+            this.getPartial(this.partials[i].fileName, this.partials[i].targetNode);
+        }
+    },
+
+    getPartial: function(fileName, targetNode) {
+        $.ajax({
+            url : '../templates/' + fileName + '.hbs',
+            success : function(data) {
+                $(targetNode).html(data);
+            },
+            async : false
+        });
+    }
+}
+
+var App = App || {};
+
+App.PlantArchive = {
+    init: function() {
+        this.getPlantData();
+        this.assignVariables();
+        this.compileHandlebarsTemplates();
+    },
+
+    getPlantData: function() {
+        var _this = this;
+        $.ajax({
+              url: 'data/archive.json',
+              dataType: 'json',
+              success: function(data) {
+                  _this.plants = data;
+                  _this.loadPlantMenu();
+                  _this.setEventListeners();
+              },
+              error: function(errorMsg) {
+                  console.log(errorMsg);
+              }
+        });
+    },
+
+    assignVariables: function() {
+        this.plantArchive = $('.plant-archive');
+        this.archiveMenu = $('.plant-archive__menu');
+        this.archiveEntry = $('.plant-archive__entry');
+        this.entryContent = $('.plant-archive__entry-content');
+    },
+
+    compileHandlebarsTemplates: function() {
+        var plantMenuTemplate = $('#handlebars-plant-menu').html();
+        var plantEntryTemplate = $('#handlebars-plant-entry').html();
+
+        this.plantMenuTemplateScript = Handlebars.compile(plantMenuTemplate);
+        this.plantEntryTemplateScript = Handlebars.compile(plantEntryTemplate);
+    },
+
+    loadPlantMenu: function() {
+        var plants = this.plants;
+        var compiledHTML = this.plantMenuTemplateScript(this.plants);
+        $('.plant-archive__menu-icon-list').empty();
+        $('.plant-archive__menu-icon-list').append(compiledHTML);
+    },
+
+    setEventListeners: function() {
+        this.showPlantEntry();
+        this.showArchiveMenu();
+    },
+
+    showPlantEntry: function() {
+        $('.plant-archive__menu-icon').click(function(e) {
+            var plant = $(e.target).attr("data-plant");
+            this.updatePlantEntry(plant);
+            this.archiveMenu.hide();
+            this.archiveEntry.show();
+        }.bind(this));
+    },
+
+    showArchiveMenu: function() {
+        $('.plant-archive__entry-menu-btn .icon-grid').click(function() {
+            this.archiveEntry.hide();
+            this.archiveMenu.show();
+        }.bind(this));
+    },
+
+    updatePlantEntry: function(plant) {
+        var plantEntryData = Object.assign({},
+            this.plants[plant],
+            {
+                name: plant,
+                symbol: "<span class='icon-" + plant + "'></span>",
+                source: "<a href='" + this.plants[plant].source + "' target='_blank'>" + this.plants[plant].source + "</a>",
+                medicinal_use: this.plants[plant].medicinal_use.join(",</p><p>")}
+            );
+        var compiledHTML = this.plantEntryTemplateScript(plantEntryData);
+        this.entryContent.empty();
+        this.entryContent.append(compiledHTML);
+    }
+}
+
+var App = App || {};
+
 App.Graph = function( p5 ) {
 
     var yAxisLabel = $('#yAxisLabel'),

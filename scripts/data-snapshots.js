@@ -1,7 +1,7 @@
 var App = App || {};
 
 App.DataSnapshots = {
-    init: function(getHandlebarsPartials) {
+    init: function() {
         this.compileHandlebarsTemplates();
         this.cacheSelectors();
     },
