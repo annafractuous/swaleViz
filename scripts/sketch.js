@@ -142,8 +142,8 @@ App.Graph = function( p5 ) {
     }
 
     function mapY (zInterval, zMax) {
-        for (z = 0; z <= zMax; z += zInterval) {
-            y = p5.map(z, 0, zMax, yMin, yMax);
+        for (var z = 0; z <= zMax; z += zInterval) {
+            var y = p5.map(z, 0, zMax, yMin, yMax);
             drawY(y, z);
         }
     }
@@ -181,7 +181,7 @@ App.Graph = function( p5 ) {
 
         sensorValues["time"] = [];
 
-        for (i = 0; i < options.length; i++) {  // sensorValues = {
+        for (var i = 0; i < options.length; i++) {  // sensorValues = {
             sensorValues[options[i]] = [];      //  temperature_f: [],
             mappedValues[options[i]] = [];      //  wind_speed_mph: [], ...
         }                                       // }
