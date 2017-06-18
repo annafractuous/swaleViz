@@ -19,6 +19,7 @@ gulp.task('styles',function(cb) {
         gulp.src('styles/style.sass'),
         sass(),
         autoprefixer(),
+        gulp.dest('build'),
         cleanCSS(),
         rename({ suffix: '.min' }),
         gulp.dest('build')
@@ -33,6 +34,7 @@ gulp.task('scripts', function(cb) {
     pump([
         gulp.src('scripts/*.js'),
         concat('script.js'),
+        gulp.dest('build'),
         babel({ presets: ['es2015'] }),
         uglify(),
         rename({ suffix: '.min' }),
