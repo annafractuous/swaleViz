@@ -30,7 +30,7 @@ $(function() {
 var App = App || {};
 
 App.DataSnapshots = {
-    init: function(getHandlebarsPartials) {
+    init: function() {
         this.compileHandlebarsTemplates();
         this.cacheSelectors();
     },
@@ -119,6 +119,10 @@ App.Handlebars = {
     init: function() {
         this.partials = [
             {
+                fileName: 'plant-menu',
+                targetNode: '#handlebars-plant-menu'
+            },
+            {
                 fileName: 'plant-entry',
                 targetNode: '#handlebars-plant-entry'
             },
@@ -154,11 +158,10 @@ App.Handlebars = {
 var App = App || {};
 
 App.PlantArchive = {
-    init: function(getHandlebarsPartials) {
+    init: function() {
         this.getPlantData();
         this.assignVariables();
         this.compileHandlebarsTemplates();
-        this.setEventListeners();
     },
 
     getPlantData: function() {
@@ -168,6 +171,8 @@ App.PlantArchive = {
               dataType: 'json',
               success: function(data) {
                   _this.plants = data;
+                  _this.loadPlantMenu();
+                  _this.setEventListeners();
               },
               error: function(errorMsg) {
                   console.log(errorMsg);
@@ -183,8 +188,18 @@ App.PlantArchive = {
     },
 
     compileHandlebarsTemplates: function() {
+        var plantMenuTemplate = $('#handlebars-plant-menu').html();
         var plantEntryTemplate = $('#handlebars-plant-entry').html();
+
+        this.plantMenuTemplateScript = Handlebars.compile(plantMenuTemplate);
         this.plantEntryTemplateScript = Handlebars.compile(plantEntryTemplate);
+    },
+
+    loadPlantMenu: function() {
+        var plants = this.plants;
+        var compiledHTML = this.plantMenuTemplateScript(this.plants);
+        $('.plant-archive__menu-icon-list').empty();
+        $('.plant-archive__menu-icon-list').append(compiledHTML);
     },
 
     setEventListeners: function() {

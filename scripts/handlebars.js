@@ -4,6 +4,10 @@ App.Handlebars = {
     init: function() {
         this.partials = [
             {
+                fileName: 'plant-menu',
+                targetNode: '#handlebars-plant-menu'
+            },
+            {
                 fileName: 'plant-entry',
                 targetNode: '#handlebars-plant-entry'
             },
