@@ -1,33 +1,38 @@
 .about-us,
 .plant-archive,
 .graph
-    height: 100vh
+    height: calc(100vh - 50px)
     width: 100%
     position: absolute
     right: -100vw
-    top: 0
-    –webkit-transition: right ease 1s
-    -moz-transition: right ease 1s
+    top: 50px
     transition: right ease 1s
 
     &.in-view
         right: 0
 
+.graph
+    background-color: #e8e8e8
+
 .nav
     height: 50px
     width: 100%
+    padding: 10px
     background-color: black
     display: flex
     justify-content: center
     z-index: 300
     position: relative
+    list-style: none
 
     &__item
         color: white
         font-family: 'DINPro Light', sans-serif
         text-transform: uppercase
+        text-align: center
         margin: 0 15px
-        line-height: 50px
+        /* line-height: 50px
+        line-height: 16px
         cursor: pointer
 
         &:hover,

@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <title>towerOverTime</title>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
@@ -33,25 +34,25 @@
 <article class="graph in-view">
 
     <!-- sidebar -->
-    <div class="sidebar col-sm-3">
-        <div class="col-sm-10 col-sm-offset-1">
-            <span class="sidebar__icon icon-tower col-sm-4"></span>
-            <span class="sidebar__icon icon-plant col-sm-4"></span>
-            <span class="sidebar__icon icon-water col-sm-4"></span>
+    <div class="sidebar">
+        <div class="">
+            <span class="sidebar__icon icon-tower"></span>
+            <span class="sidebar__icon icon-plant"></span>
+            <span class="sidebar__icon icon-water"></span>
         </div>
 
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="">
             <h4 class="sidebar__title">Tower</h4>
         </div>
 
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="">
             <p class="sidebar__subtitle">
                 Time of most recent data:
                 <span class="sidebar__time"></span>
             </p>
         </div>
 
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="">
             <div class="sidebar__dropdown-container">
                 <select class="sidebar__dropdown"></select>
                 <span class="icon-down"></span>
@@ -74,13 +75,7 @@
 
     <!-- bottom data bar -->
     <div class="data-bar">
-        <div class="header">
-            <h6>Live Data Feed From @SwaleNY</h6>
-        </div>
-
-        <div class="data">
-            <script id="handlebars-data-bar" type="text/x-handlebars-template"></script>
-        </div>
+        <script id="handlebars-data-bar" type="text/x-handlebars-template"></script>
     </div>
 </article> <!-- END GRAPH -->
 
@@ -98,7 +93,7 @@
     <!-- archive entry -->
     <div class="plant-archive__entry">
         <div class="plant-archive__entry-menu-btn row">
-            <div class="col-sm-1 icon-grid"></div>
+            <div class=" icon-grid"></div>
         </div>
 
         <div class="plant-archive__entry-content">

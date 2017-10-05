@@ -55,14 +55,17 @@ App.Graph = function( p5 ) {
 
     function drawCanvas() {
         // create graph canvas
-        var canvas = p5.createCanvas(p5.windowWidth * 0.6, p5.windowHeight * 0.75);
+        var canvas = window.innerWidth < 768 ?
+            p5.createCanvas(p5.windowWidth * 0.9, p5.windowHeight * 0.5) :
+            p5.createCanvas(p5.windowWidth * 0.6, p5.windowHeight * 0.75) ;
         canvas.parent("canvas");
 
         // set graph boundaries
         xMin = p5.width * 0.05;
         xMax = p5.width * 0.95;
         yMin = p5.height * 0.85;
-        yMax = p5.height * 0.15;
+        // yMax = p5.height * 0.15;
+        yMax = p5.height * .05;
 
         // populate dropdown menu for data types
         dropdown = $('.sidebar__dropdown')[0];

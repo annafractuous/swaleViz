@@ -16,7 +16,7 @@ App.DataSnapshots = {
 
     cacheSelectors: function() {
         this.dropdown = $('.sidebar__dropdown')[0];
-        this.dataBar = $('.data-bar .data');
+        this.dataBar = $('.data-bar');
         this.dataSnapshot = $('.data-snapshot');
     },
 

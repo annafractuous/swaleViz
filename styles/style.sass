@@ -1,12 +1,15 @@
 /* FUNCTIONS & MIXINS */
 
 @function rem($px)
-  @return #{$px/16}rem
+    @return #{$px/16}rem
 
 /* BASIC STYLES */
 
 @import 'normalize'
 @import 'media-queries'
+
+html
+    overflow-x: hidden
 
 /* TYPOGRAPHY */
 
@@ -19,6 +22,5 @@
 @import 'canvas'
 @import 'data-bar'
 @import 'data-snapshot'
-@import 'data-info'
 @import 'plant-archive'
 @import 'about-us'
