@@ -196,7 +196,7 @@ h6 {
   top: 0;
   margin-top: 50px;
   –webkit-transition: right ease 1s;
-  -webkit-transition: right ease 1s;
+  -moz-transition: right ease 1s;
   transition: right ease 1s; }
   .page.in-view {
     right: 0; }
@@ -207,12 +207,8 @@ h6 {
   height: 50px;
   width: 100%;
   background-color: black;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   z-index: 300;
   position: relative; }
   .nav__item {
@@ -243,10 +239,8 @@ h6 {
     .graph .main-content #yAxisLabel {
       top: 57%;
       left: -5px;
-      -webkit-transform: rotate(270deg);
-              transform: rotate(270deg);
-      -webkit-transform-origin: top left;
-              transform-origin: top left; }
+      transform: rotate(270deg);
+      transform-origin: top left; }
     .graph .main-content #xAxisLabel {
       left: 50%;
       bottom: 25px;
@@ -279,6 +273,8 @@ h6 {
       color: white;
       text-decoration: none;
       outline: none;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
       border-radius: 0;
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -316,8 +312,6 @@ h6 {
     background-image: url("../assets/images/data-bar-bg.jpg");
     background-size: cover;
     height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     color: #FFF;
     text-align: left; }
@@ -342,12 +336,8 @@ h6 {
           font-size: 9rem;
           right: 15%; }
         .data-bar .data .data-section.temperature .temp-container {
-          display: -webkit-box;
-          display: -ms-flexbox;
           display: flex;
-          -webkit-box-pack: start;
-              -ms-flex-pack: start;
-                  justify-content: flex-start; }
+          justify-content: flex-start; }
           .data-bar .data .data-section.temperature .temp-container .fahrenheit {
             margin-right: 20px; }
       .data-bar .data .data-section.windspeed {
@@ -423,8 +413,6 @@ h6 {
       font-family: 'Input Sans';
       font-weight: normal; }
   .data-snapshot .low-high-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex; }
     .data-snapshot .low-high-container .low,
     .data-snapshot .low-high-container .high {
@@ -461,11 +449,8 @@ h6 {
       text-align: center;
       margin-bottom: 20px; }
     .plant-archive__menu-icon-list {
-      display: -webkit-box;
-      display: -ms-flexbox;
       display: flex;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
+      flex-wrap: wrap; }
       .plant-archive__menu-icon-list .row {
         width: 100%;
         height: 30%; }
@@ -516,23 +501,15 @@ h6 {
       font-size: 90px;
       text-align: left; }
       .plant-archive__entry-quote-marks:first-of-type {
-        -webkit-transform: rotate(180deg);
-                transform: rotate(180deg);
+        transform: rotate(180deg);
         position: relative;
         top: -.5em; }
 
 .about-us {
   padding: 0 10%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
+  flex-direction: column;
+  align-items: center; }
   .about-us__media {
     padding: 40px 0; }
   .about-us__text {
@@ -548,3 +525,5 @@ h6 {
       margin-bottom: 40px; }
       .about-us__text-paragraph:last-child {
         margin-bottom: 0; }
+
+/*# sourceMappingURL=style.css.map */
