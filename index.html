@@ -13,99 +13,104 @@
 <!-- NAV -->
 <div class="nav">
     <li class="nav__item" data-page=".plant-archive">Plant Archive</li>
-    <li class="nav__item" data-page=".about-us">About Swale</li>
-    <li class="nav__item selected" data-page=".graph">Sensor Data</li>
+    <li class="nav__item selected" data-page=".about-us">About Swale</li>
+    <li class="nav__item" data-page=".graph">Sensor Data</li>
 </div>
 
-<!-- ABOUT US -->
-<article class="about-us">
-    <h4 class="about-us__text">
-        <span class="about-us__text-paragraph">
-            Arr sheet warp Shiver me timbers quarter lee lugsail sutler cutlass pink. Belay port pinnace overhaul line fluke Plate Fleet man-of-war splice the main brace Nelsons folly. To go on account chandler draft heave down booty black spot Blimey flogging six pounders fathom.
-        </span>
-        <span class="about-us__text-paragraph">
-            List hornswaggle bilge rat hail-shot spyglass pillage barque lugsail poop deck ahoy. Poop deck starboard Spanish Main pink bilged on her anchor rope's end hogshead Admiral of the Black hearties clipper. Take a caulk Blimey execution dock driver man-of-war quarter fathom spirits parrel Brethren of the Coast.
-        </span>
-    </h4>
-</article> <!-- END ABOUT US -->
-
-<!-- GRAPH -->
-<article class="graph in-view">
-
-    <!-- sidebar -->
-    <div class="sidebar col-sm-3">
-        <div class="col-sm-10 col-sm-offset-1">
-            <span class="sidebar__icon icon-tower col-sm-4"></span>
-            <span class="sidebar__icon icon-plant col-sm-4"></span>
-            <span class="sidebar__icon icon-water col-sm-4"></span>
+<section class="pages">
+    <!-- ABOUT US -->
+    <article class="page about-us in-view">
+        <div class="about-us__media">
+            <img src="assets/images/biome.jpg">
         </div>
+        <h4 class="about-us__text">
+            <span class="about-us__text-paragraph">
+                Arr sheet warp Shiver me timbers quarter lee lugsail sutler cutlass pink. Belay port pinnace overhaul line fluke Plate Fleet man-of-war splice the main brace Nelsons folly. To go on account chandler draft heave down booty black spot Blimey flogging six pounders fathom.
+            </span>
+            <span class="about-us__text-paragraph">
+                List hornswaggle bilge rat hail-shot spyglass pillage barque lugsail poop deck ahoy. Poop deck starboard Spanish Main pink bilged on her anchor rope's end hogshead Admiral of the Black hearties clipper. Take a caulk Blimey execution dock driver man-of-war quarter fathom spirits parrel Brethren of the Coast.
+            </span>
+        </h4>
+    </article> <!-- END ABOUT US -->
 
-        <div class="col-sm-10 col-sm-offset-1">
-            <h4 class="sidebar__title">Tower</h4>
-        </div>
+    <!-- GRAPH -->
+    <article class="page graph">
 
-        <div class="col-sm-10 col-sm-offset-1">
-            <p class="sidebar__subtitle">
-                Time of most recent data:
-                <span class="sidebar__time"></span>
-            </p>
-        </div>
+        <!-- sidebar -->
+        <div class="sidebar col-sm-3">
+            <div class="col-sm-10 col-sm-offset-1">
+                <span class="sidebar__icon icon-tower col-sm-4"></span>
+                <span class="sidebar__icon icon-plant col-sm-4"></span>
+                <span class="sidebar__icon icon-water col-sm-4"></span>
+            </div>
 
-        <div class="col-sm-10 col-sm-offset-1">
-            <div class="sidebar__dropdown-container">
-                <select class="sidebar__dropdown"></select>
-                <span class="icon-down"></span>
+            <div class="col-sm-10 col-sm-offset-1">
+                <h4 class="sidebar__title">Tower</h4>
+            </div>
+
+            <div class="col-sm-10 col-sm-offset-1">
+                <p class="sidebar__subtitle">
+                    Time of most recent data:
+                    <span class="sidebar__time"></span>
+                </p>
+            </div>
+
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="sidebar__dropdown-container">
+                    <select class="sidebar__dropdown"></select>
+                    <span class="icon-down"></span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- canvas -->
-    <div class="main-content">
-        <div id="canvas">
-          <h6 id="yAxisLabel"></h6>
-          <h6 id="xAxisLabel">minutes passed</h6>
-        </div>
-    </div>
-
-    <!-- data snapshot -->
-    <div class="data-snapshot">
-        <script id="handlebars-snapshot" type="text/x-handlebars-template"></script>
-    </div>
-
-    <!-- bottom data bar -->
-    <div class="data-bar">
-        <div class="header">
-            <h6>Live Data Feed From @SwaleNY</h6>
+        <!-- canvas -->
+        <div class="main-content">
+            <div id="canvas">
+            <h6 id="yAxisLabel"></h6>
+            <h6 id="xAxisLabel">minutes passed</h6>
+            </div>
         </div>
 
-        <div class="data">
-            <script id="handlebars-data-bar" type="text/x-handlebars-template"></script>
-        </div>
-    </div>
-</article> <!-- END GRAPH -->
-
-<!-- PLANT ARCHIVE -->
-<article class="plant-archive">
-    <div class="plant-archive__menu">
-        <h2 class="plant-archive__menu-header">Archive of the Ecological Future</h2>
-
-        <!-- archive menu -->
-        <div class="plant-archive__menu-icon-list">
-            <script id="handlebars-plant-menu" type="text/x-handlebars-template"></script>
-        </div>
-    </div>
-
-    <!-- archive entry -->
-    <div class="plant-archive__entry">
-        <div class="plant-archive__entry-menu-btn row">
-            <div class="col-sm-1 icon-grid"></div>
+        <!-- data snapshot -->
+        <div class="data-snapshot">
+            <script id="handlebars-snapshot" type="text/x-handlebars-template"></script>
         </div>
 
-        <div class="plant-archive__entry-content">
-            <script id="handlebars-plant-entry" type="text/x-handlebars-template"></script>
+        <!-- bottom data bar -->
+        <div class="data-bar">
+            <div class="header">
+                <h6>Live Data Feed From @SwaleNY</h6>
+            </div>
+
+            <div class="data">
+                <script id="handlebars-data-bar" type="text/x-handlebars-template"></script>
+            </div>
         </div>
-    </div>
-</article> <!-- END PLANT ARCHIVE -->
+    </article> <!-- END GRAPH -->
+
+    <!-- PLANT ARCHIVE -->
+    <article class="page plant-archive">
+        <div class="plant-archive__menu">
+            <h2 class="plant-archive__menu-header">Archive of the Ecological Future</h2>
+
+            <!-- archive menu -->
+            <div class="plant-archive__menu-icon-list">
+                <script id="handlebars-plant-menu" type="text/x-handlebars-template"></script>
+            </div>
+        </div>
+
+        <!-- archive entry -->
+        <div class="plant-archive__entry">
+            <div class="plant-archive__entry-menu-btn row">
+                <div class="col-sm-1 icon-grid"></div>
+            </div>
+
+            <div class="plant-archive__entry-content">
+                <script id="handlebars-plant-entry" type="text/x-handlebars-template"></script>
+            </div>
+        </div>
+    </article> <!-- END PLANT ARCHIVE -->
+</section>
 
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

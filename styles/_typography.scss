@@ -1,0 +1,98 @@
+h1, h2, h3, h4, h5, h6 {
+	text-transform: uppercase;
+	margin: 0;
+}
+
+h1 {
+	font-size: rem(75);
+}
+h2 {
+	font-size: rem(50);
+}
+h3 {
+	font-size: rem(40);
+}
+h4 {
+	font-size: rem(32);
+}
+h5 {
+	font-size: rem(24);
+}
+h6 {
+	font-size: rem(12);
+}
+
+@font-face {
+	font-family: 'Constantia';
+	src: url('../assets/fonts/Constantia.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'DINPro Light';
+	src: url('../assets/fonts/DINPro-Light.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'DINPro Regular';
+	src: url('../assets/fonts/DINPro-Regular.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'DINPro Medium';
+	src: url('../assets/fonts/DINPro-Medium.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Blanch Condensed';
+	src: url('../assets/fonts/BLANCH_CONDENSED.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Blanch Condensed Light';
+	src: url('../assets/fonts/BLANCH_CONDENSED_LIGHT.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Input Sans Light';
+	src: url('../assets/fonts/InputSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Input Sans Regular';
+	src: url('../assets/fonts/InputSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Input Mono Extra Light';
+	src: url('../assets/fonts/InputMono-ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Input Mono Extra Light Italic';
+	src: url('../assets/fonts/InputMono-ExtraLightItalic.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Input Mono Regular';
+	src: url('../assets/fonts/InputMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Input Mono Medium';
+	src: url('../assets/fonts/InputMono-Medium.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Input Mono Compressed Light';
+	src: url('../assets/fonts/InputMonoCompressed-Light.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Input Mono Compressed Regular';
+	src: url('../assets/fonts/InputMonoCompressed-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Input Mono Compressed Bold';
+	src: url('../assets/fonts/InputMonoCompressed-Bold.ttf') format('truetype');
+}
