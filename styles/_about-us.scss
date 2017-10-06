@@ -6,6 +6,10 @@
     
     &__media {
         padding: 40px 0;
+
+        img {
+            max-width: 100%;
+        }
     }
 
     &__text {
@@ -13,6 +17,7 @@
         text-transform: none;
         line-height: 1.3em;
         height: 100vh;
+        max-width: 700px;
         padding-bottom: 40px;
         display: table-cell;
         vertical-align: middle;
