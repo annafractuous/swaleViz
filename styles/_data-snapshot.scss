@@ -1,0 +1,59 @@
+// DATA SNAPSHOT
+.data-snapshot {
+	color: #373737;
+	position: absolute;
+	top: 25%;
+	left: 88%;
+
+	h5 {
+		font-size: rem(16);
+	}
+
+	.snapshot-label {
+		font-family: 'Input Mono Compressed Light';
+	}
+
+	.snapshot-value {
+		font-family: 'Blanch Condensed';
+		font-weight: normal;
+	}
+
+	.current-container {
+		display: block;
+
+		h1, 
+		h5 {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.snapshot-label {
+			display: block;
+		}
+
+		.snapshot-value {
+			font-size: rem(80);
+			margin-bottom: 14px;
+		}
+
+		#value-unit {
+			font-family: 'Input Sans';
+			font-weight: normal;
+		}
+	}
+
+	.low-high-container {
+		display: flex;
+
+		.low, 
+		.high {
+			width: 66px;
+		}
+
+		.snapshot-value {
+			display: inline-block;
+			font-size: rem(45);
+			line-height: 50px;
+		}
+	}
+}

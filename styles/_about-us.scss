@@ -1,0 +1,32 @@
+.about-us {
+	padding: 0 10%;
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    
+    &__media {
+        padding: 40px 0;
+    }
+
+    &__text {
+        font-family: 'DINPro Light', sans-serif;
+        text-transform: none;
+        line-height: 1.3em;
+        height: 100vh;
+        padding-bottom: 40px;
+        display: table-cell;
+        vertical-align: middle;
+
+        &-paragraph {
+            display: block;
+            margin-bottom: 40px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+            
+        
+    

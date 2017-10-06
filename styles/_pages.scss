@@ -1,0 +1,43 @@
+.page {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    right: -100vw;
+    top: 0;
+    margin-top: 50px;
+    –webkit-transition: right ease 1s;
+    -moz-transition: right ease 1s;
+    transition: right ease 1s;
+
+    &.in-view {
+        right: 0;
+    }
+    
+    &:not(.in-view) {
+        overflow: hidden;
+    }
+}
+
+.nav {
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    z-index: 300;
+    position: relative;
+
+    &__item {
+        color: white;
+        font-family: 'DINPro Light', sans-serif;
+        text-transform: uppercase;
+        margin: 0 15px;
+        line-height: 50px;
+        cursor: pointer;
+
+        &:hover,
+        &.selected {
+            color: #A8C7BF;
+        }
+    }
+}
