@@ -2,9 +2,10 @@ var App = App || {};
 
 App.PlantArchive = {
     init: function() {
-        this.getPlantData();
-        this.assignVariables();
+        // this.getPlantData();
+        // this.assignVariables();
         this.compileHandlebarsTemplates();
+        this.loadPlantMenu();
     },
 
     getPlantData: function() {
@@ -32,15 +33,16 @@ App.PlantArchive = {
 
     compileHandlebarsTemplates: function() {
         var plantMenuTemplate = $('#handlebars-plant-menu').html();
-        var plantEntryTemplate = $('#handlebars-plant-entry').html();
+        // var plantEntryTemplate = $('#handlebars-plant-entry').html();
 
         this.plantMenuTemplateScript = Handlebars.compile(plantMenuTemplate);
-        this.plantEntryTemplateScript = Handlebars.compile(plantEntryTemplate);
+        // this.plantEntryTemplateScript = Handlebars.compile(plantEntryTemplate);
     },
 
     loadPlantMenu: function() {
-        var plants = this.plants;
-        var compiledHTML = this.plantMenuTemplateScript(this.plants);
+        // var plants = this.plants;
+        // var compiledHTML = this.plantMenuTemplateScript(this.plants);
+        var compiledHTML = this.plantMenuTemplateScript();
         $('.plant-archive__menu-icon-list').empty();
         $('.plant-archive__menu-icon-list').append(compiledHTML);
     },

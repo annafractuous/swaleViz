@@ -2,3 +2,4 @@
 /.sass-cache
 npm-debug.log
 /assets/icons/icomoon/selection.json
+.gulp-scss-cache/*

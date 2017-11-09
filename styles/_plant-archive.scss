@@ -2,13 +2,18 @@
 	background-color: black;
 	padding: 60px 40px 20px;
 
+	#handlebars-plant-menu {
+		display: block;
+	}
+
 	&__menu {
 		padding: 20px;
+		height:  100%;
 
 		&-header {
 			text-transform: capitalize;
 			font-family: 'Input Mono Regular';
-			font-size: 55px;
+			font-size: 42px;
 			color: white;
 			text-align: center;
 			margin-bottom: 20px;
