@@ -1,4 +1,5 @@
 /node_modules
 /.sass-cache
+/.gulp-scss-cache
 npm-debug.log
 /assets/icons/icomoon/selection.json
