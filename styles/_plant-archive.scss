@@ -1,114 +1,100 @@
+/* WebKit and Opera browsers */
+@-webkit-keyframes spinner {
+	from {
+		-webkit-transform: rotateY(0deg);
+	}
+	to {
+		-webkit-transform: rotateY(-360deg);
+	}
+}
+/* all other browsers */
+@keyframes spinner {
+	from {
+		-moz-transform: rotateY(0deg);
+		-ms-transform: rotateY(0deg);
+		transform: rotateY(0deg);
+	}
+	to
+	{
+		-moz-transform: rotateY(-360deg);
+		-ms-transform: rotateY(-360deg);
+		transform: rotateY(-360deg);
+	}
+}
+		
 .plant-archive {
 	background-color: black;
-	padding: 60px 40px 20px;
+	padding: 20px 40px;
+
+	#handlebars-plant-menu {
+		display: block;
+	}
 
 	&__menu {
 		padding: 20px;
+		height:  100%;
 
 		&-header {
 			text-transform: capitalize;
 			font-family: 'Input Mono Regular';
-			font-size: 55px;
+			font-size: 42px;
 			color: white;
 			text-align: center;
 			margin-bottom: 20px;
 		}
-
-		&-icon-list {
-			display: flex;
-			flex-wrap: wrap;
-
-			.row {
-				width: 100%;
-				height: 30%;
-			}
-		}
-
-		&-icon {
-			color: white;
-			font-size: 100px;
-			text-align: center;
-			padding: 30px 20px;
-			cursor: pointer;
-
-			&.icon-about {
-				font-size: 80px;
-			}
-		}
 	}
 
-	&__entry {
-		display: none;
-		max-height: 100%;
+	&__container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
 
-		&-content {
-			color: white;
+		#particles-js {
+			height: 100%;
 		}
 
-		&-menu-btn {
-			color: white;
+		#scene {
+			position: absolute;
+			top: 150px;
+			width: 100%;
+			height: calc(100% - 200px);
+			display: flex;
+			align-items: center;
+			margin: 0 auto;
+			font-family: 'Neou Bold';
+			font-size: 1.2rem;
+			align-items: center;
+			word-wrap: break-word;
+			hyphens: auto;
+			pointer-events: none;
 
-			.icon-grid {
-				font-size: 40px;
-				cursor: pointer;
+			#poem,
+			#icon,
+			#spec {
+				color: white;
+				padding: 3%;
+				width: 30vw;
+				height: 100%;
 			}
 		}
 
-		&-heading {
-			font-family: "Input Mono Medium";
-			font-size: 14px;
-			margin: 20px 0;
-		}
-
-		&-title,
-		&-text,
-		&-text p,
-		&-link {
-			font-family: "Input Mono Extra Light";
-		}
-
-		&-title {
-			text-transform: capitalize;
-			font-size: 55px;
-		}
-
-		&-text {
-			padding-bottom: 30px;
-
-			p {
-				line-height: 1.2;
-			}
-		}
-
-		&-link a {
-			color: inherit;
-			text-decoration: underline;
-
-			&:hover {
-				color: inherit;
-			}
-		}
-
-		&-symbol {
-			font-size: 325px;
-			max-height: 325px;
-		}
-
-		&-quote {
-			font-family: "Input Mono Extra Light Italic";
-			text-align: center;
-		}
-
-		&-quote-marks {
-			font-family: "Input Mono Extra Light Italic";
-			font-size: 90px;
-			text-align: left;
-
-			&:first-of-type {
-				transform: rotate(180deg);
-				position: relative;
-				top: -.5em;
-			}
+		#icon > div {
+			font-size: 30vw;
+			max-width: 100%;
+			-webkit-animation-name: spinner;
+			-webkit-animation-timing-function: linear;
+			-webkit-animation-iteration-count: infinite;
+			-webkit-animation-duration: 6s;
+			animation-name: spinner;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+			animation-duration: 6s;
+			-webkit-transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+			-ms-transform-style: preserve-3d;
+			transform-style: preserve-3d;
 		}
 	}
 }
