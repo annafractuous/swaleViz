@@ -4,15 +4,6 @@ App.Handlebars = {
     init: function() {
         this.partials = [
             {
-                // fileName: 'plant-menu',
-                fileName: 'aef-js/index',
-                targetNode: '#handlebars-plant-menu'
-            },
-            {
-                fileName: 'plant-entry',
-                targetNode: '#handlebars-plant-entry'
-            },
-            {
                 fileName: 'data-bar',
                 targetNode: '#handlebars-data-bar'
             },
