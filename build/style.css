@@ -477,36 +477,34 @@ h6 {
     left: 0;
     height: 100%;
     width: 100%; }
-    .plant-archive__container #particles-js {
+  .plant-archive #particles-js {
+    height: 100%; }
+  .plant-archive__scene {
+    position: absolute;
+    top: 150px;
+    width: 100%;
+    height: calc(100% - 200px);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0 auto;
+    font-family: 'Neou Bold';
+    font-size: 1.2rem;
+    align-items: center;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
+    pointer-events: none; }
+    .plant-archive__scene-poem, .plant-archive__scene-icon, .plant-archive__scene-spec {
+      color: white;
+      padding: 3%;
+      width: 30vw;
       height: 100%; }
-    .plant-archive__container #scene {
-      position: absolute;
-      top: 150px;
-      width: 100%;
-      height: calc(100% - 200px);
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      margin: 0 auto;
-      font-family: 'Neou Bold';
-      font-size: 1.2rem;
-      align-items: center;
-      word-wrap: break-word;
-      -webkit-hyphens: auto;
-          -ms-hyphens: auto;
-              hyphens: auto;
-      pointer-events: none; }
-      .plant-archive__container #scene #poem,
-      .plant-archive__container #scene #icon,
-      .plant-archive__container #scene #spec {
-        color: white;
-        padding: 3%;
-        width: 30vw;
-        height: 100%; }
-    .plant-archive__container #icon > div {
+    .plant-archive__scene-icon > div {
       font-size: 30vw;
       max-width: 100%;
       -webkit-animation-name: spinner;

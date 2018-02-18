@@ -2,10 +2,7 @@ var App = App || {};
 
 App = {
     init: function() {
-        new p5(App.Graph);
         App.Handlebars.init();
-        App.DataSnapshots.init();
-        App.PlantArchive.init();
 
         this.pages = $('article');
         this.navItems = $('.nav__item');
@@ -14,12 +11,31 @@ App = {
 
     addNavEventListeners: function() {
         this.navItems.click(function(e) {
-            var nextPage = $(e.target).data('page');
-            this.navItems.filter('.selected').removeClass('selected');
-            $(e.target).addClass('selected');
-            this.pages.filter('.in-view').removeClass('in-view');
-            this.pages.filter(nextPage).addClass('in-view');
+            var navItem, nextPage;
+            
+            navItem  = e.target;
+            nextPage = $(navItem).data('page');
+            
+            App.setActivePage(navItem, nextPage);
+            App.initPage(nextPage);
         }.bind(this));
+    },
+
+    setActivePage(navItem, nextPage) {
+        $('.selected').removeClass('selected');
+        $('.in-view').removeClass('in-view');
+        $(navItem).addClass('selected');
+        $(nextPage).addClass('in-view');
+    },
+
+    initPage(nextPage) {
+        if (nextPage === '.plant-archive') {
+            App.PlantArchive.init();
+        } 
+        else if (nextPage === '.graph') {
+            new p5(App.Graph);
+            App.DataSnapshots.init();
+        }
     }
 }
 
@@ -110,129 +126,6 @@ App.DataSnapshots = {
         }
 
         return (month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm);
-    }
-}
-
-var App = App || {};
-
-App.Handlebars = {
-    init: function() {
-        this.partials = [
-            {
-                fileName: 'plant-archive',
-                targetNode: '#handlebars-plant-menu'
-            },
-            {
-                fileName: 'data-bar',
-                targetNode: '#handlebars-data-bar'
-            },
-            {
-                fileName: 'snapshot',
-                targetNode: '#handlebars-snapshot'
-            }
-        ]
-        this.getAllPartials();
-    },
-
-    getAllPartials: function() {
-        for (var i = 0; i < this.partials.length; i++) {
-            this.getPartial(this.partials[i].fileName, this.partials[i].targetNode);
-        }
-    },
-
-    getPartial: function(fileName, targetNode) {
-        $.ajax({
-            url : '../templates/' + fileName + '.hbs',
-            success : function(data) {
-                $(targetNode).html(data);
-            },
-            async : false
-        });
-    }
-}
-
-var App = App || {};
-
-App.PlantArchive = {
-    init: function() {
-        // this.getPlantData();
-        // this.assignVariables();
-        this.compileHandlebarsTemplates();
-        this.loadPlantMenu();
-    },
-
-    getPlantData: function() {
-        var _this = this;
-        $.ajax({
-              url: 'data/archive.json',
-              dataType: 'json',
-              success: function(data) {
-                  _this.plants = data;
-                  _this.loadPlantMenu();
-                  _this.setEventListeners();
-              },
-              error: function(errorMsg) {
-                  console.log(errorMsg);
-              }
-        });
-    },
-
-    assignVariables: function() {
-        this.plantArchive = $('.plant-archive');
-        this.archiveMenu = $('.plant-archive__menu');
-        this.archiveEntry = $('.plant-archive__entry');
-        this.entryContent = $('.plant-archive__entry-content');
-    },
-
-    compileHandlebarsTemplates: function() {
-        var plantMenuTemplate = $('#handlebars-plant-menu').html();
-        // var plantEntryTemplate = $('#handlebars-plant-entry').html();
-
-        this.plantMenuTemplateScript = Handlebars.compile(plantMenuTemplate);
-        // this.plantEntryTemplateScript = Handlebars.compile(plantEntryTemplate);
-    },
-
-    loadPlantMenu: function() {
-        // var plants = this.plants;
-        // var compiledHTML = this.plantMenuTemplateScript(this.plants);
-        var compiledHTML = this.plantMenuTemplateScript();
-        $('.plant-archive__menu-icon-list').empty();
-        $('.plant-archive__menu-icon-list').append(compiledHTML);
-    },
-
-    setEventListeners: function() {
-        this.showPlantEntry();
-        this.showArchiveMenu();
-    },
-
-    showPlantEntry: function() {
-        $('.plant-archive__menu-icon').click(function(e) {
-            var plant = $(e.target).attr("data-plant");
-            this.updatePlantEntry(plant);
-            this.archiveMenu.hide();
-            this.archiveEntry.show();
-        }.bind(this));
-    },
-
-    showArchiveMenu: function() {
-        $('.plant-archive__entry-menu-btn .icon-grid').click(function() {
-            this.archiveEntry.hide();
-            this.archiveMenu.show();
-        }.bind(this));
-    },
-
-    updatePlantEntry: function(plant) {
-        var plantEntryData = Object.assign({},
-            this.plants[plant],
-            {
-                name: plant,
-                symbol: "<span class='icon-" + plant + "'></span>",
-                source: "<a href='" + this.plants[plant].source + "' target='_blank'>" + this.plants[plant].source + "</a>",
-                medicinal_use: this.plants[plant].medicinal_use.join(",</p><p>")}
-            );
-        var compiledHTML = this.plantEntryTemplateScript(plantEntryData);
-        this.entryContent.empty();
-        this.entryContent.append(compiledHTML);
     }
 }
 
@@ -482,3 +375,164 @@ App.Graph = function( p5 ) {
         }, 60000);
     }
 };
+
+var App = App || {};
+
+App.Handlebars = {
+    init: function() {
+        this.partials = [
+            {
+                fileName: 'data-bar',
+                targetNode: '#handlebars-data-bar'
+            },
+            {
+                fileName: 'snapshot',
+                targetNode: '#handlebars-snapshot'
+            }
+        ]
+        this.getAllPartials();
+    },
+
+    getAllPartials: function() {
+        for (var i = 0; i < this.partials.length; i++) {
+            this.getPartial(this.partials[i].fileName, this.partials[i].targetNode);
+        }
+    },
+
+    getPartial: function(fileName, targetNode) {
+        $.ajax({
+            url : '../templates/' + fileName + '.hbs',
+            success : function(data) {
+                $(targetNode).html(data);
+            },
+            async : false
+        });
+    }
+}
+
+var App = App || {};
+
+App.PlantArchive = {
+    init: function() {
+        this.getPlantData();
+        this.getParticleData();
+        this.saveVariables();
+        this.setParameters();
+    },
+
+    getPlantData: function() {
+        var _this = this;
+        $.ajax({
+              url: 'data/archive.json',
+              dataType: 'json',
+              success: function(data) {
+                  _this.scenes = data.scenes;
+                  _this.drawPlants();
+              },
+              error: function(errorMsg) {
+                  console.log(errorMsg);
+              }
+        });
+    },
+
+    getParticleData: function() {
+        var _this = this;
+        $.ajax({
+              url: 'data/particles.json',
+              dataType: 'json',
+              success: function(data) {
+                  particlesJS("particles-js", data);
+              },
+              error: function(errorMsg) {
+                  console.log(errorMsg);
+              }
+        });
+    },
+
+    saveVariables: function() {
+        this.poem = $('.plant-archive__scene-poem');
+        this.icon = $('.plant-archive__scene-icon');
+        this.spec = $('.plant-archive__scene-spec');
+        this.currentIndex = 0;
+    },
+
+    setParameters: function() {
+        this.params = {
+            delayBetween: {
+                poem: {
+                    word: 500
+                },
+                spec: {
+                    section: 2000
+                }
+            },
+            fadeInTime: {
+                poem: {
+                    word: 750
+                },
+                icon: {
+                    image: 1500
+                },
+                spec: {
+                    section: 1500
+                }
+            },
+            fadeOutTime: {
+                scene: 2500
+            }
+        }
+    },
+
+    drawPlants: function() {
+        this.poem.empty().show()
+        this.icon.empty().show()
+        this.spec.empty().show()
+
+        var poem = this.scenes[this.currentIndex].poem
+        var icon = this.scenes[this.currentIndex].icon
+        var spec = this.scenes[this.currentIndex].spec
+
+        this.icon.html($('<div>').addClass('icon-' + icon)).children().hide().fadeIn(this.params.fadeInTime.icon.image)
+
+        console.log('Draw %c' + spec.plant, 'font-weight: bold')
+
+        this.poemHTML = poem.split(' ').map(function(word) {
+            return '<span>' + word + ' ' + '</span>'
+        }).join('')
+
+        this.specHTML = ''
+        this.specHTML += this.makeSpecSectionHTML('Plant:', spec.plant)
+        this.specHTML += this.makeSpecSectionHTML('Symbolism:', spec.symbolism)
+        this.specHTML += this.makeSpecSectionHTML('Medicinal Use:', spec.usage)
+        this.specHTML += this.makeSpecSectionHTML('Political Pairing:', spec.politics)
+
+        // https://stackoverflow.com/questions/11637582/fading-a-paragraph-in-word-by-word-using-jquery
+        var _this = this;
+        this.poem.html(this.poemHTML).children().hide().each(function(i) {
+            $(this).delay(i * _this.params.delayBetween.poem.word).fadeIn(_this.params.fadeInTime.poem.word)
+        }).promise().done(function() {
+            console.log('Poem completed')
+
+            _this.spec.html(_this.specHTML).children().hide().each(function(i) {
+                $(this).delay(i * _this.params.delayBetween.spec.section).fadeIn(_this.params.fadeInTime.spec.section)
+            }).promise().done(function() {
+                console.log('Spec completed')
+
+                $('#scene').children().each(function() {
+                    $(this).fadeOut(_this.params.fadeOutTime.scene)
+                }).promise().done(function() {
+                    console.log('Scene completed')
+
+                    _this.currentIndex = _this.currentIndex + 1 >= _this.scenes.length ? 0 : _this.currentIndex + 1
+                    _this.drawPlants()
+                    console.log('%casync0', 'color: #aaa')
+                });
+            });
+        });
+        console.log('%csync0', 'color: #aaa')
+    },
+
+    makeSpecSectionHTML: function(title, content) {
+        return '<div class="section">' + '<div class="title">' + title + '</div>' + '<div class="content">' + content + '</div>' + '</div>'
+    }
+}
