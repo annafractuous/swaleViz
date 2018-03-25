@@ -426,7 +426,7 @@ App.PlantArchive = {
               url: 'data/archive.json',
               dataType: 'json',
               success: function(data) {
-                  _this.scenes = data.scenes;
+                  _this.scenes = _this.shuffleScenes(data.scenes);
                   _this.drawPlants();
               },
               error: function(errorMsg) {
@@ -481,6 +481,20 @@ App.PlantArchive = {
                 scene: 2500
             }
         }
+    },
+
+    shuffleScenes: function(scenes) {
+        for (var currentIdx = scenes.length - 1; currentIdx > 0; currentIdx--) {
+            var randomIdx, currentVal;
+
+            randomIdx = Math.floor(Math.random() * (currentIdx + 1));
+            currentVal = scenes[currentIdx];
+            
+            scenes[currentIdx] = scenes[randomIdx];
+            scenes[randomIdx] = currentVal;
+        }
+
+        return scenes;
     },
 
     drawPlants: function() {
