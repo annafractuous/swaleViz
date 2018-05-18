@@ -517,6 +517,11 @@ h6 {
       animation-duration: 6s;
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d; }
+    .plant-archive__scene-spec .section {
+      margin-bottom: 20px; }
+      .plant-archive__scene-spec .section .content {
+        margin-top: 5px;
+        font-size: 14px; }
 
 .about-us {
   padding: 0 10%;

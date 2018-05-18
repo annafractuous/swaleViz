@@ -96,5 +96,14 @@
             -ms-transform-style: preserve-3d;
             transform-style: preserve-3d;
         }
+
+        &-spec .section {
+            margin-bottom: 20px;
+
+            .content {
+                margin-top: 5px;
+                font-size: 14px;
+            }
+        }
     }
 }
