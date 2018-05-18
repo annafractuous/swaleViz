@@ -45,6 +45,14 @@ $(function() {
 
 var App = App || {};
 
+App.CustomParticles = {
+    init: function() {
+        // Ari, put yer jazz here
+        console.log(pJSDom);
+    }
+}
+var App = App || {};
+
 App.DataSnapshots = {
     init: function() {
         this.compileHandlebarsTemplates();
@@ -442,6 +450,7 @@ App.PlantArchive = {
               dataType: 'json',
               success: function(data) {
                   particlesJS("particles-js", data);
+                  App.CustomParticles.init();
               },
               error: function(errorMsg) {
                   console.log(errorMsg);

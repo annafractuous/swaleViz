@@ -30,6 +30,7 @@ App.PlantArchive = {
               dataType: 'json',
               success: function(data) {
                   particlesJS("particles-js", data);
+                  App.CustomParticles.init();
               },
               error: function(errorMsg) {
                   console.log(errorMsg);
