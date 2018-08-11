@@ -1,7 +1,7 @@
 // Gulp – compile & minify files, run server, watch for changes
 var gulp         = require('gulp'),
     concat       = require('gulp-concat'),            // concatenate scripts
-    babel        = require('gulp-babel'),             // transpile scripts to ES5
+    babel        = require('gulp-babel'),             // transpile scripts to ES6
     uglify       = require('gulp-uglify'),            // minify scripts
     scss         = require('gulp-scss'),              // compile SCSS files to CSS
     autoprefixer = require('gulp-autoprefixer'),      // auto-prefix CSS
