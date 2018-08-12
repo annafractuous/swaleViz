@@ -29,7 +29,7 @@ App.PlantArchive = {
               url: 'data/particles.json',
               dataType: 'json',
               success: function(data) {
-                  particlesJS("particles-js", data);
+                  particlesJS('particles-js', data);
                   App.CustomParticles.init();
               },
               error: function(errorMsg) {
