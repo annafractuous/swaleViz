@@ -228,7 +228,7 @@ h6 {
       padding: 0 20px; }
     .graph .main-content #yAxisLabel,
     .graph .main-content #xAxisLabel {
-      font-family: 'Source Code Pro';
+      font-family: "Input Mono Regular", monospace;
       font-size: 0.875rem;
       text-transform: none;
       position: absolute; }
@@ -252,10 +252,10 @@ h6 {
       padding: 10px 0;
       border-bottom: 1px solid #5f5f5f; }
     .graph .sidebar__title {
-      font-family: 'DINPro Medium';
+      font-family: "DINPro Medium", Arial, sans-serif;
       border-top: 1px solid #5f5f5f; }
     .graph .sidebar__subtitle {
-      font-family: 'DINPro Light';
+      font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
       line-height: 1.3em;
       color: #5f5f5f; }
     .graph .sidebar__dropdown {
@@ -265,7 +265,7 @@ h6 {
       width: 100%;
       height: 36px;
       font-size: 0.875rem;
-      font-family: 'DINPro Light';
+      font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
       color: white;
       text-decoration: none;
       outline: none;
@@ -307,11 +307,11 @@ h6 {
       .data-bar .data .data-section h6 {
         position: relative; }
       .data-bar .data .data-section h5 {
-        font-family: 'DINPro Light';
+        font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
         font-weight: normal;
         text-transform: none; }
         .data-bar .data .data-section h5 .data-bar-value {
-          font-family: 'Blanch Condensed';
+          font-family: "Blanch Condensed", monospace;
           font-weight: normal;
           font-size: 5.625rem; }
           .data-bar .data .data-section h5 .data-bar-value .decimal {
@@ -361,7 +361,7 @@ h6 {
       .data-bar .data .data-section:last-child {
         border-right: 0; }
       .data-bar .data .data-section .data-bar-label {
-        font-family: 'DINPro Light';
+        font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
         line-height: 14px;
         text-align: left; }
       .data-bar .data .data-section.location h6 {
@@ -379,9 +379,9 @@ h6 {
   .data-snapshot h5 {
     font-size: 1rem; }
   .data-snapshot .snapshot-label {
-    font-family: 'DINPro Light'; }
+    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif; }
   .data-snapshot .snapshot-value {
-    font-family: 'Blanch Condensed';
+    font-family: "Blanch Condensed", monospace;
     font-weight: normal; }
   .data-snapshot .current-container {
     display: block; }
@@ -506,7 +506,7 @@ h6 {
     .about-us__media img {
       max-width: 100%; }
   .about-us__text {
-    font-family: 'DINPro Light', sans-serif;
+    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
     text-transform: none;
     line-height: 1.3em;
     height: 100vh;

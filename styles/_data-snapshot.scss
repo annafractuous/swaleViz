@@ -10,11 +10,11 @@
 	}
 
 	.snapshot-label {
-		font-family: 'DINPro Light';
+		font-family: $dinpro-light;
 	}
 
 	.snapshot-value {
-		font-family: 'Blanch Condensed';
+		font-family: $blanch-condensed;
 		font-weight: normal;
 	}
 
@@ -37,7 +37,7 @@
 		}
 
 		#value-unit {
-			font-family: 'Input Sans';
+			font-family: $dinpro-med;
 			font-weight: normal;
 		}
 	}

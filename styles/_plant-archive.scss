@@ -8,7 +8,7 @@
 
     &__header {
         text-transform: capitalize;
-        font-family: 'Input Mono Regular';
+        font-family: $input-mono;
         font-size: 32px;
         color: white;
         text-align: center;
@@ -35,7 +35,7 @@
         display: flex;
         align-items: center;
         margin: 0 auto;
-        font-family: 'Neou Bold';
+        font-family: $neou;
         font-size: 1.2rem;
         align-items: center;
         word-wrap: break-word;
