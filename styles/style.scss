@@ -4,19 +4,17 @@
 	@return #{$px/16}rem;
 }
 
-/* BASIC STYLES */
+/* COMMON STYLES */
 
 @import 'normalize';
-@import 'media-queries';
-
-/* TYPOGRAPHY */
-
-@import 'icons';
+@import 'variables';
 @import 'typography';
+@import 'icons';
+@import 'nav';
+@import 'page';
 
-/* MAIN STYLES */
+/* PAGES */
 
-@import 'pages';
 @import 'canvas';
 @import 'data-bar';
 @import 'data-snapshot';

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* FUNCTIONS & MIXINS */
-/* BASIC STYLES */
+/* COMMON STYLES */
 /* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   border: 0;
@@ -16,7 +16,69 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body {
   line-height: 1; }
 
-/* TYPOGRAPHY */
+/* Breakpoints */
+/* Fonts */
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+  margin: 0; }
+
+h1 {
+  font-size: 4.6875rem; }
+
+h2 {
+  font-size: 3.125rem; }
+
+h3 {
+  font-size: 2.5rem; }
+
+h4 {
+  font-size: 2rem; }
+
+h5 {
+  font-size: 1.5rem; }
+
+h6 {
+  font-size: 0.75rem; }
+
+@font-face {
+  font-family: 'Blanch Condensed';
+  src: url("../assets/fonts/Blanch-Condensed.otf") format("opentype"); }
+@font-face {
+  font-family: 'DINPro Light';
+  src: url("../assets/fonts/DINPro-Light.otf") format("opentype"); }
+@font-face {
+  font-family: 'DINPro Medium';
+  src: url("../assets/fonts/DINPro-Medium.otf") format("opentype"); }
+@font-face {
+  font-family: 'DINPro Regular';
+  src: url("../assets/fonts/DINPro-Regular.otf") format("opentype"); }
+@font-face {
+  font-family: 'Input Mono Extra Light';
+  src: url("../assets/fonts/InputMono-ExtraLight.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Input Mono Extra Light Italic';
+  src: url("../assets/fonts/InputMono-ExtraLightItalic.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Input Mono Medium';
+  src: url("../assets/fonts/InputMono-Medium.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Input Mono Regular';
+  src: url("../assets/fonts/InputMono-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Input Mono Compressed Bold';
+  src: url("../assets/fonts/InputMonoCompressed-Bold.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Input Mono Compressed Light';
+  src: url("../assets/fonts/InputMonoCompressed-Light.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Input Sans Light';
+  src: url("../assets/fonts/InputSans-Light.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Input Sans Regular';
+  src: url("../assets/fonts/InputSans-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Neou Bold';
+  src: url("../assets/fonts/Neou-Bold.ttf") format("truetype"); }
 @font-face {
   font-family: 'icomoon';
   src: url("../assets/icons/icomoon/icomoon.eot?exif77");
@@ -120,93 +182,14 @@ body {
 .icon-down::before {
   content: "\e91d"; }
 
-h1, h2, h3, h4, h5, h6 {
-  text-transform: uppercase;
-  margin: 0; }
-
-h1 {
-  font-size: 4.6875rem; }
-
-h2 {
-  font-size: 3.125rem; }
-
-h3 {
-  font-size: 2.5rem; }
-
-h4 {
-  font-size: 2rem; }
-
-h5 {
-  font-size: 1.5rem; }
-
-h6 {
-  font-size: 0.75rem; }
-
-@font-face {
-  font-family: 'Blanch Condensed';
-  src: url("../assets/fonts/Blanch-Condensed.otf") format("opentype"); }
-@font-face {
-  font-family: 'DINPro Light';
-  src: url("../assets/fonts/DINPro-Light.otf") format("opentype"); }
-@font-face {
-  font-family: 'DINPro Medium';
-  src: url("../assets/fonts/DINPro-Medium.otf") format("opentype"); }
-@font-face {
-  font-family: 'DINPro Regular';
-  src: url("../assets/fonts/DINPro-Regular.otf") format("opentype"); }
-@font-face {
-  font-family: 'Input Mono Extra Light';
-  src: url("../assets/fonts/InputMono-ExtraLight.ttf") format("truetype"); }
-@font-face {
-  font-family: 'Input Mono Extra Light Italic';
-  src: url("../assets/fonts/InputMono-ExtraLightItalic.ttf") format("truetype"); }
-@font-face {
-  font-family: 'Input Mono Medium';
-  src: url("../assets/fonts/InputMono-Medium.ttf") format("truetype"); }
-@font-face {
-  font-family: 'Input Mono Regular';
-  src: url("../assets/fonts/InputMono-Regular.ttf") format("truetype"); }
-@font-face {
-  font-family: 'Input Mono Compressed Bold';
-  src: url("../assets/fonts/InputMonoCompressed-Bold.ttf") format("truetype"); }
-@font-face {
-  font-family: 'Input Mono Compressed Light';
-  src: url("../assets/fonts/InputMonoCompressed-Light.ttf") format("truetype"); }
-@font-face {
-  font-family: 'Input Sans Light';
-  src: url("../assets/fonts/InputSans-Light.ttf") format("truetype"); }
-@font-face {
-  font-family: 'Input Sans Regular';
-  src: url("../assets/fonts/InputSans-Regular.ttf") format("truetype"); }
-@font-face {
-  font-family: 'Neou Bold';
-  src: url("../assets/fonts/Neou-Bold.ttf") format("truetype"); }
-/* MAIN STYLES */
-.page {
-  height: 100vh;
-  width: 100%;
-  position: absolute;
-  right: -100vw;
-  top: 0;
-  margin-top: 50px;
-  –webkit-transition: right ease 1s;
-  -webkit-transition: right ease 1s;
-  transition: right ease 1s; }
-  .page.in-view {
-    right: 0; }
-  .page:not(.in-view) {
-    overflow: hidden; }
-
 .nav {
   height: 50px;
   width: 100%;
   background-color: black;
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
   z-index: 300;
   position: relative; }
   .nav__item {
@@ -219,6 +202,21 @@ h6 {
     .nav__item:hover, .nav__item.selected {
       color: #A8C7BF; }
 
+.page {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  right: -100vw;
+  top: 0;
+  margin-top: 50px;
+  –webkit-transition: right ease 1s;
+  transition: right ease 1s; }
+  .page.in-view {
+    right: 0; }
+  .page:not(.in-view) {
+    overflow: hidden; }
+
+/* PAGES */
 .graph {
   margin-top: 0; }
   .graph .main-content {
@@ -237,10 +235,8 @@ h6 {
     .graph .main-content #yAxisLabel {
       top: 57%;
       left: -5px;
-      -webkit-transform: rotate(270deg);
-              transform: rotate(270deg);
-      -webkit-transform-origin: top left;
-              transform-origin: top left; }
+      transform: rotate(270deg);
+      transform-origin: top left; }
     .graph .main-content #xAxisLabel {
       left: 50%;
       bottom: 25px;
@@ -294,23 +290,10 @@ h6 {
   width: 100%;
   left: 0;
   top: 75%; }
-  .data-bar .header {
-    background-image: url("../assets/images/data-bar-header-bg.jpg");
-    background-size: cover;
-    background-position: left bottom;
-    height: 20px;
-    padding-left: 50px; }
-    .data-bar .header h6 {
-      font-family: 'DINPro Regular';
-      color: #FDFDFD;
-      font-size: 0.625rem;
-      line-height: 20px;
-      vertical-align: middle; }
   .data-bar .data {
     background-image: url("../assets/images/data-bar-bg.jpg");
     background-size: cover;
     height: 100%;
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     color: #FFF;
@@ -323,6 +306,18 @@ h6 {
       .data-bar .data .data-section h5,
       .data-bar .data .data-section h6 {
         position: relative; }
+      .data-bar .data .data-section h5 {
+        font-family: 'DINPro Light';
+        font-weight: normal;
+        text-transform: none; }
+        .data-bar .data .data-section h5 .data-bar-value {
+          font-family: 'Blanch Condensed';
+          font-weight: normal;
+          font-size: 5.625rem; }
+          .data-bar .data .data-section h5 .data-bar-value .decimal {
+            font-size: 3.125rem;
+            line-height: 65px;
+            position: absolute; }
       .data-bar .data .data-section .icon {
         position: absolute;
         top: 0;
@@ -336,12 +331,10 @@ h6 {
           font-size: 9rem;
           right: 15%; }
         .data-bar .data .data-section.temperature .temp-container {
-          display: -webkit-box;
           display: -ms-flexbox;
           display: flex;
-          -webkit-box-pack: start;
-              -ms-flex-pack: start;
-                  justify-content: flex-start; }
+          -ms-flex-pack: start;
+              justify-content: flex-start; }
           .data-bar .data .data-section.temperature .temp-container .fahrenheit {
             margin-right: 20px; }
       .data-bar .data .data-section.windspeed {
@@ -367,18 +360,6 @@ h6 {
           text-align: right; }
       .data-bar .data .data-section:last-child {
         border-right: 0; }
-      .data-bar .data .data-section h5 {
-        font-family: 'Input Sans Light';
-        font-weight: normal;
-        text-transform: none; }
-        .data-bar .data .data-section h5 .data-bar-value {
-          font-family: 'Blanch Condensed';
-          font-weight: normal;
-          font-size: 5.625rem; }
-          .data-bar .data .data-section h5 .data-bar-value .decimal {
-            font-size: 3.125rem;
-            line-height: 65px;
-            position: absolute; }
       .data-bar .data .data-section .data-bar-label {
         font-family: 'DINPro Light';
         line-height: 14px;
@@ -387,7 +368,7 @@ h6 {
         padding: 17% 17% 0 0;
         line-height: 18px; }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .data-bar .data .data-section.location .label {
     padding-right: 18%; } }
 .data-snapshot {
@@ -398,7 +379,7 @@ h6 {
   .data-snapshot h5 {
     font-size: 1rem; }
   .data-snapshot .snapshot-label {
-    font-family: 'Input Mono Compressed Light'; }
+    font-family: 'DINPro Light'; }
   .data-snapshot .snapshot-value {
     font-family: 'Blanch Condensed';
     font-weight: normal; }
@@ -417,7 +398,6 @@ h6 {
       font-family: 'Input Sans';
       font-weight: normal; }
   .data-snapshot .low-high-container {
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex; }
     .data-snapshot .low-high-container .low,
@@ -442,35 +422,18 @@ h6 {
     font-size: 0.625rem;
     line-height: 1.25rem; }
 
-/* WebKit and Opera browsers */
-@-webkit-keyframes spinner {
-  from {
-    -webkit-transform: rotateY(0deg); }
-  to {
-    -webkit-transform: rotateY(-360deg); } }
-/* all other browsers */
-@keyframes spinner {
-  from {
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg); }
-  to {
-    -webkit-transform: rotateY(-360deg);
-            transform: rotateY(-360deg); } }
 .plant-archive {
   background-color: black;
   padding: 20px 40px; }
   .plant-archive #handlebars-plant-menu {
     display: block; }
-  .plant-archive__menu {
-    padding: 20px;
-    height: 100%; }
-    .plant-archive__menu-header {
-      text-transform: capitalize;
-      font-family: 'Input Mono Regular';
-      font-size: 42px;
-      color: white;
-      text-align: center;
-      margin-bottom: 20px; }
+  .plant-archive__header {
+    text-transform: capitalize;
+    font-family: 'Input Mono Regular';
+    font-size: 32px;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px; }
   .plant-archive__container {
     position: absolute;
     top: 0;
@@ -484,12 +447,10 @@ h6 {
     top: 150px;
     width: 100%;
     height: calc(100% - 200px);
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+        align-items: center;
     margin: 0 auto;
     font-family: 'Neou Bold';
     font-size: 1.2rem;
@@ -515,26 +476,31 @@ h6 {
       animation-timing-function: linear;
       animation-iteration-count: infinite;
       animation-duration: 6s;
-      -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d; }
     .plant-archive__scene-spec .section {
       margin-bottom: 20px; }
       .plant-archive__scene-spec .section .content {
         margin-top: 5px;
         font-size: 14px; }
+  @media (min-width: 768px) {
+    .plant-archive__header {
+      font-size: 42px; } }
 
+/* WebKit and Opera browsers */
+/* all other browsers */
+@keyframes spinner {
+  from {
+    transform: rotateY(0deg); }
+  to {
+    transform: rotateY(-360deg); } }
 .about-us {
   padding: 0 10%;
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center; }
   .about-us__media {
     padding: 40px 0; }
     .about-us__media img {

@@ -26,6 +26,24 @@
 				position: relative;
 			}
 
+			h5 {
+				font-family: 'DINPro Light';
+				font-weight: normal;
+				text-transform: none;
+
+				.data-bar-value {
+					font-family: 'Blanch Condensed';
+					font-weight: normal;
+					font-size: rem(90);
+
+					.decimal {
+						font-size: rem(50);
+						line-height: 65px;
+						position: absolute;
+					}
+				}
+			}
+
 			.icon {
 				position: absolute;
 				top: 0;
@@ -92,24 +110,6 @@
 
 			&:last-child {
 				border-right: 0;
-			}
-
-			h5 {
-				font-family: 'Input Sans Light';
-				font-weight: normal;
-				text-transform: none;
-
-				.data-bar-value {
-					font-family: 'Blanch Condensed';
-					font-weight: normal;
-					font-size: rem(90);
-
-					.decimal {
-						font-size: rem(50);
-						line-height: 65px;
-						position: absolute;
-					}
-				}
 			}
 
 			.data-bar-label {
