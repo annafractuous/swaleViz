@@ -7,22 +7,6 @@
 	left: 0;
 	top: 75%;
 
-	.header {
-		background-image: url('../assets/images/data-bar-header-bg.jpg');
-		background-size: cover;
-		background-position: left bottom;
-		height: 20px;
-		padding-left: 50px;
-
-		h6 {
-			font-family: 'DINPro Regular';
-			color: #FDFDFD;
-			font-size: rem(10);
-			line-height: 20px;
-			vertical-align: middle;
-		}
-	}
-
 	.data {
 		background-image: url('../assets/images/data-bar-bg.jpg');
 		background-size: cover;
@@ -143,7 +127,7 @@
 }
 
 // media queries
-@media screen and (min-width: $tablet) {
+@media (min-width: $tablet) {
 	.data-bar .data .data-section.location .label {
 		padding-right: 18%;
 	}
