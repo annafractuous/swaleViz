@@ -1,13 +1,8 @@
-/* FUNCTIONS & MIXINS */
-
-@function rem($px) {
-	@return #{$px/16}rem;
-}
-
 /* COMMON STYLES */
 
-@import 'normalize';
 @import 'variables';
+@import 'mixins';
+@import 'base';
 @import 'typography';
 @import 'icons';
 @import 'nav';
@@ -15,7 +10,8 @@
 
 /* PAGES */
 
-@import 'canvas';
+@import 'data';
+@import 'data-sidebar';
 @import 'data-bar';
 @import 'data-snapshot';
 @import 'plant-archive';

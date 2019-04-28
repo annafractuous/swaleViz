@@ -1,0 +1,37 @@
+// CANVAS
+.graph {
+	background: #e8e8e8;
+	
+	#canvas {
+		position: relative;
+		padding: 0 20px;
+	}
+
+	#yAxisLabel,
+	#xAxisLabel {
+		font-family: $input-mono;
+		font-size: rem(14);
+		text-transform: none;
+		position: absolute;
+	}
+
+	#yAxisLabel {
+		top: 57%;
+		left: -5px;
+		transform: rotate(270deg);
+		transform-origin: top left;
+	}
+
+	#xAxisLabel {
+		left: 50%;
+		bottom: 25px;
+		margin-left: -58px;
+	}
+
+	@media (min-width: $tablet) {
+		#canvas {
+			width: 60%;
+			margin-left: 25%;
+		}
+	}
+}

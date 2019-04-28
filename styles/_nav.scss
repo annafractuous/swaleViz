@@ -1,23 +1,26 @@
 .nav {
-    height: 50px;
-    width: 100%;
-    background-color: black;
+  height: 50px;
+  width: 100vw;
+  background-color: black;
+  z-index: 300;
+
+  &__container {
     display: flex;
-    justify-content: center;
-    z-index: 300;
-    position: relative;
+    justify-content: space-around;
+    max-width: 500px;
+    margin: 0 auto;
+  }
 
-    &__item {
-        color: white;
-        font-family: $dinpro-light;
-        text-transform: uppercase;
-        margin: 0 15px;
-        line-height: 50px;
-        cursor: pointer;
+  &__item {
+    color: white;
+    font-family: $dinpro-light;
+    text-transform: uppercase;
+    line-height: 50px;
+    cursor: pointer;
 
-        &:hover,
-        &.selected {
-            color: #A8C7BF;
-        }
+    &:hover,
+    &.selected {
+      color: #A8C7BF;
     }
+  }
 }

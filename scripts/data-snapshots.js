@@ -80,6 +80,6 @@ App.DataSnapshots = {
             ampm = "pm";
         }
 
-        return (month + "/" + day + "/" + year + " " + hour + ":" + minute + ampm);
+        return (month + "/" + day + "/" + year + "<span>" + hour + ":" + minute + ampm + "</span");
     }
 }

@@ -3,7 +3,7 @@ var App = App || {};
 App.Graph = function( p5 ) {
 
     var yAxisLabel = $('#yAxisLabel'),
-        dataTime = $('.sidebar__time'),
+        dataTime = $('.sidebar__info-date'),
         options = ["wind_speed_mph", "temperature_f", "rain_in", "humidity_per", "wind_direction_deg", "pressure_pa", "light_v"],
         // towerUrl = 'http://54.235.200.47/tower',
         towerUrl = 'data/latest-weather-data.json',
@@ -48,7 +48,6 @@ App.Graph = function( p5 ) {
 
 
     p5.draw = function() {
-        p5.background('#f7f7f7');
         p5.noLoop();
     }
 
