@@ -205,32 +205,55 @@ h6 {
     overflow: hidden; }
 
 /* PAGES */
-.graph {
+.data {
   background: #e8e8e8; }
-  .graph #canvas {
+  .data-graph__canvas {
     position: relative;
     padding: 0 20px; }
-  .graph #yAxisLabel,
-  .graph #xAxisLabel {
+  .data-graph__y-label, .data-graph__x-label {
     font-family: "Input Mono Regular", monospace;
     font-size: 0.875rem;
     text-transform: none;
     position: absolute; }
-  .graph #yAxisLabel {
+  .data-graph__y-label {
     top: 57%;
     left: -5px;
     transform: rotate(270deg);
     transform-origin: top left; }
-  .graph #xAxisLabel {
+  .data-graph__x-label {
     left: 50%;
     bottom: 25px;
     margin-left: -58px; }
+  .data-graph__snapshot {
+    color: #373737;
+    position: absolute;
+    top: 25%;
+    left: 88%; }
+    .data-graph__snapshot-label {
+      font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 1rem; }
+    .data-graph__snapshot-current-value, .data-graph__snapshot-range-value {
+      font-family: "Blanch Condensed", monospace;
+      font-weight: normal;
+      font-size: 2.8125rem; }
+    .data-graph__snapshot-current-value, .data-graph__snapshot-current-unit {
+      vertical-align: middle; }
+    .data-graph__snapshot-current-value {
+      font-size: 5rem;
+      margin-bottom: 14px; }
+    .data-graph__snapshot-current-unit {
+      font-family: "DINPro Medium", Arial, sans-serif; }
+    .data-graph__snapshot-range-low, .data-graph__snapshot-range-high {
+      display: inline-block;
+      width: 66px; }
+    .data-graph__snapshot-range-value {
+      display: inline-block; }
   @media (min-width: 768px) {
-    .graph #canvas {
+    .data-graph__canvas {
       width: 60%;
       margin-left: 25%; } }
 
-.sidebar {
+.data-sidebar {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: justify;
@@ -238,38 +261,38 @@ h6 {
   -ms-flex-align: center;
       align-items: center;
   padding: 20px 10px; }
-  .sidebar__container {
+  .data-sidebar__container {
     margin: 0 10%; }
-  .sidebar__icons {
+  .data-sidebar__icons {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: distribute;
         justify-content: space-around; }
-  .sidebar__icon {
+  .data-sidebar__icon {
     -ms-flex-preferred-size: 30%;
         flex-basis: 30%;
     font-size: 1.875rem;
     color: #5f5f5f;
     padding-bottom: 5px; }
-  .sidebar__title, .sidebar__info {
+  .data-sidebar__title, .data-sidebar__info {
     padding: 10px 0; }
-  .sidebar__title {
+  .data-sidebar__title {
     font-family: "DINPro Medium", Arial, sans-serif;
     font-size: 1.875rem;
     padding: 5px 0;
     text-align: center;
     border-top: 1px solid #5f5f5f;
     border-bottom: 1px solid #5f5f5f; }
-  .sidebar__info {
+  .data-sidebar__info {
     font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 0.875rem;
     line-height: 1.3em;
     text-align: center;
     color: #5f5f5f;
     padding: 0; }
-    .sidebar__info-date, .sidebar__info-date span {
+    .data-sidebar__info-date, .data-sidebar__info-date span {
       display: block; }
-  .sidebar__dropdown {
+  .data-sidebar__dropdown {
     background: black;
     border: 0;
     padding: 5px 20px;
@@ -284,9 +307,9 @@ h6 {
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none; }
-    .sidebar__dropdown-container {
+    .data-sidebar__dropdown-container {
       position: relative; }
-    .sidebar__dropdown-icon {
+    .data-sidebar__dropdown-icon {
       position: absolute;
       top: 20px;
       right: 15px;
@@ -294,143 +317,90 @@ h6 {
       font-size: 0.875rem;
       color: white; }
   @media (min-width: 768px) {
-    .sidebar {
+    .data-sidebar {
       padding-top: 20vh;
       width: 25%;
       height: 100%; }
-      .sidebar__icon {
+      .data-sidebar__icon {
         font-size: 3.125rem; }
-      .sidebar__info {
+      .data-sidebar__info {
         border-bottom: 1px solid #5f5f5f; }
-      .sidebar__dropdown {
+      .data-sidebar__dropdown {
         margin-top: 25px; }
-        .sidebar__dropdown-icon {
+        .data-sidebar__dropdown-icon {
           top: 43px; } }
 
 .data-bar {
+  display: -ms-flexbox;
+  display: flex;
   position: absolute;
+  left: 0;
+  top: 75%;
+  width: 100%;
   height: 22%;
   max-height: 200px;
-  width: 100%;
-  left: 0;
-  top: 75%; }
-  .data-bar .data {
-    background-image: url("../assets/images/data-bar-bg.jpg");
-    background-size: cover;
-    height: 100%;
-    display: -ms-flexbox;
-    display: flex;
-    color: #FFF;
-    text-align: left; }
-    .data-bar .data .data-section {
-      position: relative;
-      border-right: 1px solid #9CB8B5;
-      width: 20%;
-      padding: 20px 0 0 40px; }
-      .data-bar .data .data-section h5,
-      .data-bar .data .data-section h6 {
-        position: relative; }
-      .data-bar .data .data-section h5 {
-        font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
-        font-weight: normal;
-        text-transform: none; }
-        .data-bar .data .data-section h5 .data-bar-value {
-          font-family: "Blanch Condensed", monospace;
-          font-weight: normal;
-          font-size: 5.625rem; }
-          .data-bar .data .data-section h5 .data-bar-value .decimal {
-            font-size: 3.125rem;
-            line-height: 65px;
-            position: absolute; }
-      .data-bar .data .data-section .icon {
-        position: absolute;
-        top: 0;
-        right: 0;
-        color: #FFF;
-        opacity: .25;
-        font-size: 8.3125rem; }
-      .data-bar .data .data-section.temperature {
-        width: 29%; }
-        .data-bar .data .data-section.temperature .icon {
-          font-size: 9rem;
-          right: 15%; }
-        .data-bar .data .data-section.temperature .temp-container {
-          display: -ms-flexbox;
-          display: flex;
-          -ms-flex-pack: start;
-              justify-content: flex-start; }
-          .data-bar .data .data-section.temperature .temp-container .fahrenheit {
-            margin-right: 20px; }
-      .data-bar .data .data-section.windspeed {
-        width: 18%; }
-        .data-bar .data .data-section.windspeed .icon {
-          bottom: 0px;
-          top: auto;
-          font-size: 7.8125rem; }
-      .data-bar .data .data-section.pressure {
-        width: 19%; }
-      .data-bar .data .data-section.rainfall {
-        width: 20%; }
-        .data-bar .data .data-section.rainfall h5 {
-          display: inline-block;
-          margin-top: -5px; }
-      .data-bar .data .data-section.location {
-        width: 14%; }
-        .data-bar .data .data-section.location .icon {
-          bottom: 0px;
-          top: auto; }
-        .data-bar .data .data-section.location span {
-          display: block;
-          text-align: right; }
-      .data-bar .data .data-section:last-child {
-        border-right: 0; }
-      .data-bar .data .data-section .data-bar-label {
-        font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
-        line-height: 14px;
-        text-align: left; }
-      .data-bar .data .data-section.location h6 {
+  background-image: url("../assets/images/data-bar-bg.jpg");
+  background-size: cover;
+  color: #FFF;
+  text-align: left; }
+  .data-bar__section {
+    position: relative;
+    width: 20%;
+    padding: 20px 0 0 40px;
+    border-right: 1px solid #9CB8B5; }
+    .data-bar__section.temperature {
+      width: 29%; }
+    .data-bar__section.windspeed {
+      width: 18%; }
+    .data-bar__section.pressure {
+      width: 19%; }
+    .data-bar__section.rainfall {
+      width: 20%; }
+    .data-bar__section.location {
+      width: 14%; }
+      .data-bar__section.location .data-bar__label {
         padding: 17% 17% 0 0;
         line-height: 18px; }
-
-@media (min-width: 768px) {
-  .data-bar .data .data-section.location .label {
-    padding-right: 18%; } }
-.data-snapshot {
-  color: #373737;
-  position: absolute;
-  top: 25%;
-  left: 88%; }
-  .data-snapshot h5 {
-    font-size: 1rem; }
-  .data-snapshot .snapshot-label {
-    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif; }
-  .data-snapshot .snapshot-value {
+        .data-bar__section.location .data-bar__label span {
+          display: block;
+          text-align: right; }
+    .data-bar__section:last-child {
+      border-right: 0; }
+  .data-bar__subsection {
+    display: inline-block; }
+  .data-bar__icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #FFF;
+    opacity: .25;
+    font-size: 8.3125rem; }
+    .data-bar__icon.icon-thermometer {
+      font-size: 9rem;
+      right: 15%; }
+    .data-bar__icon.icon-windspeed {
+      bottom: 0px;
+      top: auto;
+      font-size: 7.8125rem; }
+    .data-bar__icon.icon-location {
+      bottom: 0px;
+      top: auto; }
+  .data-bar__value {
+    position: relative;
     font-family: "Blanch Condensed", monospace;
-    font-weight: normal; }
-  .data-snapshot .current-container {
-    display: block; }
-    .data-snapshot .current-container h1,
-    .data-snapshot .current-container h5 {
-      display: inline-block;
-      vertical-align: middle; }
-    .data-snapshot .current-container .snapshot-label {
-      display: block; }
-    .data-snapshot .current-container .snapshot-value {
-      font-size: 5rem;
-      margin-bottom: 14px; }
-    .data-snapshot .current-container #value-unit {
-      font-family: "DINPro Medium", Arial, sans-serif;
-      font-weight: normal; }
-  .data-snapshot .low-high-container {
-    display: -ms-flexbox;
-    display: flex; }
-    .data-snapshot .low-high-container .low,
-    .data-snapshot .low-high-container .high {
-      width: 66px; }
-    .data-snapshot .low-high-container .snapshot-value {
-      display: inline-block;
-      font-size: 2.8125rem;
-      line-height: 50px; }
+    font-weight: normal;
+    font-size: 5.625rem;
+    line-height: 1; }
+    .data-bar__value .decimal {
+      font-size: 3.125rem;
+      line-height: 65px;
+      position: absolute; }
+  .data-bar__unit {
+    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 1.5rem; }
+  .data-bar__label {
+    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 14px; }
 
 .plant-archive {
   background-color: black;

@@ -1,97 +1,106 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>towerOverTime</title>
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
-    <link href="build/style.css" rel="stylesheet" type="text/css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>towerOverTime</title>
+	<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
+	<link href="build/style.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-    <div class="nav__container">
-        <div class="nav__item" data-page=".plant-archive">Plant Archive</div>
-        <div class="nav__item selected" data-page=".about-us">About Swale</div>
-        <div class="nav__item" data-page=".graph">Sensor Data</div>
-    </div>
-</nav>
+	<!-- NAV -->
+	<nav class="nav">
+		<div class="nav__container">
+			<div class="nav__item" data-page=".plant-archive">Plant Archive</div>
+			<div class="nav__item selected" data-page=".about-us">About Swale</div>
+			<div class="nav__item" data-page=".data">Sensor Data</div>
+		</div>
+	</nav>
 
-<section class="pages">
-    <!-- ABOUT US -->
-    <article class="page about-us in-view">
-        <div class="about-us__media">
-            <img src="assets/images/biome.jpg">
-        </div>
-        <div class="about-us__text">
-            <p class="about-us__text-paragraph">
-                The Archive of the Ecological Future installation (AEF) synthesizes three layers of local information: environmental data, botanical species catalog, and political map of involved community organizations. AEF records and visualizes geolocation, soil moisture, and wind data from our digital sensor network on Swale. Medicinal uses of Swale’s plant and sociopolitical alignments of local community organizations are also layered within the installation. Available on site and online, the installation serves as an archive of these data sets and a networking tool for participating organizations.
-            </p>
-        </div>
-    </article> 
-    <!-- END ABOUT US -->
+	<section class="pages">
+		<!-- ABOUT US -->
+		<article class="page about-us in-view">
+			<div class="about-us__media">
+				<img src="assets/images/biome.jpg">
+			</div>
+			<div class="about-us__text">
+				<p class="about-us__text-paragraph">
+					The Archive of the Ecological Future installation (AEF) synthesizes three layers of local information:
+					environmental data, botanical species catalog, and political map of involved community organizations. AEF
+					records and visualizes geolocation, soil moisture, and wind data from our digital sensor network on Swale.
+					Medicinal uses of Swale’s plant and sociopolitical alignments of local community organizations are also
+					layered within the installation. Available on site and online, the installation serves as an archive of these
+					data sets and a networking tool for participating organizations.
+				</p>
+			</div>
+		</article>
+		<!-- END ABOUT US -->
+
+		<!-- DATA -->
+		<article class="page data">
+			<!-- sidebar -->
+			<div class="data-sidebar">
+				<div class="data-sidebar__header">
+					<div class="data-sidebar__icons">
+						<span class="data-sidebar__icon icon-tower"></span>
+						<span class="data-sidebar__icon icon-plant"></span>
+						<span class="data-sidebar__icon icon-water"></span>
+					</div>
+					<h4 class="data-sidebar__title">Tower</h4>
+				</div>
+
+				<p class="data-sidebar__info">Time of data: <span class="data-sidebar__info-date"></span></p>
+
+				<div class="data-sidebar__dropdown-container">
+					<select class="data-sidebar__dropdown"></select>
+					<span class="data-sidebar__dropdown-icon icon-down"></span>
+				</div>
+			</div>
+
+			<!-- graph -->
+			<div class="data-graph">
+				<div id="canvas" class="data-graph__canvas">
+					<h6 id="yAxisLabel" class="data-graph__y-label"></h6>
+					<h6 id="xAxisLabel" class="data-graph__x-label">minutes passed</h6>
+				</div>
+
+				<div class="data-graph__snapshot">
+					<script id="handlebars-snapshot" type="text/x-handlebars-template"></script>
+				</div>
+			</div>
+
+			<!-- bottom bar -->
+			<div class="data-bar">
+				<script id="handlebars-data-bar" type="text/x-handlebars-template"></script>
+			</div>
+		</article>
+		<!-- END DATA -->
+
+		<!-- PLANT ARCHIVE -->
+		<article class="page plant-archive">
+			<div id="particles-js"></div>
+			<h2 class="plant-archive__header">Archive of the Ecological Future</h2>
+			<div class="plant-archive__scene">
+				<div class="plant-archive__scene-poem"></div>
+				<div class="plant-archive__scene-icon-container">
+					<div class="plant-archive__scene-icon"></div>
+				</div>
+				<div class="plant-archive__scene-spec"></div>
+			</div>
+		</article>
+		<!-- END PLANT ARCHIVE -->
+	</section>
 
 
-
-    <!-- PLANT ARCHIVE -->
-    <article class="page plant-archive">
-        <div id="particles-js"></div>
-        <h2 class="plant-archive__header">Archive of the Ecological Future</h2>
-        <div class="plant-archive__scene">
-            <div class="plant-archive__scene-poem"></div>
-            <div class="plant-archive__scene-icon-container">
-                <div class="plant-archive__scene-icon"></div>
-            </div>
-            <div class="plant-archive__scene-spec"></div>
-        </div>
-    </article> 
-    <!-- END PLANT ARCHIVE -->
-</section>
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="libraries/p5.min.js" type="text/javascript"></script>
-<script src="libraries/p5.dom.min.js" type="text/javascript"></script>
-<script src="libraries/particles.js"></script>
-<script src="libraries/handlebars.min-latest.js" type="text/javascript"></script>
-<script src="build/script.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="libraries/p5.min.js" type="text/javascript"></script>
+	<script src="libraries/p5.dom.min.js" type="text/javascript"></script>
+	<script src="libraries/particles.js"></script>
+	<script src="libraries/handlebars.min-latest.js" type="text/javascript"></script>
+	<script src="build/script.js" type="text/javascript"></script>
 
 </body>
 </html>
-
-<!-- <article class="page data">
-
-    <div class="data-sidebar">
-        <div class="data-sidebar__header">
-            <div class="data-sidebar__icons">
-                <span class="data-sidebar__icon icon-tower"></span>
-                <span class="data-sidebar__icon icon-plant"></span>
-                <span class="data-sidebar__icon icon-water"></span>
-            </div>
-            <h4 class="data-sidebar__title">Tower</h4>
-        </div>
-
-        <p class="data-sidebar__info">Time of data: <span class="data-sidebar__info-date"></span></p>
-
-        <div class="data-sidebar__dropdown-container">
-            <select class="data-sidebar__dropdown"></select>
-            <span class="data-sidebar__dropdown-icon icon-down"></span>
-        </div>
-    </div>
-
-    <div class="data-graph">
-        <div id="canvas" class="data-graph__canvas">
-            <h6 id="yAxisLabel" class="data-graph__canvas-y-label"></h6>
-            <h6 id="xAxisLabel" class="data-graph__canvas-x-label">minutes passed</h6>
-        </div>
-
-        <div class="data-graph__snapshot">
-            <script id="handlebars-snapshot" type="text/x-handlebars-template"></script>
-        </div>
-    </div>
-
-    <div class="data-bar">
-        <script id="handlebars-data-bar" type="text/x-handlebars-template"></script>
-    </div>
-</article> -->
