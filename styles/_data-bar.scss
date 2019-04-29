@@ -1,12 +1,14 @@
 // BOTTOM DATA BAR
+$section-border: 1px solid #9CB8B5;
+
 .data-bar {
 	display: flex;
+	flex-wrap: wrap;
 	position: absolute;
 	left: 0;
-	top: 75%;
+	bottom: 50px;
+	height: 100px;
 	width: 100%;
-	height: 22%;
-	max-height: 200px;
 	background-image: url('../assets/images/data-bar-bg.jpg');
 	background-size: cover;
 	color: #FFF;
@@ -14,30 +16,19 @@
 
 	&__section {
 		position: relative;
-		width: 20%;
-		padding: 20px 0 0 40px;
-		border-right: 1px solid #9CB8B5;
-
-		&.temperature { width: 29%; }
-		&.windspeed { width: 18%; }
-		&.pressure { width: 19%; }
-		&.rainfall { width: 20%; }
-
-		&.location {
-			width: 14%;
-
-			.data-bar__label {
-				padding: 17% 17% 0 0;
-				line-height: 18px;
-
-				span {
-					display: block;
-					text-align: right;
-				}
-			}
-		}
-
+		flex-grow: 1;
+		padding: 10px 5px;
+		border-right: $section-border;
 		&:last-child { border-right: 0; }
+
+		&.rainfall { border-right: none; }
+		
+		&.location {
+			flex-basis: 100%;
+			width: 100%;
+			padding: 5px 5px 5px 30px;
+			border-top: $section-border;
+		}
 	}
 
 	&__subsection { display: inline-block; }
@@ -48,46 +39,115 @@
 		right: 0;
 		color: #FFF;
 		opacity: .25;
-		font-size: rem(133);
+
+		&.icon-thermometer,
+		&.icon-pressure,
+		&.icon-rain {
+			top: 0;
+		}
+
+		&.icon-windspeed,
+		&.icon-location {
+			bottom: 0;
+		}
 
 		&.icon-thermometer {
-			font-size: rem(144);
-			right: 15%;
-		}
-		
-		&.icon-windspeed {
-			bottom: 0px;
-			top: auto;
-			font-size: rem(125);
+			font-size: rem(70);
+			right: 5%;
 		}
 		
 		&.icon-location {
-			bottom: 0px;
-			top: auto;
+			font-size: rem(24);
+			left: 5px;
 		}
+		
+		&.icon-windspeed { font-size: rem(50); }
+		&.icon-pressure { font-size: rem(62); }
+		&.icon-rain { font-size: rem(70); }
 	}
 
 	&__value {
 		position: relative;
 		font-family: $blanch-condensed;
-		font-weight: normal;
-		font-size: rem(90);
+		font-size: rem(36);
 		line-height: 1;
 
 		.decimal {
-			font-size: rem(50);
-			line-height: 65px;
-			position: absolute;
+			position: relative;
+			bottom: 12px;
+			margin-right: -4px;
+			font-size: rem(18);
 		}
 	}
 
-	&__unit {
-		font-family: $dinpro-light;
-		font-size: rem(24);
-	}
-
+	&__unit,
 	&__label {
 		font-family: $dinpro-light;
-		line-height: 14px;
+	}
+	
+	&__label { font-size: rem(12); }
+	&__unit { font-size: rem(11); }
+
+	@media (min-width: $tablet) {
+		bottom: 100px;
+		height: 200px;
+
+		&__section {
+			padding: 20px 0 0 40px;
+
+			&.temperature { width: 29%; }
+			&.windspeed { width: 18%; }
+			&.pressure { width: 19%; }
+			&.rainfall {
+				width: 20%;
+				border-right: $section-border;
+			}
+
+			&.location {
+				width: 14%;
+
+				.data-bar__label {
+					padding: 17% 17% 0 0;
+					line-height: 18px;
+
+					span {
+						display: block;
+						text-align: right;
+					}
+				}
+			}
+		}
+
+		&__subsection { display: inline-block; }
+
+		&__icon {
+			font-size: rem(133);
+
+			&.icon-thermometer {
+				font-size: rem(144);
+				right: 15%;
+			}
+			
+			&.icon-windspeed {
+				font-size: rem(125);
+			}
+		}
+
+		&__value {
+			font-size: rem(90);
+
+			.decimal {
+				font-size: rem(50);
+				line-height: 65px;
+			}
+		}
+
+		&__unit {
+			font-size: rem(24);
+		}
+
+		&__label {
+			line-height: 14px;
+		}
 	}
 }

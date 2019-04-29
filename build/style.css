@@ -333,39 +333,33 @@ h6 {
 .data-bar {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   position: absolute;
   left: 0;
-  top: 75%;
+  bottom: 50px;
+  height: 100px;
   width: 100%;
-  height: 22%;
-  max-height: 200px;
   background-image: url("../assets/images/data-bar-bg.jpg");
   background-size: cover;
   color: #FFF;
   text-align: left; }
   .data-bar__section {
     position: relative;
-    width: 20%;
-    padding: 20px 0 0 40px;
+    -ms-flex-positive: 1;
+        flex-grow: 1;
+    padding: 10px 5px;
     border-right: 1px solid #9CB8B5; }
-    .data-bar__section.temperature {
-      width: 29%; }
-    .data-bar__section.windspeed {
-      width: 18%; }
-    .data-bar__section.pressure {
-      width: 19%; }
-    .data-bar__section.rainfall {
-      width: 20%; }
-    .data-bar__section.location {
-      width: 14%; }
-      .data-bar__section.location .data-bar__label {
-        padding: 17% 17% 0 0;
-        line-height: 18px; }
-        .data-bar__section.location .data-bar__label span {
-          display: block;
-          text-align: right; }
     .data-bar__section:last-child {
       border-right: 0; }
+    .data-bar__section.rainfall {
+      border-right: none; }
+    .data-bar__section.location {
+      -ms-flex-preferred-size: 100%;
+          flex-basis: 100%;
+      width: 100%;
+      padding: 5px 5px 5px 30px;
+      border-top: 1px solid #9CB8B5; }
   .data-bar__subsection {
     display: inline-block; }
   .data-bar__icon {
@@ -373,34 +367,80 @@ h6 {
     top: 0;
     right: 0;
     color: #FFF;
-    opacity: .25;
-    font-size: 8.3125rem; }
+    opacity: .25; }
+    .data-bar__icon.icon-thermometer, .data-bar__icon.icon-pressure, .data-bar__icon.icon-rain {
+      top: 0; }
+    .data-bar__icon.icon-windspeed, .data-bar__icon.icon-location {
+      bottom: 0; }
     .data-bar__icon.icon-thermometer {
-      font-size: 9rem;
-      right: 15%; }
-    .data-bar__icon.icon-windspeed {
-      bottom: 0px;
-      top: auto;
-      font-size: 7.8125rem; }
+      font-size: 4.375rem;
+      right: 5%; }
     .data-bar__icon.icon-location {
-      bottom: 0px;
-      top: auto; }
+      font-size: 1.5rem;
+      left: 5px; }
+    .data-bar__icon.icon-windspeed {
+      font-size: 3.125rem; }
+    .data-bar__icon.icon-pressure {
+      font-size: 3.875rem; }
+    .data-bar__icon.icon-rain {
+      font-size: 4.375rem; }
   .data-bar__value {
     position: relative;
     font-family: "Blanch Condensed", monospace;
-    font-weight: normal;
-    font-size: 5.625rem;
+    font-size: 2.25rem;
     line-height: 1; }
     .data-bar__value .decimal {
-      font-size: 3.125rem;
-      line-height: 65px;
-      position: absolute; }
-  .data-bar__unit {
-    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 1.5rem; }
+      position: relative;
+      bottom: 12px;
+      margin-right: -4px;
+      font-size: 1.125rem; }
+  .data-bar__unit, .data-bar__label {
+    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif; }
   .data-bar__label {
-    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
-    line-height: 14px; }
+    font-size: 0.75rem; }
+  .data-bar__unit {
+    font-size: 0.6875rem; }
+  @media (min-width: 768px) {
+    .data-bar {
+      bottom: 100px;
+      height: 200px; }
+      .data-bar__section {
+        padding: 20px 0 0 40px; }
+        .data-bar__section.temperature {
+          width: 29%; }
+        .data-bar__section.windspeed {
+          width: 18%; }
+        .data-bar__section.pressure {
+          width: 19%; }
+        .data-bar__section.rainfall {
+          width: 20%;
+          border-right: 1px solid #9CB8B5; }
+        .data-bar__section.location {
+          width: 14%; }
+          .data-bar__section.location .data-bar__label {
+            padding: 17% 17% 0 0;
+            line-height: 18px; }
+            .data-bar__section.location .data-bar__label span {
+              display: block;
+              text-align: right; }
+      .data-bar__subsection {
+        display: inline-block; }
+      .data-bar__icon {
+        font-size: 8.3125rem; }
+        .data-bar__icon.icon-thermometer {
+          font-size: 9rem;
+          right: 15%; }
+        .data-bar__icon.icon-windspeed {
+          font-size: 7.8125rem; }
+      .data-bar__value {
+        font-size: 5.625rem; }
+        .data-bar__value .decimal {
+          font-size: 3.125rem;
+          line-height: 65px; }
+      .data-bar__unit {
+        font-size: 1.5rem; }
+      .data-bar__label {
+        line-height: 14px; } }
 
 .plant-archive {
   background-color: black;
