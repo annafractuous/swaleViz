@@ -207,51 +207,62 @@ h6 {
 /* PAGES */
 .data {
   background: #e8e8e8; }
-  .data-graph__canvas {
-    position: relative;
-    padding: 0 20px; }
-  .data-graph__y-label, .data-graph__x-label {
-    font-family: "Input Mono Regular", monospace;
-    font-size: 0.875rem;
-    text-transform: none;
-    position: absolute; }
-  .data-graph__y-label {
-    top: 57%;
-    left: -5px;
-    transform: rotate(270deg);
-    transform-origin: top left; }
-  .data-graph__x-label {
-    left: 50%;
-    bottom: 25px;
-    margin-left: -58px; }
-  .data-graph__snapshot {
-    color: #373737;
-    position: absolute;
-    top: 25%;
-    left: 88%; }
-    .data-graph__snapshot-label {
-      font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
-      font-size: 1rem; }
-    .data-graph__snapshot-current-value, .data-graph__snapshot-range-value {
-      font-family: "Blanch Condensed", monospace;
-      font-weight: normal;
-      font-size: 2.8125rem; }
-    .data-graph__snapshot-current-value, .data-graph__snapshot-current-unit {
-      vertical-align: middle; }
-    .data-graph__snapshot-current-value {
-      font-size: 5rem;
-      margin-bottom: 14px; }
-    .data-graph__snapshot-current-unit {
-      font-family: "DINPro Medium", Arial, sans-serif; }
-    .data-graph__snapshot-range-low, .data-graph__snapshot-range-high {
-      display: inline-block;
-      width: 66px; }
-    .data-graph__snapshot-range-value {
-      display: inline-block; }
-  @media (min-width: 768px) {
+  .data-graph {
+    position: relative; }
     .data-graph__canvas {
-      width: 60%;
-      margin-left: 25%; } }
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 275px);
+      padding: 0 20px; }
+    .data-graph__y-label, .data-graph__x-label {
+      position: absolute;
+      font-family: "Input Mono Regular", monospace;
+      font-size: 0.75rem;
+      text-transform: none;
+      color: #565656; }
+    .data-graph__y-label {
+      top: 50%;
+      left: 6%;
+      transform: rotate(270deg) translateX(-25%);
+      transform-origin: top left; }
+    .data-graph__x-label {
+      left: 50%;
+      bottom: 6%;
+      margin-left: -58px; }
+    .data-graph__snapshot {
+      color: #373737;
+      position: absolute;
+      top: 5%;
+      right: 5%; }
+      .data-graph__snapshot-label {
+        font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 0.75rem; }
+      .data-graph__snapshot-current-value, .data-graph__snapshot-range-value {
+        font-family: "Blanch Condensed", monospace;
+        font-weight: normal; }
+      .data-graph__snapshot-current-value, .data-graph__snapshot-current-unit {
+        vertical-align: middle; }
+      .data-graph__snapshot-current-value {
+        font-size: 2.625rem;
+        margin-bottom: 14px; }
+      .data-graph__snapshot-current-unit {
+        font-family: "DINPro Medium", Arial, sans-serif; }
+      .data-graph__snapshot-range-high, .data-graph__snapshot-range-low, .data-graph__snapshot-range-value {
+        display: inline-block; }
+      .data-graph__snapshot-range-high {
+        margin-right: 12px; }
+      .data-graph__snapshot-range-value {
+        font-size: 1.875rem; }
+    @media (min-width: 768px) {
+      .data-graph__canvas {
+        width: 60%;
+        margin-left: 25%; }
+      .data-graph__snapshot-label {
+        font-size: 1rem; }
+      .data-graph__snapshot-range-value {
+        font-size: 2.8125rem; }
+      .data-graph__snapshot-current-value {
+        font-size: 5rem; } }
 
 .data-sidebar {
   display: -ms-flexbox;
@@ -291,18 +302,21 @@ h6 {
     color: #5f5f5f;
     padding: 0; }
     .data-sidebar__info-date, .data-sidebar__info-date span {
-      display: block; }
+      display: inline-block; }
+    .data-sidebar__info-date span {
+      margin-left: 7px; }
   .data-sidebar__dropdown {
     background: black;
-    border: 0;
-    padding: 5px 20px;
-    width: 100%;
-    height: 36px;
-    font-size: 0.875rem;
-    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
     color: white;
+    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 0.875rem;
     text-decoration: none;
+    height: 36px;
+    width: 100%;
+    min-width: 125px;
+    padding: 5px 20px;
     outline: none;
+    border: none;
     border-radius: 0;
     -webkit-appearance: none;
        -moz-appearance: none;
@@ -364,7 +378,6 @@ h6 {
     display: inline-block; }
   .data-bar__icon {
     position: absolute;
-    top: 0;
     right: 0;
     color: #FFF;
     opacity: .25; }
@@ -508,6 +521,13 @@ h6 {
       .plant-archive__scene-spec .section .content {
         margin-top: 5px;
         font-size: 0.875rem; }
+  @media (min-width: 400px) {
+    .plant-archive__scene-icon-container {
+      width: 400px;
+      height: 400px;
+      margin: 0 calc(50% - 200px); }
+    .plant-archive__scene-icon > div {
+      font-size: 400px; } }
   @media (min-width: 768px) {
     .plant-archive {
       padding: 20px 40px; }

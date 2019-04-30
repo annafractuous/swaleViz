@@ -201,14 +201,15 @@ App.Graph = function (p5) {
 
 	function drawCanvas() {
 		// create graph canvas
-		var canvas = p5.createCanvas(p5.windowWidth * 0.6, p5.windowHeight * 0.75);
-		canvas.parent("canvas");
+		var canvasEl = document.getElementById('canvas');
+		var canvas = p5.createCanvas(canvasEl.clientWidth, canvasEl.clientHeight);
+		canvas.parent(canvasEl);
 
 		// set graph boundaries
-		xMin = p5.width * 0.05;
-		xMax = p5.width * 0.95;
+		xMin = p5.width * 0.1;
+		xMax = p5.width * 0.85;
 		yMin = p5.height * 0.85;
-		yMax = p5.height * 0.15;
+		yMax = p5.height * 0.05;
 
 		// populate dropdown menu for data types
 		dropdown = $('.data-sidebar__dropdown')[0];
@@ -252,7 +253,7 @@ App.Graph = function (p5) {
 			p5.fill(86);
 			p5.strokeWeight(1);
 
-			if (i % 2 == 1) {
+			if (i % 5 == 0) {
 				p5.text(i, x, yMin + 20);
 			}
 		}
@@ -293,7 +294,7 @@ App.Graph = function (p5) {
 		p5.stroke(86, 86, 86, 100);
 		p5.strokeWeight(0.25);
 		p5.line(xMin - 3, y, xMax, y);
-		p5.text(z, xMin - 30, y + 5);
+		p5.text(z, xMin - 15, y + 5);
 	}
 
 	function drawGraph() {

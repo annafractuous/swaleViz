@@ -85,6 +85,17 @@
     }
   }
 
+  @media (min-width: 400px) {
+		&__scene-icon {
+      &-container {
+        width: 400px;
+        height: 400px;
+        margin: 0 calc(50% - 200px);
+      }
+      > div { font-size: 400px; }
+    }
+  }
+
   @media (min-width: $tablet) {
 		padding: 20px 40px;
 

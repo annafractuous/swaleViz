@@ -1,44 +1,49 @@
 .data {
 	background: #e8e8e8;
 
+	// CANVAS
 	&-graph {
-		// CANVAS
+		position: relative;
+
 		&__canvas {
 			position: relative;
+			width: 100%;
+			height: calc(100vh - 275px); 	// nav + aside + bottom bar
 			padding: 0 20px;
 		}
 
 		&__y-label,
 		&__x-label {
-			font-family: $input-mono;
-			font-size: rem(14);
-			text-transform: none;
 			position: absolute;
+			font-family: $input-mono;
+			font-size: rem(12);
+			text-transform: none;
+			color: #565656;
 		}
 
 		&__y-label {
-			top: 57%;
-			left: -5px;
-			transform: rotate(270deg);
+			top: 50%;
+			left: 6%;
+			transform: rotate(270deg) translateX(-25%);
 			transform-origin: top left;
 		}
 
 		&__x-label {
 			left: 50%;
-			bottom: 25px;
+			bottom: 6%;
 			margin-left: -58px;
 		}
-		
+
 		// SNAPSHOT
 		&__snapshot {
 			color: #373737;
 			position: absolute;
-			top: 25%;
-			left: 88%;
+			top: 5%;
+			right: 5%;
 
 			&-label {
 				font-family: $dinpro-light;
-				font-size: rem(16);
+				font-size: rem(12);
 			}
 
 			&-current,
@@ -46,7 +51,6 @@
 				&-value {
 					font-family: $blanch-condensed;
 					font-weight: normal;
-					font-size: rem(45);
 				}
 			}
 
@@ -57,7 +61,7 @@
 				}
 
 				&-value {
-					font-size: rem(80);
+					font-size: rem(42);
 					margin-bottom: 14px;
 				}
 
@@ -65,20 +69,26 @@
 			}
 
 			&-range {
-				&-low, 
-				&-high {
+				&-high,
+				&-low,
+				&-value {
 					display: inline-block;
-					width: 66px;
 				}
 
-				&-value { display: inline-block; }
+				&-high { margin-right: 12px; }
+				&-value { font-size: rem(30); }
 			}
 		}
-	
+
 		@media (min-width: $tablet) {
 			&__canvas {
 				width: 60%;
 				margin-left: 25%;
+			}
+			&__snapshot {
+				&-label { font-size: rem(16); }
+				&-range-value { font-size: rem(45); }
+				&-current-value { font-size: rem(80); }
 			}
 		}
 	}
