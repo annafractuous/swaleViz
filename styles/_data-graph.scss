@@ -81,10 +81,11 @@
 		}
 
 		@media (min-width: $tablet) {
-			&__canvas {
-				width: 60%;
-				margin-left: 25%;
-			}
+    	display: inline-block;
+			vertical-align: top;
+			width: 75%;
+
+			&__canvas { height: calc(100vh - 150px); }
 			&__snapshot {
 				&-label { font-size: rem(16); }
 				&-range-value { font-size: rem(45); }

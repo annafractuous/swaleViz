@@ -77,12 +77,25 @@
 	}
 
 	@media (min-width: $tablet) {
-		padding-top: 20vh;
-		width: 25%;
-		height: 100%;
+    display: inline-flex;
+		flex-direction: column;
+    justify-content: center;
+		width: calc(25% - 20px);
+		height: calc(100% - 100px);
+		padding-left: 5vw;
+		vertical-align: top;
 
+		&__header { width: 100%; }
+		&__title { font-size: rem(42); }
 		&__icon { font-size: rem(50); }
-		&__info { border-bottom: 1px solid #5f5f5f; }
+		&__info {
+			width: 100%;
+			font-size: rem(18);
+			line-height: 1.5;
+			padding: 10px 0;
+			border-bottom: 1px solid #5f5f5f;
+			&-date { display: block; }
+		}
 
 		&__dropdown {
 			margin-top: 25px;

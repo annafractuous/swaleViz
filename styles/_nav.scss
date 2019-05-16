@@ -3,6 +3,7 @@
   width: 100vw;
   background-color: black;
   z-index: 300;
+  position: relative;
 
   &__container {
     display: flex;

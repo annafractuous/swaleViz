@@ -6,7 +6,7 @@ $section-border: 1px solid #9CB8B5;
 	flex-wrap: wrap;
 	position: absolute;
 	left: 0;
-	bottom: 50px;
+	bottom: 0;
 	height: 100px;
 	width: 100%;
 	background-image: url('../assets/images/data-bar-bg.jpg');
@@ -88,26 +88,22 @@ $section-border: 1px solid #9CB8B5;
 	&__unit { font-size: rem(11); }
 
 	@media (min-width: $tablet) {
-		bottom: 100px;
-		height: 200px;
+		height: 100px;
+		bottom: 0;
+		flex-wrap: nowrap;
 
 		&__section {
-			padding: 20px 0 0 40px;
-
-			&.temperature { width: 29%; }
-			&.windspeed { width: 18%; }
-			&.pressure { width: 19%; }
-			&.rainfall {
-				width: 20%;
-				border-right: $section-border;
-			}
-
+			padding: 10px 20px;
+			&.rainfall { border-right: $section-border; }
 			&.location {
-				width: 14%;
+				flex-basis: auto;
+				width: auto;
+				padding: 10px 20px;
 
 				.data-bar__label {
-					padding: 17% 17% 0 0;
 					line-height: 18px;
+					position: relative;
+    			top: 5px;
 
 					span {
 						display: block;
@@ -117,36 +113,26 @@ $section-border: 1px solid #9CB8B5;
 			}
 		}
 
-		&__subsection { display: inline-block; }
-
 		&__icon {
-			font-size: rem(133);
-
-			&.icon-thermometer {
-				font-size: rem(144);
-				right: 15%;
+			&.icon-windspeed { font-size: rem(86); }
+			&.icon-thermometer,
+			&.icon-rain {
+				font-size: rem(95);
 			}
-			
-			&.icon-windspeed {
-				font-size: rem(125);
+			&.icon-pressure,
+			&.icon-location {
+				font-size: rem(90);
 			}
 		}
 
 		&__value {
-			font-size: rem(90);
-
+			font-size: rem(50);
 			.decimal {
-				font-size: rem(50);
-				line-height: 65px;
+				font-size: rem(25);
+				bottom: 17px;
 			}
 		}
 
-		&__unit {
-			font-size: rem(24);
-		}
-
-		&__label {
-			line-height: 14px;
-		}
+		&__unit { font-size: rem(18); }
 	}
 }

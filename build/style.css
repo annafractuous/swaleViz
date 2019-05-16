@@ -174,7 +174,8 @@ h6 {
   height: 50px;
   width: 100vw;
   background-color: black;
-  z-index: 300; }
+  z-index: 300;
+  position: relative; }
   .nav__container {
     display: -ms-flexbox;
     display: flex;
@@ -197,7 +198,7 @@ h6 {
   position: absolute;
   right: -100vw;
   top: 0;
-  margin-top: 50px;
+  padding-top: 50px;
   transition: right ease 1s; }
   .page.in-view {
     right: 0; }
@@ -254,15 +255,18 @@ h6 {
       .data-graph__snapshot-range-value {
         font-size: 1.875rem; }
     @media (min-width: 768px) {
-      .data-graph__canvas {
-        width: 60%;
-        margin-left: 25%; }
-      .data-graph__snapshot-label {
-        font-size: 1rem; }
-      .data-graph__snapshot-range-value {
-        font-size: 2.8125rem; }
-      .data-graph__snapshot-current-value {
-        font-size: 5rem; } }
+      .data-graph {
+        display: inline-block;
+        vertical-align: top;
+        width: 75%; }
+        .data-graph__canvas {
+          height: calc(100vh - 150px); }
+        .data-graph__snapshot-label {
+          font-size: 1rem; }
+        .data-graph__snapshot-range-value {
+          font-size: 2.8125rem; }
+        .data-graph__snapshot-current-value {
+          font-size: 5rem; } }
 
 .data-sidebar {
   display: -ms-flexbox;
@@ -332,13 +336,30 @@ h6 {
       color: white; }
   @media (min-width: 768px) {
     .data-sidebar {
-      padding-top: 20vh;
-      width: 25%;
-      height: 100%; }
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -ms-flex-direction: column;
+          flex-direction: column;
+      -ms-flex-pack: center;
+          justify-content: center;
+      width: calc(25% - 20px);
+      height: calc(100% - 100px);
+      padding-left: 5vw;
+      vertical-align: top; }
+      .data-sidebar__header {
+        width: 100%; }
+      .data-sidebar__title {
+        font-size: 2.625rem; }
       .data-sidebar__icon {
         font-size: 3.125rem; }
       .data-sidebar__info {
+        width: 100%;
+        font-size: 1.125rem;
+        line-height: 1.5;
+        padding: 10px 0;
         border-bottom: 1px solid #5f5f5f; }
+        .data-sidebar__info-date {
+          display: block; }
       .data-sidebar__dropdown {
         margin-top: 25px; }
         .data-sidebar__dropdown-icon {
@@ -351,7 +372,7 @@ h6 {
       flex-wrap: wrap;
   position: absolute;
   left: 0;
-  bottom: 50px;
+  bottom: 0;
   height: 100px;
   width: 100%;
   background-image: url("../assets/images/data-bar-bg.jpg");
@@ -415,45 +436,39 @@ h6 {
     font-size: 0.6875rem; }
   @media (min-width: 768px) {
     .data-bar {
-      bottom: 100px;
-      height: 200px; }
+      height: 100px;
+      bottom: 0;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap; }
       .data-bar__section {
-        padding: 20px 0 0 40px; }
-        .data-bar__section.temperature {
-          width: 29%; }
-        .data-bar__section.windspeed {
-          width: 18%; }
-        .data-bar__section.pressure {
-          width: 19%; }
+        padding: 10px 20px; }
         .data-bar__section.rainfall {
-          width: 20%;
           border-right: 1px solid #9CB8B5; }
         .data-bar__section.location {
-          width: 14%; }
+          -ms-flex-preferred-size: auto;
+              flex-basis: auto;
+          width: auto;
+          padding: 10px 20px; }
           .data-bar__section.location .data-bar__label {
-            padding: 17% 17% 0 0;
-            line-height: 18px; }
+            line-height: 18px;
+            position: relative;
+            top: 5px; }
             .data-bar__section.location .data-bar__label span {
               display: block;
               text-align: right; }
-      .data-bar__subsection {
-        display: inline-block; }
-      .data-bar__icon {
-        font-size: 8.3125rem; }
-        .data-bar__icon.icon-thermometer {
-          font-size: 9rem;
-          right: 15%; }
-        .data-bar__icon.icon-windspeed {
-          font-size: 7.8125rem; }
-      .data-bar__value {
+      .data-bar__icon.icon-windspeed {
+        font-size: 5.375rem; }
+      .data-bar__icon.icon-thermometer, .data-bar__icon.icon-rain {
+        font-size: 5.9375rem; }
+      .data-bar__icon.icon-pressure, .data-bar__icon.icon-location {
         font-size: 5.625rem; }
+      .data-bar__value {
+        font-size: 3.125rem; }
         .data-bar__value .decimal {
-          font-size: 3.125rem;
-          line-height: 65px; }
+          font-size: 1.5625rem;
+          bottom: 17px; }
       .data-bar__unit {
-        font-size: 1.5rem; }
-      .data-bar__label {
-        line-height: 14px; } }
+        font-size: 1.125rem; } }
 
 .plant-archive {
   background-color: black;

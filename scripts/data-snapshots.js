@@ -22,7 +22,6 @@ App.DataSnapshots = {
 
 	updateBottomBar: function (sensorValues) {
 		var bottomBarData = {},
-			currentTime = new Date().toLocaleTimeString(),
 			lastIdx = sensorValues["temperature_f"].length - 1,
 			tempCels = (sensorValues["temperature_f"][lastIdx] - 32) / 1.8;
 				
@@ -31,7 +30,7 @@ App.DataSnapshots = {
 		bottomBarData.windspeed = sensorValues["wind_speed_mph"][lastIdx];
 		bottomBarData.pressure = sensorValues["pressure_pa"][lastIdx];
 		bottomBarData.rainfall = sensorValues["rain_in"][lastIdx];
-		bottomBarData.time = currentTime.replace(currentTime.substring(4, 7), " ");
+		bottomBarData.time = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
 
 		var compiledHTML = this.bottomBarTemplateScript(bottomBarData);
 
