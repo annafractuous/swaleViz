@@ -230,43 +230,51 @@ h6 {
       left: 50%;
       bottom: 6%;
       margin-left: -58px; }
-    .data-graph__snapshot {
-      color: #373737;
-      position: absolute;
-      top: 5%;
-      right: 5%; }
-      .data-graph__snapshot-label {
-        font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
-        font-size: 0.75rem; }
-      .data-graph__snapshot-current-value, .data-graph__snapshot-range-value {
-        font-family: "Blanch Condensed", monospace;
-        font-weight: normal; }
-      .data-graph__snapshot-current-value, .data-graph__snapshot-current-unit {
-        vertical-align: middle; }
-      .data-graph__snapshot-current-value {
-        font-size: 2.625rem;
-        margin-bottom: 14px; }
-      .data-graph__snapshot-current-unit {
-        font-family: "DINPro Medium", Arial, sans-serif; }
-      .data-graph__snapshot-range-high, .data-graph__snapshot-range-low, .data-graph__snapshot-range-value {
-        display: inline-block; }
-      .data-graph__snapshot-range-high {
-        margin-right: 12px; }
-      .data-graph__snapshot-range-value {
-        font-size: 1.875rem; }
     @media (min-width: 768px) {
       .data-graph {
         display: inline-block;
         vertical-align: top;
         width: 75%; }
         .data-graph__canvas {
-          height: calc(100vh - 150px); }
-        .data-graph__snapshot-label {
-          font-size: 1rem; }
-        .data-graph__snapshot-range-value {
-          font-size: 2.8125rem; }
-        .data-graph__snapshot-current-value {
-          font-size: 5rem; } }
+          height: calc(100vh - 150px); } }
+    @media (min-width: 1024px) {
+      .data-graph {
+        width: 67%; } }
+
+.data-snapshot {
+  color: #373737;
+  position: absolute;
+  top: calc(125px + 10%);
+  right: 5%; }
+  .data-snapshot__label {
+    font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 0.75rem; }
+  .data-snapshot__current-value, .data-snapshot__range-value {
+    font-family: "Blanch Condensed", monospace;
+    font-weight: normal; }
+  .data-snapshot__current-value, .data-snapshot__current-unit {
+    vertical-align: middle; }
+  .data-snapshot__current-value {
+    font-size: 2.625rem;
+    margin-bottom: 14px; }
+  .data-snapshot__current-unit {
+    font-family: "DINPro Medium", Arial, sans-serif; }
+  .data-snapshot__range-high, .data-snapshot__range-low, .data-snapshot__range-value {
+    display: inline-block; }
+  .data-snapshot__range-high {
+    margin-right: 12px; }
+  .data-snapshot__range-value {
+    font-size: 1.875rem; }
+  @media (min-width: 768px) {
+    .data-snapshot__label {
+      font-size: 1rem; }
+    .data-snapshot__range-value {
+      font-size: 2.8125rem; }
+    .data-snapshot__current-value {
+      font-size: 5rem; } }
+  @media (min-width: 1024px) {
+    .data-snapshot {
+      top: calc(30% - 90px); } }
 
 .data-sidebar {
   display: -ms-flexbox;
@@ -430,10 +438,12 @@ h6 {
       font-size: 1.125rem; }
   .data-bar__unit, .data-bar__label {
     font-family: "DINPro Light", "Helvetica Neue", Helvetica, sans-serif; }
-  .data-bar__label {
-    font-size: 0.75rem; }
   .data-bar__unit {
     font-size: 0.6875rem; }
+  .data-bar__label {
+    font-size: 0.75rem;
+    line-height: 1;
+    margin-top: 3px; }
   @media (min-width: 768px) {
     .data-bar {
       height: 100px;
@@ -468,11 +478,31 @@ h6 {
           font-size: 1.5625rem;
           bottom: 17px; }
       .data-bar__unit {
-        font-size: 1.125rem; } }
+        font-size: 1.125rem; }
+      .data-bar__label {
+        margin-top: 0; } }
+  @media (min-width: 1024px) {
+    .data-bar {
+      height: 115px; }
+      .data-bar__section.location .data-bar__label {
+        top: 12px; }
+      .data-bar__icon.icon-thermometer {
+        font-size: 6.875rem; }
+      .data-bar__icon.icon-windspeed, .data-bar__icon.icon-pressure, .data-bar__icon.icon-rain, .data-bar__icon.icon-location {
+        font-size: 6.25rem; }
+      .data-bar__value {
+        font-size: 4.6875rem; }
+        .data-bar__value .decimal {
+          font-size: 2.625rem;
+          bottom: 22px; }
+      .data-bar__unit {
+        font-size: 1.375rem; }
+      .data-bar__label {
+        margin-top: -5px; } }
 
 .plant-archive {
   background-color: black;
-  padding: 20px; }
+  padding: 50px 20px 20px; }
   .plant-archive #particles-js {
     height: 100%;
     width: 100%;
@@ -545,7 +575,7 @@ h6 {
       font-size: 400px; } }
   @media (min-width: 768px) {
     .plant-archive {
-      padding: 20px 40px; }
+      padding: 60px 40px 20px; }
       .plant-archive__header {
         font-size: 2.625rem; } }
 
@@ -557,7 +587,7 @@ h6 {
   to {
     transform: rotateY(-360deg); } }
 .about-us {
-  padding: 0 10%;
+  padding: 50px 10% 0;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;

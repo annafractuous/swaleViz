@@ -1,6 +1,6 @@
 .plant-archive {
   background-color: black;
-  padding: 20px;
+  padding: 50px 20px 20px;
 
   #particles-js {
 		height: 100%;
@@ -97,7 +97,7 @@
   }
 
   @media (min-width: $tablet) {
-		padding: 20px 40px;
+		padding: 60px 40px 20px;
 
     &__header { font-size: rem(42); }
   }

@@ -84,8 +84,13 @@ $section-border: 1px solid #9CB8B5;
 		font-family: $dinpro-light;
 	}
 	
-	&__label { font-size: rem(12); }
 	&__unit { font-size: rem(11); }
+
+	&__label {
+		font-size: rem(12);
+		line-height: 1;
+		margin-top: 3px;
+	}
 
 	@media (min-width: $tablet) {
 		height: 100px;
@@ -134,5 +139,32 @@ $section-border: 1px solid #9CB8B5;
 		}
 
 		&__unit { font-size: rem(18); }
+		&__label { margin-top: 0; }
+	}
+
+	@media (min-width: $desktop) {
+		height: 115px;
+
+		&__section.location .data-bar__label { top: 12px; }
+
+		&__icon {
+			&.icon-thermometer { font-size: rem(110); }
+			&.icon-windspeed,
+			&.icon-pressure,
+			&.icon-rain,
+			&.icon-location {
+				font-size: rem(100);
+			}
+		}
+
+		&__value {
+			font-size: rem(75);
+			.decimal {
+				font-size: rem(42);
+    		bottom: 22px;
+			}
+		}
+		&__unit { font-size: rem(22); }
+		&__label { margin-top: -5px; }
 	}
 }
