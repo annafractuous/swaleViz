@@ -1,0 +1,49 @@
+.data {
+	background: #e8e8e8;
+
+	// CANVAS
+	&-graph {
+		position: relative;
+
+		&__canvas {
+			position: relative;
+			width: 100%;
+			height: calc(100vh - 275px); 	// nav + aside + bottom bar
+			padding: 0 20px;
+		}
+
+		&__y-label,
+		&__x-label {
+			position: absolute;
+			font-family: $input-mono;
+			font-size: rem(12);
+			text-transform: none;
+			color: #565656;
+		}
+
+		&__y-label {
+			top: 50%;
+			left: 6%;
+			transform: rotate(270deg) translateX(-25%);
+			transform-origin: top left;
+		}
+
+		&__x-label {
+			left: 50%;
+			bottom: 6%;
+			margin-left: -58px;
+		}
+
+		@media (min-width: $tablet) {
+    	display: inline-block;
+			vertical-align: top;
+			width: 75%;
+
+			&__canvas { height: calc(100vh - 150px); }
+		}
+		
+		@media (min-width: $desktop) {
+			width: 67%;
+		}
+	}
+}

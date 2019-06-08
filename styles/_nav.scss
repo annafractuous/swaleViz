@@ -1,0 +1,27 @@
+.nav {
+  height: 50px;
+  width: 100vw;
+  background-color: black;
+  z-index: 300;
+  position: relative;
+
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  &__item {
+    color: white;
+    font-family: $dinpro-light;
+    text-transform: uppercase;
+    line-height: 50px;
+    cursor: pointer;
+
+    &:hover,
+    &.selected {
+      color: #A8C7BF;
+    }
+  }
+}

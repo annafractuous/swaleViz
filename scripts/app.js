@@ -43,7 +43,7 @@ App = {
             }
         }
         else {
-            if (nextPage === '.graph') {
+            if (nextPage === '.data') {
                 new p5(App.Graph);
                 App.DataSnapshots.init();
             }

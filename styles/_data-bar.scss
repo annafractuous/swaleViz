@@ -1,150 +1,170 @@
 // BOTTOM DATA BAR
+$section-border: 1px solid #9CB8B5;
+
 .data-bar {
+	display: flex;
+	flex-wrap: wrap;
 	position: absolute;
-	height: 22%;
-	max-height: 200px;
-	width: 100%;
 	left: 0;
-	top: 75%;
+	bottom: 0;
+	height: 100px;
+	width: 100%;
+	background-image: url('../assets/images/data-bar-bg.jpg');
+	background-size: cover;
+	color: #FFF;
+	text-align: left;
 
-	.header {
-		background-image: url('../assets/images/data-bar-header-bg.jpg');
-		background-size: cover;
-		background-position: left bottom;
-		height: 20px;
-		padding-left: 50px;
+	&__section {
+		position: relative;
+		flex-grow: 1;
+		padding: 10px 5px;
+		border-right: $section-border;
+		&:last-child { border-right: 0; }
 
-		h6 {
-			font-family: 'DINPro Regular';
-			color: #FDFDFD;
-			font-size: rem(10);
-			line-height: 20px;
-			vertical-align: middle;
+		&.rainfall { border-right: none; }
+		
+		&.location {
+			flex-basis: 100%;
+			width: 100%;
+			padding: 5px 5px 5px 30px;
+			border-top: $section-border;
 		}
 	}
 
-	.data {
-		background-image: url('../assets/images/data-bar-bg.jpg');
-		background-size: cover;
-		height: 100%;
-		display: flex;
+	&__subsection { display: inline-block; }
+
+	&__icon {
+		position: absolute;
+		right: 0;
 		color: #FFF;
-		text-align: left;
+		opacity: .25;
 
-		.data-section {
+		&.icon-thermometer,
+		&.icon-pressure,
+		&.icon-rain {
+			top: 0;
+		}
+
+		&.icon-windspeed,
+		&.icon-location {
+			bottom: 0;
+		}
+
+		&.icon-thermometer {
+			font-size: rem(70);
+			right: 5%;
+		}
+		
+		&.icon-location {
+			font-size: rem(24);
+			left: 5px;
+		}
+		
+		&.icon-windspeed { font-size: rem(50); }
+		&.icon-pressure { font-size: rem(62); }
+		&.icon-rain { font-size: rem(70); }
+	}
+
+	&__value {
+		position: relative;
+		font-family: $blanch-condensed;
+		font-size: rem(36);
+		line-height: 1;
+
+		.decimal {
 			position: relative;
-			border-right: 1px solid #9CB8B5;
-			width: 20%;
-			padding: 20px 0 0 40px;
-
-			h5, 
-			h6 {
-				position: relative;
-			}
-
-			.icon {
-				position: absolute;
-				top: 0;
-				right: 0;
-				color: #FFF;
-				opacity: .25;
-				font-size: rem(133);
-			}
-
-			&.temperature {
-				width: 29%;
-
-				.icon {
-					font-size: rem(144);
-					right: 15%;
-				}
-
-				.temp-container {
-					display: flex;
-					justify-content: flex-start;
-
-					.fahrenheit {
-						margin-right: 20px;
-					}
-				}
-			}
-
-			&.windspeed {
-				width: 18%;
-
-				.icon {
-					bottom: 0px;
-					top: auto;
-					font-size: rem(125);
-				}
-			}
-
-			&.pressure {
-				width: 19%;
-			}
-
-			&.rainfall {
-				width: 20%;
-
-				h5 {
-					display: inline-block;
-					margin-top: -5px;
-				}
-			}
-
-			&.location {
-				width: 14%;
-
-				.icon {
-					bottom: 0px;
-					top: auto;
-				}
-
-				span {
-					display: block;
-					text-align: right;
-				}
-			}
-
-			&:last-child {
-				border-right: 0;
-			}
-
-			h5 {
-				font-family: 'Input Sans Light';
-				font-weight: normal;
-				text-transform: none;
-
-				.data-bar-value {
-					font-family: 'Blanch Condensed';
-					font-weight: normal;
-					font-size: rem(90);
-
-					.decimal {
-						font-size: rem(50);
-						line-height: 65px;
-						position: absolute;
-					}
-				}
-			}
-
-			.data-bar-label {
-				font-family: 'DINPro Light';
-				line-height: 14px;
-				text-align: left;
-			}
-
-			&.location h6 {
-				padding: 17% 17% 0 0;
-				line-height: 18px;
-			}
+			bottom: 12px;
+			margin-right: -4px;
+			font-size: rem(18);
 		}
 	}
-}
 
-// media queries
-@media screen and (min-width: $tablet) {
-	.data-bar .data .data-section.location .label {
-		padding-right: 18%;
+	&__unit,
+	&__label {
+		font-family: $dinpro-light;
+	}
+	
+	&__unit { font-size: rem(11); }
+
+	&__label {
+		font-size: rem(12);
+		line-height: 1;
+		margin-top: 3px;
+	}
+
+	@media (min-width: $tablet) {
+		height: 100px;
+		bottom: 0;
+		flex-wrap: nowrap;
+
+		&__section {
+			padding: 10px 20px;
+			&.rainfall { border-right: $section-border; }
+			&.location {
+				flex-basis: auto;
+				width: auto;
+				padding: 10px 20px;
+
+				.data-bar__label {
+					line-height: 18px;
+					position: relative;
+    			top: 5px;
+
+					span {
+						display: block;
+						text-align: right;
+					}
+				}
+			}
+		}
+
+		&__icon {
+			&.icon-windspeed { font-size: rem(86); }
+			&.icon-thermometer,
+			&.icon-rain {
+				font-size: rem(95);
+			}
+			&.icon-pressure,
+			&.icon-location {
+				font-size: rem(90);
+			}
+		}
+
+		&__value {
+			font-size: rem(50);
+			.decimal {
+				font-size: rem(25);
+				bottom: 17px;
+			}
+		}
+
+		&__unit { font-size: rem(18); }
+		&__label { margin-top: 0; }
+	}
+
+	@media (min-width: $desktop) {
+		height: 115px;
+
+		&__section.location .data-bar__label { top: 12px; }
+
+		&__icon {
+			&.icon-thermometer { font-size: rem(110); }
+			&.icon-windspeed,
+			&.icon-pressure,
+			&.icon-rain,
+			&.icon-location {
+				font-size: rem(100);
+			}
+		}
+
+		&__value {
+			font-size: rem(75);
+			.decimal {
+				font-size: rem(42);
+    		bottom: 22px;
+			}
+		}
+		&__unit { font-size: rem(22); }
+		&__label { margin-top: -5px; }
 	}
 }

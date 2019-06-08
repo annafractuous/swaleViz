@@ -22,20 +22,20 @@
   },
   "homepage": "https://github.com/annafractuous/swaleViz#readme",
   "dependencies": {
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.1.2"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-clean-css": "^3.4.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-rename": "^1.2.2",
+    "gulp-babel": "^6.1.3",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.4.0",
     "gulp-scss": "^1.4.0",
     "gulp-uglify": "^2.1.2",
     "gulp-webserver": "^0.9.1",
-    "jshint": "^2.9.3",
-    "pump": "^1.0.2"
+    "jshint": "^2.10.2",
+    "pump": "^1.0.3"
   }
 }

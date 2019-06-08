@@ -1,25 +1,18 @@
-/* FUNCTIONS & MIXINS */
+/* COMMON STYLES */
 
-@function rem($px) {
-	@return #{$px/16}rem;
-}
-
-/* BASIC STYLES */
-
-@import 'normalize';
-@import 'media-queries';
-
-/* TYPOGRAPHY */
-
-@import 'icons';
+@import 'variables';
+@import 'mixins';
+@import 'base';
 @import 'typography';
+@import 'icons';
+@import 'nav';
+@import 'page';
 
-/* MAIN STYLES */
+/* PAGES */
 
-@import 'pages';
-@import 'canvas';
-@import 'data-bar';
+@import 'data-graph';
 @import 'data-snapshot';
-@import 'data-info';
+@import 'data-sidebar';
+@import 'data-bar';
 @import 'plant-archive';
 @import 'about-us';
