@@ -33,15 +33,9 @@ App.Graph = function (p5) {
 	}
 
 	p5.setup = function () {
-		p5.loadJSON(towerUrl, function (towerData) {
-				update(towerData);
-				drawChart();
-				listenForUpdates();
-			},
-			function (errorMsg) {
-				console.log(errorMsg);
-			}
-		);
+		update(window.towerData);
+		drawChart();
+		listenForUpdates();
 	}
 
 	p5.draw = function () {

@@ -24,7 +24,6 @@ App.PlantArchive = {
 	},
 
 	getParticleData: function () {
-		var _this = this;
 		$.ajax({
 			url: 'data/particles.json',
 			dataType: 'json',

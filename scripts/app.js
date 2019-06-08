@@ -11,6 +11,7 @@ App = {
         this.archiveInitiated = false;
         
         this.addNavEventListeners();
+        this.loadTowerData();
     },
 
     addNavEventListeners: function() {
@@ -25,7 +26,7 @@ App = {
         }.bind(this));
     },
 
-    setActivePage(navItem, nextPage) {
+    setActivePage: function(navItem, nextPage) {
         $('.selected').removeClass('selected');
         $('.in-view').removeClass('in-view');
         $(navItem).addClass('selected');
@@ -33,7 +34,7 @@ App = {
         this.activePage = nextPage;
     },
 
-    initPage(nextPage) {
+    initPage: function(nextPage) {
         if (nextPage === '.plant-archive') {
             if (!this.archiveInitiated) {
                 App.PlantArchive.init();
@@ -48,6 +49,19 @@ App = {
                 App.DataSnapshots.init();
             }
         }
+    },
+
+    loadTowerData: function() {
+        $.ajax({
+			url: 'data/latest-weather-data.json',
+			dataType: 'json',
+			success: function (data) {
+				window.towerData = data;
+			},
+			error: function (errorMsg) {
+				console.log(errorMsg);
+			}
+		});
     }
 }
 

@@ -11,6 +11,7 @@ App = {
         this.archiveInitiated = false;
         
         this.addNavEventListeners();
+        this.loadTowerData();
     },
 
     addNavEventListeners: function() {
@@ -25,7 +26,7 @@ App = {
         }.bind(this));
     },
 
-    setActivePage(navItem, nextPage) {
+    setActivePage: function(navItem, nextPage) {
         $('.selected').removeClass('selected');
         $('.in-view').removeClass('in-view');
         $(navItem).addClass('selected');
@@ -33,7 +34,7 @@ App = {
         this.activePage = nextPage;
     },
 
-    initPage(nextPage) {
+    initPage: function(nextPage) {
         if (nextPage === '.plant-archive') {
             if (!this.archiveInitiated) {
                 App.PlantArchive.init();
@@ -48,6 +49,19 @@ App = {
                 App.DataSnapshots.init();
             }
         }
+    },
+
+    loadTowerData: function() {
+        $.ajax({
+			url: 'data/latest-weather-data.json',
+			dataType: 'json',
+			success: function (data) {
+				window.towerData = data;
+			},
+			error: function (errorMsg) {
+				console.log(errorMsg);
+			}
+		});
     }
 }
 
@@ -59,8 +73,56 @@ var App = App || {};
 
 App.CustomParticles = {
 	init: function() {
-		// Ari, put yer jazz here
-		console.log(pJSDom);
+		this.particles = pJSDom[0].pJS.particles;
+		
+		this.organizeData();
+		this.mapDataToParticles();
+	},
+
+	organizeData: function() {
+		this.tempData = window.towerData.results.map(function(minute) {
+			return minute.temperature_f;
+		});
+		this.humidityData = window.towerData.results.map(function(minute) {
+			return minute.humidity_per;
+		});
+		this.windData = window.towerData.results.map(function(minute) {
+			return minute.wind_speed_mph;
+		});
+	},
+
+	mapDataToParticles: function() {
+		var tempCounter = 0;
+		var blue = 0;
+		var red = 0;
+		var speed = 0;
+		var size = 0;
+
+		setInterval(function(){
+			if (tempCounter < this.tempData.length) {
+				tempCounter++;
+				red = this.convertRange( this.tempData[tempCounter], [ 50, 110 ], [ 0, 255 ] );
+				blue = 250 - red;
+				size = this.convertRange( this.humidityData[tempCounter], [ 0, 100 ], [ 0, 7.5 ] );
+				speed = this.convertRange( this.windData[tempCounter], [ 0, 11 ], [ 0, 10 ] );
+			} else {
+				tempCounter = 0;
+				blue = 0;
+				red = 0;
+				speed = 0;
+				size = 0;
+			}
+
+			this.particles.array.forEach(function(p) { p.radius = size; });
+			this.particles.move.speed = speed;
+			this.particles.color.rgb = {r: red, g: 0, b: blue};
+			if (tempCounter == 1) console.log(this.particles.array[1]);
+			this.particles.line_linked.color_rgb_line = {r: 100, g: 100, b: 100};
+		}.bind(this), 300)
+	},
+
+	convertRange: function(value, r1, r2) {
+		return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
 	}
 }
 var App = App || {};
@@ -183,15 +245,9 @@ App.Graph = function (p5) {
 	}
 
 	p5.setup = function () {
-		p5.loadJSON(towerUrl, function (towerData) {
-				update(towerData);
-				drawChart();
-				listenForUpdates();
-			},
-			function (errorMsg) {
-				console.log(errorMsg);
-			}
-		);
+		update(window.towerData);
+		drawChart();
+		listenForUpdates();
 	}
 
 	p5.draw = function () {
@@ -433,7 +489,6 @@ App.PlantArchive = {
 	},
 
 	getParticleData: function () {
-		var _this = this;
 		$.ajax({
 			url: 'data/particles.json',
 			dataType: 'json',
