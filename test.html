@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<head>
+    <link href="build/style.css" rel="stylesheet" type="text/css">
+</head>>
+<body>
+	<!-- NAV -->
+	<nav class="nav">
+    <div class="nav__container">
+      <div class="nav__item" data-page=".plant-archive">Plant Archive</div>
+      <div class="nav__item selected" data-page=".about-us">About Swale</div>
+      <div class="nav__item" data-page=".data">Sensor Data</div>
+    </div>
+  </nav>
+  <div class="plant-archive_menu">
+    <h2 class="plant-archive__header">Sensor Data</h2>
+  </div>
+  <button>Temperature</button>
+  <button>Humidity</button>
+  <button>Wind</button>
+  <div id="heatmap"></div>
+</body>
+<!-- Load color palettes -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<style type="text/css">
+  .chartTitle {
+    color: #26b72b;
+  }
+
+  body{
+    background-color:black;
+  }
+</style>
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 100, right: 50, bottom: 140, left: 50},
+  width = window.innerWidth - margin.left - margin.right,
+  height = window.innerHeight - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#heatmap")
+.append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+.append("g")
+  .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+var parseTime = d3.timeParse("%Y%m%d%H");
+var formatTime = d3.timeFormat("%j");
+var xTickParse = d3.timeFormat("%d")
+var yParse = d3.timeFormat("%H")
+
+//Read the data
+d3.json("./dummyData2.json", function(data) {
+
+  data.forEach(function(d) {
+    console.log(d);
+      // d.days = formatTime(parseTime(d.date));
+      d.date = parseTime(d.date);
+      // console.log(+formatTime(d.date));
+      d.temperature_f = +d.temperature_f;
+      d.humidity_per = +d.humidity_per;
+  });
+  
+  // Build X scales and axis:
+  var x = d3.scaleLinear()
+  .range([0, width])
+  .domain(d3.extent(data, function(d) { return +formatTime(d.date); }));
+  // .domain([d3.max(data, function(d) { return xparse(d.date); }), d3.max(data, function(d) { return xparse(d.date); })]);
+
+
+  // Build Y scales and axis:
+  var y = d3.scaleTime()
+  .range([height, 0])
+  .domain(d3.extent(data, function(d) { return +yParse(d.date); }));
+
+  // Build color scale
+  var myColor = d3.scaleSequential()
+    .interpolator(d3.interpolateCubehelixDefault)
+    // .interpolateRgb("red", "blue")(0.5)
+    .domain([20,170])
+
+  // create a tooltip
+  var tooltip = d3.select("#heatmap")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+  var mouseover = function(d) {
+    console.log(d.date, d.temperature_f, d.humidity_per);
+    tooltip
+      .style("opacity", 1)
+    d3.select(this)
+      .attr("r", 15)
+      .style("opacity", 1)
+  }
+  var mousemove = function(d) {
+    tooltip
+      .html("The exact value of<br>this cell is: " + d.value)
+      .style("left", (d3.mouse(this)[0]+70) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")
+  }
+  var mouseleave = function(d) {
+    tooltip
+      .style("opacity", 0)
+    d3.select(this)
+      .attr("r", (d.temperature_f)*((d.temperature_f)/2)/700) 
+      .style("opacity", 0.8)
+  }
+
+  // add the squares
+  svg.selectAll()
+    .data(data, function(d) {return d.group+':'+d.variable;})
+    .enter()
+    .append('circle')
+      .attr('cx', function(d) { return x(+formatTime(d.date))})
+      .attr('cy', function(d) { return y(+yParse(d.date))})
+      .attr('r', function(d) { return (d.temperature_f)*((d.temperature_f)/2)/700} )
+      // .attr("width", x.bandwidth() )
+      // .attr("height", y.bandwidth() )
+      .style("fill", function(d) { return myColor(d.temperature_f)} )
+      .style("stroke-width", 6)
+      .style("stroke", "none")
+      .style("opacity", 0.8)
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
+});
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+</script>
