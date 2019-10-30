@@ -2,28 +2,28 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/colorbrewer.v1.min.js"></script>
 
 <head>
     <link href="build/style.css" rel="stylesheet" type="text/css">
 </head>>
 <body>
-	<!-- NAV -->
-	<nav class="nav">
+
+	<nav class="nav sensors">
     <div class="nav__container">
       <div class="nav__item" data-page=".plant-archive">Plant Archive</div>
-      <div class="nav__item selected" data-page=".about-us">About Swale</div>
-      <div class="nav__item" data-page=".data">Sensor Data</div>
+      <div class="nav__item" data-page=".about-us">About Swale</div>
+      <div class="nav__item selected " data-page=".data">Sensor Data</div>
     </div>
   </nav>
   <div class="plant-archive_menu">
     <h2 class="plant-archive__header">Sensor Data</h2>
   </div>
-  <button>Temperature</button>
-  <button>Humidity</button>
-  <button>Wind</button>
+  <button onclick="changeColor('temperature_f')">Temperature</button>
+  <button onclick="changeColor('humidity_per')">Humidity</button>
+  <!-- <button onclick="changeColor('wind')>Wind</button> -->
   <div id="heatmap"></div>
 </body>
-<!-- Load color palettes -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <style type="text/css">
   .chartTitle {
@@ -31,62 +31,63 @@
   }
 
   body{
-    background-color:black;
+    background-color: #343442
   }
 </style>
 
 <script>
 
-// set the dimensions and margins of the graph
-var margin = {top: 100, right: 50, bottom: 140, left: 50},
+var margin = {top: 125, right: 50, bottom: 300, left: 50},
   width = window.innerWidth - margin.left - margin.right,
   height = window.innerHeight - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
 var svg = d3.select("#heatmap")
 .append("svg")
-  .attr("width", width + margin.left + margin.right)
+  .attr("width", width )
   .attr("height", height + margin.top + margin.bottom)
 .append("g")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-var parseTime = d3.timeParse("%Y%m%d%H");
+var parseTime = d3.timeParse("%Y%m%d%H"); //%b %e
 var formatTime = d3.timeFormat("%j");
+var xLabelFormat = d3.timeFormat("%b %e");
+var xLabelParse = d3.timeParse("%b %e");
 var xTickParse = d3.timeFormat("%d")
 var yParse = d3.timeFormat("%H")
 
 //Read the data
-d3.json("./dummyData2.json", function(data) {
-
+d3.json("./dummyData3.json", function(data) {
   data.forEach(function(d) {
-    console.log(d);
+    
       // d.days = formatTime(parseTime(d.date));
-      d.date = parseTime(d.date);
+      d.date = parseTime(d[0]);
       // console.log(+formatTime(d.date));
-      d.temperature_f = +d.temperature_f;
-      d.humidity_per = +d.humidity_per;
+      d.sensor = d[1];
+      d.temperature_f = +d[1].temperature_f;
+      d.humidity_per = +d[1].humidity_per;
+      // console.log(d.sensor, d.temperature_f);
   });
-  
-  // Build X scales and axis:
-  var x = d3.scaleLinear()
-  .range([0, width])
-  .domain(d3.extent(data, function(d) { return +formatTime(d.date); }));
+
+  var myColor = d3.scaleLinear()  //use scaleLinear later, after finding appropriate colors 
+    // .domain(d3.extent(data, function(d) { return (d.temperature_f); }))
+    .domain(d3.extent(data, function(d) { return (d.temperature_f); }))
+    .range([
+      "#382e73",
+      "#b9b5ff"
+    ] );
+
+  var x = d3.scaleTime()
+  .range([0 + margin.left, width - margin.right - 5])
+  .domain([203, 305]);
   // .domain([d3.max(data, function(d) { return xparse(d.date); }), d3.max(data, function(d) { return xparse(d.date); })]);
 
-
-  // Build Y scales and axis:
   var y = d3.scaleTime()
-  .range([height, 0])
-  .domain(d3.extent(data, function(d) { return +yParse(d.date); }));
+  .range([0, height])
+  .domain(
+    d3.extent(data, function(d) { return +yParse(d.date); })
+    );
 
-  // Build color scale
-  var myColor = d3.scaleSequential()
-    .interpolator(d3.interpolateCubehelixDefault)
-    // .interpolateRgb("red", "blue")(0.5)
-    .domain([20,170])
-
-  // create a tooltip
   var tooltip = d3.select("#heatmap")
     .append("div")
     .style("opacity", 0)
@@ -97,9 +98,8 @@ d3.json("./dummyData2.json", function(data) {
     .style("border-radius", "5px")
     .style("padding", "5px")
 
-  // Three function that change the tooltip when user hover / move / leave a cell
   var mouseover = function(d) {
-    console.log(d.date, d.temperature_f, d.humidity_per);
+    console.log(x(+formatTime(d.date)));
     tooltip
       .style("opacity", 1)
     d3.select(this)
@@ -116,31 +116,54 @@ d3.json("./dummyData2.json", function(data) {
     tooltip
       .style("opacity", 0)
     d3.select(this)
-      .attr("r", (d.temperature_f)*((d.temperature_f)/2)/700) 
+      // .attr("r", (d.temperature_f)*((d.temperature_f)/2)/700) 
+      .attr("r", 5) 
       .style("opacity", 0.8)
   }
 
-  // add the squares
   svg.selectAll()
-    .data(data, function(d) {return d.group+':'+d.variable;})
+    .data(data)
     .enter()
     .append('circle')
       .attr('cx', function(d) { return x(+formatTime(d.date))})
       .attr('cy', function(d) { return y(+yParse(d.date))})
-      .attr('r', function(d) { return (d.temperature_f)*((d.temperature_f)/2)/700} )
+      // .attr('r', function(d) { return (d.temperature_f)*((d.temperature_f)/2)/500} )
+      .attr('r', 5 )
       // .attr("width", x.bandwidth() )
       // .attr("height", y.bandwidth() )
       .style("fill", function(d) { return myColor(d.temperature_f)} )
       .style("stroke-width", 6)
       .style("stroke", "none")
-      .style("opacity", 0.8)
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
-});
 
-function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
+    svg.append("g")
+    .attr("class", "x-axis")
+    .attr("transform", "translate(0," + -20 + ")")
+    .call(d3.axisTop(x)
+      // .tickFormat(d3.timeFormat("%j"))
+    ); 
+
+    // svg.append("g")
+    // .attr("class", "y-axis")
+    // // .attr("transform", "translate(0," + -20 + ")")
+    // .call(d3.axisLeft(y)
+    //   // .tickFormat(d3.timeFormat("%H"))
+    // ); 
+
+    function myColor (data, variable){
+  return d3.scaleLinear()  //use scaleLinear later, after finding appropriate colors 
+    // .domain(d3.extent(data, function(d) { return (d.temperature_f); }))
+    .domain(d3.extent(data, function(d) { return (d[variable]); }))
+    .range([
+      "#382e73",
+      "#b9b5ff"
+    ] );
 }
+
+
+
+});
 
 </script>

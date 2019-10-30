@@ -27,30 +27,32 @@ var finalArray = [];
 
 //pulling chronological data
 rootRef.once('value').then(function(snapshot){
+  // console.log(snapshot.val().keys());
     var obj = snapshot.val();
     
     values = Object.values(obj);
     keys = Object.keys(obj);
     entries = Object.entries(obj);
     
-
     // for (var [time,obj] of entries){
-    //   time = time.substring(0,10);
+    //   time = time.substring(0,11);
+    //   console.log(time);
     // }
+    // console.log(entries[0]);
+    keys.forEach(function(element) {
+      element = element.substring(0,10);
+      console.log(element);
+    });
 
-    // keys.forEach(function(element) {
-    //   element = element.substring(0,10);
-    // });
+    // removeMinutes(entries, onlyUnique);
 
-    removeMinutes(entries, onlyUnique);
-
-    setTimeout(function(){ 
+    // setTimeout(function(){ 
   
-      fs.writeFile("./dummyData2.json", JSON.stringify(finalArray), function(err) {
-              console.log("done!");
-          })
+    //   fs.writeFile("./dummyData3.json", JSON.stringify(finalArray), function(err) {
+    //           console.log("done!");
+    //       })
     
-           },5000);
+    //        },50000);
     
 });
 

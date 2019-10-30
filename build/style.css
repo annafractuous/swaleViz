@@ -170,6 +170,23 @@ h6 {
 .icon-down::before {
   content: "\e91d"; }
 
+.x-axis path,
+.x-axis .tick line,
+.y-axis path,
+.y-axis .tick line
+{
+  stroke: #7e7e8f;
+  
+}  
+
+.x-axis .tick text,
+.y-axis .tick text{
+  fill:#7e7e8f;
+} 
+
+.sensors{
+  background-color: #343442 !important;
+}
 .nav {
   height: 50px;
   width: 100vw;
