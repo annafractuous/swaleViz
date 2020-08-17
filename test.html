@@ -17,7 +17,7 @@
     </div>
   </nav>
   <div class="plant-archive_menu">
-    <h2 class="plant-archive__header">Sensor Data</h2>
+    <h2 class="plant-archive__header">Summary Sensor Data</h2>
   </div>
   <button onclick="changeColor('temperature_f')">Temperature</button>
   <button onclick="changeColor('humidity_per')">Humidity</button>
@@ -26,117 +26,159 @@
 </body>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <style type="text/css">
-  .chartTitle {
-    color: #26b72b;
+  .chart {
+    position: relative;
+    left: 50%; 
   }
 
   body{
-    background-color: #343442
+    background-color: #405E8B;
+  }
+
+  #heatmap{
+     float: right;
+    position: relative;
+    left: -50%;
   }
 </style>
 
 <script>
 
-var margin = {top: 125, right: 50, bottom: 300, left: 50},
-  width = window.innerWidth - margin.left - margin.right,
-  height = window.innerHeight - margin.top - margin.bottom;
+var margin = {top: 130, right: 0, bottom: 0, left: 0},
+  width = 1150,
+  height = 400;
 
 var svg = d3.select("#heatmap")
 .append("svg")
   .attr("width", width )
-  .attr("height", height + margin.top + margin.bottom)
-.append("g")
-  .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+  .attr("height", height + 100)
+  .attr("class", "chart");
+// .append("g")
+//   .attr("transform",
+//         "translate(" + margin.left + "," + margin.top + ")");
 
 var parseTime = d3.timeParse("%Y%m%d%H"); //%b %e
 var formatTime = d3.timeFormat("%j");
+var formatDay = d3.timeFormat("%a %d");
 var xLabelFormat = d3.timeFormat("%b %e");
 var xLabelParse = d3.timeParse("%b %e");
 var xTickParse = d3.timeFormat("%d")
-var yParse = d3.timeFormat("%H")
+var formatHour = d3.timeFormat("%H")
+
+var x = d3.scaleTime()
+    .domain([203, 305])
+    .range([0 + margin.left, width - margin.right]);
+
+var y = d3.scaleTime()
+  .domain([0, 23])
+  .range([0 + margin.top, height]);
+
+var tooltip = d3.select("#heatmap")
+  .append("div")
+  .style("opacity", 0)
+  .attr("class", "tooltip")
+  .style("background-color", "white")
+  .style("border", "solid")
+  .style("border-width", "2px")
+  .style("border-radius", "5px")
+  .style("padding", "5px");
+
+var mouseover = function(d) {
+  tooltip
+    .style("opacity", 1)
+  d3.select(this)
+    .attr("r", 8)
+    .style("opacity", 1);
+}
+
+var mousemove = function(d) {
+  tooltip
+    .html("The exact value of<br>this cell is: " + d.hour + " " + d.day+ " " + d.date)
+    .style("left", (d3.mouse(this)[0]+70) + "px")
+    .style("top", (d3.mouse(this)[1]) + "px");
+}
+
+var mouseleave = function(d) {
+  tooltip
+    .style("opacity", 0)
+  d3.select(this)
+    // .attr("r", (d.temperature_f)*((d.temperature_f)/2)/700) 
+    .attr("r", 5) 
+    .style("opacity", 1);
+}
+
+d3.json("./allDates.json", function(datesData) {
+  datesData.forEach(function(d) {
+      d.date = parseTime(d[0]);
+      d.day = formatTime(parseTime(d[0]));
+      d.hour = formatHour(parseTime(d[0]));
+  });
+
+  
+
+  svg.selectAll()
+    .data(datesData)
+    .enter()
+    .append('circle')
+    .attr('cx', function(d) { return x(d.day)})
+    .attr('cy', function(d) { return y(d.hour)})
+    // .attr('r', function(d) { return (d.temperature_f)*((d.temperature_f)/2)/500} )
+    .attr('r', 4 )
+    // .attr("width", x.bandwidth() )
+    // .attr("height", y.bandwidth() )
+    .style("fill", "none" )
+    .style("stroke-width", 1)
+    .style("stroke", "#6584B1")
+    .style("stroke-dasharray", ("3, 1"));
+});
 
 //Read the data
 d3.json("./dummyData3.json", function(data) {
   data.forEach(function(d) {
-    
-      // d.days = formatTime(parseTime(d.date));
-      d.date = parseTime(d[0]);
-      // console.log(+formatTime(d.date));
-      d.sensor = d[1];
-      d.temperature_f = +d[1].temperature_f;
-      d.humidity_per = +d[1].humidity_per;
-      // console.log(d.sensor, d.temperature_f);
+    d.date = parseTime(d[0]);
+    d.day = formatTime(parseTime(d[0]));
+    d.hour = formatHour(parseTime(d[0]));
+
+    d.sensor = d[1];
+    d.temperature_f = +d[1].temperature_f;
+    d.humidity_per = +d[1].humidity_per;
   });
 
+  var selectedVar = d3.extent(data, function(d) { return (d.temperature_f)});
+  var activeDays = d3.extent(data, function(d) { return +formatTime(d.date) });
+
   var myColor = d3.scaleLinear()  //use scaleLinear later, after finding appropriate colors 
-    // .domain(d3.extent(data, function(d) { return (d.temperature_f); }))
-    .domain(d3.extent(data, function(d) { return (d.temperature_f); }))
-    .range([
-      "#382e73",
-      "#b9b5ff"
-    ] );
+    .domain(selectedVar)
+    .range(["#637FE1", "#F4696F"] );
 
-  var x = d3.scaleTime()
-  .range([0 + margin.left, width - margin.right - 5])
-  .domain([203, 305]);
-  // .domain([d3.max(data, function(d) { return xparse(d.date); }), d3.max(data, function(d) { return xparse(d.date); })]);
+  // var x = d3.scaleTime()
+  // .domain([203, 305])
+  // .range([0 + margin.left, width - margin.right - 5]);
 
-  var y = d3.scaleTime()
-  .range([0, height])
-  .domain(
-    d3.extent(data, function(d) { return +yParse(d.date); })
-    );
-
-  var tooltip = d3.select("#heatmap")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "2px")
-    .style("border-radius", "5px")
-    .style("padding", "5px")
-
-  var mouseover = function(d) {
-    console.log(x(+formatTime(d.date)));
-    tooltip
-      .style("opacity", 1)
-    d3.select(this)
-      .attr("r", 15)
-      .style("opacity", 1)
-  }
-  var mousemove = function(d) {
-    tooltip
-      .html("The exact value of<br>this cell is: " + d.value)
-      .style("left", (d3.mouse(this)[0]+70) + "px")
-      .style("top", (d3.mouse(this)[1]) + "px")
-  }
-  var mouseleave = function(d) {
-    tooltip
-      .style("opacity", 0)
-    d3.select(this)
-      // .attr("r", (d.temperature_f)*((d.temperature_f)/2)/700) 
-      .attr("r", 5) 
-      .style("opacity", 0.8)
-  }
+  // var y = d3.scaleTime()
+  // .range([0, height])
+  // .domain(
+  //   d3.extent(data, function(d) { return +formatHour(d.date); })
+  //   );
 
   svg.selectAll()
     .data(data)
     .enter()
     .append('circle')
-      .attr('cx', function(d) { return x(+formatTime(d.date))})
-      .attr('cy', function(d) { return y(+yParse(d.date))})
-      // .attr('r', function(d) { return (d.temperature_f)*((d.temperature_f)/2)/500} )
-      .attr('r', 5 )
-      // .attr("width", x.bandwidth() )
-      // .attr("height", y.bandwidth() )
-      .style("fill", function(d) { return myColor(d.temperature_f)} )
-      .style("stroke-width", 6)
-      .style("stroke", "none")
+    .attr('cx', function(d) { return x(+formatTime(d.date))})
+    .attr('cy', function(d) { return y(+formatHour(d.date))})
+    // .attr('r', function(d) { return (d.temperature_f)*((d.temperature_f)/2)/500} )
+    // .attr("width", x.bandwidth() )
+    // .attr("height", y.bandwidth() )
+    .attr('r', 5 )
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
+    // .style("stroke-width", 1)
+    .style("stroke", "none")
+    // .transition()
+    // .duration(750)
+    .style("fill", function(d) { return myColor(d.temperature_f)} )
 
     svg.append("g")
     .attr("class", "x-axis")
@@ -145,25 +187,15 @@ d3.json("./dummyData3.json", function(data) {
       // .tickFormat(d3.timeFormat("%j"))
     ); 
 
-    // svg.append("g")
-    // .attr("class", "y-axis")
-    // // .attr("transform", "translate(0," + -20 + ")")
-    // .call(d3.axisLeft(y)
-    //   // .tickFormat(d3.timeFormat("%H"))
-    // ); 
-
     function myColor (data, variable){
-  return d3.scaleLinear()  //use scaleLinear later, after finding appropriate colors 
-    // .domain(d3.extent(data, function(d) { return (d.temperature_f); }))
-    .domain(d3.extent(data, function(d) { return (d[variable]); }))
-    .range([
-      "#382e73",
-      "#b9b5ff"
-    ] );
-}
-
-
-
+      return d3.scaleLinear()  //use scaleLinear later, after finding appropriate colors 
+      // .domain(d3.extent(data, function(d) { return (d.temperature_f); }))
+      .domain(d3.extent(data, function(d) { return (d[variable]); }))
+      .range([
+        "#382e73",
+        "#b9b5ff"
+      ] );
+    }
 });
 
 </script>
