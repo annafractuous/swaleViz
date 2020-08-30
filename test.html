@@ -19,8 +19,8 @@
   <div class="plant-archive_menu">
     <h2 class="plant-archive__header">Summary Sensor Data</h2>
   </div>
-  <button onclick="changeColor('temperature_f')">Temperature</button>
-  <button onclick="changeColor('humidity_per')">Humidity</button>
+  <!-- <button onclick="changeColor('temperature_f')">Temperature</button>
+  <button onclick="changeColor('humidity_per')">Humidity</button> -->
   <!-- <button onclick="changeColor('wind')>Wind</button> -->
   <div id="heatmap"></div>
 </body>
@@ -40,13 +40,29 @@
     position: relative;
     left: -50%;
   }
+
+  #y-axis text{
+    fill: #ffffff;
+  }
+
+  #y-axis line{
+    visibility:hidden;
+  }
+
+  #x-axis-label{
+    fill: #ffffff;
+    font: 10px Helvetica;
+  }
 </style>
 
 <script>
 
-var margin = {top: 130, right: 0, bottom: 0, left: 0},
+console.log("check");
+var margin = {top: 50, right: 0, bottom: 0, left: 50},
   width = 1150,
-  height = 400;
+  height = 400,
+  innerHeight = height - margin.top;
+  innerWidth = width - margin.left;
 
 var svg = d3.select("#heatmap")
 .append("svg")
@@ -57,22 +73,53 @@ var svg = d3.select("#heatmap")
 //   .attr("transform",
 //         "translate(" + margin.left + "," + margin.top + ")");
 
+svg
+    .append('line')
+    .attr("id", "x-axis-line")
+    .style("stroke", "white")
+    .style("stroke-width", 0.5)
+    .attr("x1", margin.left + 6)
+    .attr("y1", 32)
+    .attr("x2", width - 15)
+    .attr("y2", 32);
+
+  svg
+    .append('rect')
+    .style("fill", '#405E8B')
+    .attr("x", width / 2 - 8 )
+    .attr("y", 25)
+    .attr("width", 35)
+    .attr("height", 20);
+
+  svg
+    .append('text')
+    .attr("id", "x-axis-label")
+    // .style("stroke", "white")
+    // .style("stroke-width", 0.5)
+    .attr("x", width / 2 )
+    .attr("y", 35)
+    .text("DAY");
+
 var parseTime = d3.timeParse("%Y%m%d%H"); //%b %e
 var formatTime = d3.timeFormat("%j");
+var parseDay = d3.timeParse("%j");
 var formatDay = d3.timeFormat("%a %d");
+var formatMonthDay = d3.timeFormat("%b %d");
 var xLabelFormat = d3.timeFormat("%b %e");
 var xLabelParse = d3.timeParse("%b %e");
 var xTickParse = d3.timeFormat("%d")
 var formatHour = d3.timeFormat("%H")
+var parseHour = d3.timeParse("%H")
 
 var x = d3.scaleTime()
     .domain([203, 305])
     .range([0 + margin.left, width - margin.right]);
 
-var y = d3.scaleTime()
+var y = d3.scaleLinear()
   .domain([0, 23])
   .range([0 + margin.top, height]);
 
+var xAxis = d3.axisTop(x).tickFormat();
 var tooltip = d3.select("#heatmap")
   .append("div")
   .style("opacity", 0)
@@ -84,6 +131,7 @@ var tooltip = d3.select("#heatmap")
   .style("padding", "5px");
 
 var mouseover = function(d) {
+  console.log(d);
   tooltip
     .style("opacity", 1)
   d3.select(this)
@@ -107,14 +155,15 @@ var mouseleave = function(d) {
     .style("opacity", 1);
 }
 
+let tickLabels = ['Midnight','5 AM','10 AM','3 PM','8 PM'];
+// xAxisGenerator.tickFormat((d,i) => tickLabels[i]);
+
 d3.json("./allDates.json", function(datesData) {
   datesData.forEach(function(d) {
       d.date = parseTime(d[0]);
       d.day = formatTime(parseTime(d[0]));
       d.hour = formatHour(parseTime(d[0]));
   });
-
-  
 
   svg.selectAll()
     .data(datesData)
@@ -134,10 +183,16 @@ d3.json("./allDates.json", function(datesData) {
 
 //Read the data
 d3.json("./dummyData3.json", function(data) {
+  // const years = data.map((d) => d[0]);
+  // y
+  //   .domain(d3.extent(years, d => formatHour(parseTime(d))))
+  //   .nice(d3.timeDay);
+  // console.log(y.domain());
+
   data.forEach(function(d) {
     d.date = parseTime(d[0]);
     d.day = formatTime(parseTime(d[0]));
-    d.hour = formatHour(parseTime(d[0]));
+    d.hour = +formatHour(parseTime(d[0]));
 
     d.sensor = d[1];
     d.temperature_f = +d[1].temperature_f;
@@ -155,7 +210,9 @@ d3.json("./dummyData3.json", function(data) {
   // .domain([203, 305])
   // .range([0 + margin.left, width - margin.right - 5]);
 
-  // var y = d3.scaleTime()
+  // var yAxis = d3.scaleTime()
+  // .range([0 + margin.top, height])
+  // .domain([0, 23]);
   // .range([0, height])
   // .domain(
   //   d3.extent(data, function(d) { return +formatHour(d.date); })
@@ -165,8 +222,8 @@ d3.json("./dummyData3.json", function(data) {
     .data(data)
     .enter()
     .append('circle')
-    .attr('cx', function(d) { return x(+formatTime(d.date))})
-    .attr('cy', function(d) { return y(+formatHour(d.date))})
+    .attr('cx', function(d) { return x(d.day)})
+    .attr('cy', function(d) { return y(d.hour)})
     // .attr('r', function(d) { return (d.temperature_f)*((d.temperature_f)/2)/500} )
     // .attr("width", x.bandwidth() )
     // .attr("height", y.bandwidth() )
@@ -178,14 +235,32 @@ d3.json("./dummyData3.json", function(data) {
     .style("stroke", "none")
     // .transition()
     // .duration(750)
-    .style("fill", function(d) { return myColor(d.temperature_f)} )
+    .style("fill", function(d) { return myColor(d.temperature_f)} );
 
-    svg.append("g")
-    .attr("class", "x-axis")
-    .attr("transform", "translate(0," + -20 + ")")
-    .call(d3.axisTop(x)
-      // .tickFormat(d3.timeFormat("%j"))
-    ); 
+  // svg
+  //   .append("g")
+  //   .attr("class", "y-axis")
+  //   // .attr("transform", "translate(0,50)")
+  //   .call(yAxis);
+
+  svg
+    .append("g")
+    .attr("id", "y-axis")
+    .attr("transform", "translate(60,0)")
+    // .ticks()
+    .call(d3.axisLeft(y)
+      .ticks(4)
+      .tickFormat((d,i) => tickLabels[i])
+      // .tickFormat(d3.timeFormat("%H:%M"))
+      // .tickFormat(formatHour)
+      // .tickFormat(d3.timeFormat("%H"))
+    )
+    .select(".domain").remove()
+  // svg
+  //   .append("g")
+  //   .attr("class", "x-axis")
+  //   .attr("transform", "translate(0," + 40 + ")")
+  //   .call(xAxis); 
 
     function myColor (data, variable){
       return d3.scaleLinear()  //use scaleLinear later, after finding appropriate colors 
