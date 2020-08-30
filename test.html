@@ -42,7 +42,9 @@
   }
 
   #y-axis text{
-    fill: #ffffff;
+    fill: #BBD0EF;
+    font: 9px Helvetica;
+    font-weight: 600;
   }
 
   #y-axis line{
@@ -50,8 +52,9 @@
   }
 
   #x-axis-label{
-    fill: #ffffff;
+    fill: #BBD0EF;
     font: 10px Helvetica;
+    font-weight: 600;
   }
 </style>
 
@@ -76,7 +79,7 @@ var svg = d3.select("#heatmap")
 svg
     .append('line')
     .attr("id", "x-axis-line")
-    .style("stroke", "white")
+    .style("stroke", "#85A4D2")
     .style("stroke-width", 0.5)
     .attr("x1", margin.left + 6)
     .attr("y1", 32)
@@ -155,7 +158,7 @@ var mouseleave = function(d) {
     .style("opacity", 1);
 }
 
-let tickLabels = ['Midnight','5 AM','10 AM','3 PM','8 PM'];
+let tickLabels = ['12 AM','5 AM','10 AM','3 PM','8 PM'];
 // xAxisGenerator.tickFormat((d,i) => tickLabels[i]);
 
 d3.json("./allDates.json", function(datesData) {
