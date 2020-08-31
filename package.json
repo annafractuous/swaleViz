@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/annafractuous/swaleViz#readme",
   "dependencies": {
+    "d3-svg-legend": "^2.25.6",
     "firebase": "^6.1.1",
     "firebase-admin": "^8.0.0",
     "fs": "0.0.1-security",

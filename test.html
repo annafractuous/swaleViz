@@ -8,7 +8,6 @@
     <link href="build/style.css" rel="stylesheet" type="text/css">
 </head>>
 <body>
-
 	<nav class="nav sensors">
     <div class="nav__container">
       <div class="nav__item" data-page=".plant-archive">Plant Archive</div>
@@ -35,6 +34,27 @@
     background-color: #405E8B;
   }
 
+  .tooltip {
+  position: absolute;
+  text-align: center;
+  width: 190px;
+  height: 140px;
+  border-radius: 1px;
+  padding: 30px;
+  margin-top: -20px;
+  color:  rgb(42, 66, 104);
+  font: 13px Helvetica;
+font-weight: 400;
+  background-color: rgb(210, 219, 231);
+  pointer-events: none;
+  text-align: left;
+  border: none;
+}
+    .tooltip .dataStyle{
+        /* font: 13px Helvetica; */
+        font-weight: 600 !important;
+    }
+
   #heatmap{
      float: right;
     position: relative;
@@ -59,8 +79,6 @@
 </style>
 
 <script>
-
-console.log("check");
 var margin = {top: 50, right: 0, bottom: 0, left: 50},
   width = 1150,
   height = 400,
@@ -72,9 +90,6 @@ var svg = d3.select("#heatmap")
   .attr("width", width )
   .attr("height", height + 100)
   .attr("class", "chart");
-// .append("g")
-//   .attr("transform",
-//         "translate(" + margin.left + "," + margin.top + ")");
 
 svg
     .append('line')
@@ -104,6 +119,7 @@ svg
     .text("DAY");
 
 var parseTime = d3.timeParse("%Y%m%d%H"); //%b %e
+var formatDate = d3.timeFormat("%b %e %Y");
 var formatTime = d3.timeFormat("%j");
 var parseDay = d3.timeParse("%j");
 var formatDay = d3.timeFormat("%a %d");
@@ -113,6 +129,7 @@ var xLabelParse = d3.timeParse("%b %e");
 var xTickParse = d3.timeFormat("%d")
 var formatHour = d3.timeFormat("%H")
 var parseHour = d3.timeParse("%H")
+var timeFormat = d3.timeFormat("%I %p")
 
 var x = d3.scaleTime()
     .domain([203, 305])
@@ -123,18 +140,14 @@ var y = d3.scaleLinear()
   .range([0 + margin.top, height]);
 
 var xAxis = d3.axisTop(x).tickFormat();
-var tooltip = d3.select("#heatmap")
+var tooltip = d3.select("body")
   .append("div")
   .style("opacity", 0)
   .attr("class", "tooltip")
-  .style("background-color", "white")
-  .style("border", "solid")
-  .style("border-width", "2px")
-  .style("border-radius", "5px")
   .style("padding", "5px");
 
+//set eventListeners
 var mouseover = function(d) {
-  console.log(d);
   tooltip
     .style("opacity", 1)
   d3.select(this)
@@ -144,9 +157,23 @@ var mouseover = function(d) {
 
 var mousemove = function(d) {
   tooltip
-    .html("The exact value of<br>this cell is: " + d.hour + " " + d.day+ " " + d.date)
-    .style("left", (d3.mouse(this)[0]+70) + "px")
-    .style("top", (d3.mouse(this)[1]) + "px");
+    .html(
+        "<span class=\"dataStyle\">" + formatDate(d.date) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +  timeFormat(parseHour(d.hour)) + "</span>" +
+        "<br><br>" + 
+        "TEMPERATURE:&nbsp;&nbsp;" + "<span class=\"dataStyle\">" + d.temperature_f + "&#176;</span>" +
+        "<br>" +
+        "HUMIDITY:&nbsp;&nbsp;" + "<span class=\"dataStyle\">" + d.humidity_per + "</span>" +
+        "<br>" +
+        "PRESSURE:&nbsp;&nbsp;" + "<span class=\"dataStyle\">" + d.pressure_pa + "</span>" +
+        "<br>" +
+        "RAINFALL:&nbsp;&nbsp;" + "<span class=\"dataStyle\">" + d.rain_in + "</span>" +
+        "<br>" +
+        "WIND SPEED:&nbsp;&nbsp;" + "<span class=\"dataStyle\">" + d.wind_speed_mph + "&nbsp;MPH</span>" +
+        "<br>" +
+        "WIND DIRECTION:&nbsp;&nbsp;" + "<span class=\"dataStyle\">" + d.wind_direction_deg + "&#176;</span>" 
+        )
+    .style("left", (d3.event.pageX + 10) + "px")
+    .style("top", (d3.event.pageY + 10) + "px");
 }
 
 var mouseleave = function(d) {
@@ -158,8 +185,8 @@ var mouseleave = function(d) {
     .style("opacity", 1);
 }
 
+//custom labels
 let tickLabels = ['12 AM','5 AM','10 AM','3 PM','8 PM'];
-// xAxisGenerator.tickFormat((d,i) => tickLabels[i]);
 
 d3.json("./allDates.json", function(datesData) {
   datesData.forEach(function(d) {
@@ -174,10 +201,7 @@ d3.json("./allDates.json", function(datesData) {
     .append('circle')
     .attr('cx', function(d) { return x(d.day)})
     .attr('cy', function(d) { return y(d.hour)})
-    // .attr('r', function(d) { return (d.temperature_f)*((d.temperature_f)/2)/500} )
     .attr('r', 4 )
-    // .attr("width", x.bandwidth() )
-    // .attr("height", y.bandwidth() )
     .style("fill", "none" )
     .style("stroke-width", 1)
     .style("stroke", "#6584B1")
@@ -186,12 +210,6 @@ d3.json("./allDates.json", function(datesData) {
 
 //Read the data
 d3.json("./dummyData3.json", function(data) {
-  // const years = data.map((d) => d[0]);
-  // y
-  //   .domain(d3.extent(years, d => formatHour(parseTime(d))))
-  //   .nice(d3.timeDay);
-  // console.log(y.domain());
-
   data.forEach(function(d) {
     d.date = parseTime(d[0]);
     d.day = formatTime(parseTime(d[0]));
@@ -200,6 +218,10 @@ d3.json("./dummyData3.json", function(data) {
     d.sensor = d[1];
     d.temperature_f = +d[1].temperature_f;
     d.humidity_per = +d[1].humidity_per;
+    d.pressure_pa = +d[1].pressure_pa;
+    d.rain_in = +d[1].rain_in;
+    d.wind_speed_mph = +d[1].wind_speed_mph;
+    d.wind_direction_deg = +d[1].wind_direction_deg;
   });
 
   var selectedVar = d3.extent(data, function(d) { return (d.temperature_f)});
@@ -240,30 +262,16 @@ d3.json("./dummyData3.json", function(data) {
     // .duration(750)
     .style("fill", function(d) { return myColor(d.temperature_f)} );
 
-  // svg
-  //   .append("g")
-  //   .attr("class", "y-axis")
-  //   // .attr("transform", "translate(0,50)")
-  //   .call(yAxis);
 
   svg
     .append("g")
     .attr("id", "y-axis")
     .attr("transform", "translate(60,0)")
-    // .ticks()
     .call(d3.axisLeft(y)
       .ticks(4)
       .tickFormat((d,i) => tickLabels[i])
-      // .tickFormat(d3.timeFormat("%H:%M"))
-      // .tickFormat(formatHour)
-      // .tickFormat(d3.timeFormat("%H"))
     )
     .select(".domain").remove()
-  // svg
-  //   .append("g")
-  //   .attr("class", "x-axis")
-  //   .attr("transform", "translate(0," + 40 + ")")
-  //   .call(xAxis); 
 
     function myColor (data, variable){
       return d3.scaleLinear()  //use scaleLinear later, after finding appropriate colors 
